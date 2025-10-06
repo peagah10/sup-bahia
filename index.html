@@ -1,0 +1,2701 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suplementos BAHIA - Suplementos Alimentares Premium</title>
+    <meta name="description" content="Suplementos BAHIA - Suplementos premium para atletas e entusiastas. Whey Protein, Creatina, Vitaminas e mais. Frete grátis!">
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <!-- Open Graph (Facebook/WhatsApp) -->
+    <meta property="og:title" content="Suplementos BAHIA - Suplementos com 10% OFF">
+    <meta property="og:description" content="Desconto exclusivo! Suplementos importados e nacionais com entrega rápida. Aproveite agora!">
+    <meta property="og:url" content="https://suplementosbahia.netlify.app">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://suplementosbahia.netlify.app/images/meta.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Suplementos BAHIA - Suplementos com 10% OFF">
+    <meta name="twitter:description" content="Desconto exclusivo! Suplementos importados e nacionais com entrega rápida.">
+    <meta name="twitter:image" content="https://suplementosbahia.netlify.app/images/meta.png">
+    
+    <!-- Schema.org para SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Store",
+      "name": "Suplementos BAHIA",
+      "description": "Suplementos alimentares de alta qualidade",
+      "url": "https://www.suplementosbahia.com.br",
+      "telephone": "+5577999152558",
+      "image": "https://pfst.cf2.poecdn.net/base/image/d1f85532876f53ac1e8b5772d3928c91b46d0255ed1d3a5dfa568c3ee0207bdc?w=1024&h=1024",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Avenida São José",
+        "addressLocality": "Centro, Carinhanha",
+        "addressRegion": "BA",
+        "postalCode": "47440-000",
+        "addressCountry": "BR"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "-14.3053",
+        "longitude": "-43.7639"
+      }
+    }
+    </script>
+    
+    <!-- Fontes e ícones -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/marked@4.0.0/marked.min.js" defer></script>
+    
+    <script>
+        // Configuração do Tailwind
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#222', // Cor principal melhorada (roxo mais vibrante)
+                        secondary: '#25D366', // Cor secundária (ciano)
+                        accent: '#25D366', // Cor de destaque (âmbar)
+                        dark: {
+                            100: '#111',            // Preto mais profundo
+                            200: '#222',            // Igual ao primary
+                            300: '#1A1A1A',         // Tons de escuro
+                            400: '#0D0D0D'
+                          },
+                          light: {
+                            100: '#afafaf',
+                            200: '#F5F5F5',         // Cinza claro
+                            300: '#EEEEEE',
+                            400: '#E0E0E0'
+                          }
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                        heading: ['Poppins', 'sans-serif']
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'fade-in': 'fadeIn 0.5s ease forwards',
+                        'slide-up': 'slideUp 0.5s ease forwards',
+                        'slide-right': 'slideRight 0.5s ease forwards',
+                        'zoom-in': 'zoomIn 0.5s ease forwards'
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' }
+                        },
+                        slideRight: {
+                            '0%': { transform: 'translateX(-20px)', opacity: '0' },
+                            '100%': { transform: 'translateX(0)', opacity: '1' }
+                        },
+                        zoomIn: {
+                            '0%': { transform: 'scale(0.95)', opacity: '0' },
+                            '100%': { transform: 'scale(1)', opacity: '1' }
+                        }
+                    },
+                    boxShadow: {
+                        'card': '0 4px 20px rgba(0, 0, 0, 0.08)',
+                        'card-hover': '0 10px 25px rgba(0, 0, 0, 0.12)',
+                        'card-dark': '0 4px 20px rgba(0, 0, 0, 0.25)',
+                    },
+                    borderRadius: {
+                        'xl': '1rem',
+                        '2xl': '1.5rem',
+                        '3xl': '2rem',
+                    }
+                }
+            }
+        }
+        
+        // Configuração do tema escuro
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+        }
+        
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (event.matches) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        });
+    </script>
+    
+    <style>
+        footer {
+            padding: 2.5rem 0; /* py-10 */
+        }
+        
+        footer .container {
+            padding-left: 1.5rem; /* px-6 */
+            padding-right: 1.5rem;
+        }
+        
+        footer ul li {
+            margin-bottom: 0.5rem; /* space-y-2 */
+        }
+        
+        footer h3 {
+            margin-bottom: 0.5rem; /* mb-2 */
+        }
+        /* Cores personalizadas (mantenha apenas uma definição de cada) */
+ .text-primary {
+     color: #222;
+ }
+ 
+ .dark .text-primary {
+     color: #afafaf;
+ }
+ 
+ .text-secondary {
+     color: #25D366;
+ }
+ 
+ .bg-primary {
+     background-color: #222;
+ }
+ 
+ .dark .bg-primary {
+     background-color: #afafaf;
+ }
+ 
+ .bg-secondary {
+     background-color: #25D366;
+ }
+ 
+ .border-primary {
+     border-color: #222;
+ }
+ 
+ .dark .border-primary {
+     border-color: #afafaf;
+ }
+ 
+ .border-secondary {
+     border-color: #25D366;
+ }
+        
+         /* Estilo para o container da logo */
+ .logo-container {
+     width: 65px;
+     height: 65px;
+     min-width: 65px;
+     min-height: 65px;
+     border-radius: 50%;
+     overflow: hidden;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     background: #afafaf; /* Pode ser substituído por bg-gray-100 */
+     border: 2px solid rgba(255, 255, 255, 0.2);
+     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+     transition: all 0.3s ease;
+ }
+ 
+ /* Estilo para a imagem */
+ .logo-container img {
+     width: 100%;
+     height: 100%;
+     object-fit: cover;
+     transition: transform 0.3s ease;
+ }
+ 
+ /* Efeito hover */
+ .group:hover .logo-container {
+     transform: scale(1.1);
+     box-shadow: 0 4px 12px rgba(93, 92, 222, 0.2);
+ }
+ 
+ .group:hover .logo-container img {
+     transform: scale(1.05);
+ }
+ 
+ /* Texto da logo */
+ .logo-text {
+     font-family: 'Poppins', sans-serif;
+     font-size: 1.75rem; /* 28px */
+     font-weight: 800;
+     letter-spacing: 0.5px;
+ }
+ 
+ /* Modo escuro - versão simplificada usando classes Tailwind */
+ .dark .logo-container {
+    background-color: #222; /* ou use var(--color-dark-200) se definido */
+    border-color: rgba(255, 255, 255, 0.1);
+}
+        
+        
+        /* Estilos essenciais que não podem ser facilmente substituídos por Tailwind */
+        .product-card h3 {
+            /* Versão moderna (suportada na maioria dos navegadores) */
+            display: -webkit-box;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            
+            -webkit-line-clamp: 2;
+            -moz-line-clamp: 2;
+            -ms-line-clamp: 2;
+            line-clamp: 2;
+            
+            -webkit-box-orient: vertical;
+            -moz-box-orient: vertical;
+            -ms-box-orient: vertical;
+            box-orient: vertical;
+            
+            overflow: hidden;
+            text-overflow: ellipsis;
+            min-height: 3em; /* Ajuste conforme necessário */
+        }
+        
+        .product-card-enter {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .product-card-enter-active {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 300ms, transform 300ms;
+        }
+        
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .hero-slide.active {
+            opacity: 1;
+        }
+        
+        /* Animações e transições personalizadas */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate-fadeIn {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        /* Estilos para o mapa */
+        .map-container {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            padding-top: 56.25%; /* Proporção 16:9 para o mapa */
+            border-radius: 1rem;
+        }
+        
+        .map-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        
+        /* Efeitos de hover aprimorados */
+        .hover-scale {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .hover-scale:hover {
+            transform: scale(1.03);
+        }
+        
+        .quick-view-modal {
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+        }
+        
+        /* Estilo do breadcrumb */
+        .breadcrumb-item::after {
+            content: '/';
+            margin: 0 0.5rem;
+            color: #9ca3af;
+        }
+        
+        .breadcrumb-item:last-child::after {
+            content: '';
+            margin: 0;
+        }
+        
+        /* Barra de rolagem personalizada */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #25D366;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #25D366;
+        }
+        
+        /* Animação de pulsação */
+        .btn-pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 #25D366;
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(79, 70, 229, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(79, 70, 229, 0);
+            }
+        }
+        
+        /* Personalização de inputs */
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            background: #25D366;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        
+        input[type=range]::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            background: #25D366;
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+        }
+        
+        /* Estilização para select customizado */
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+            background-size: 1em;
+        }
+        
+        /* Dark mode input styles */
+        .dark select {
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+        }
+        
+        /* Estilo do botão do WhatsApp */
+        .whatsapp-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background-color: #0ecf55;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 28px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+        
+        .whatsapp-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Espaçamento para não sobreposição com o botão de voltar ao topo */
+        #back-to-top {
+            bottom: 90px;
+        }
+
+        /* Estilos responsivos para banners */
+        .hero-desktop {
+            display: block;
+        }
+        
+        .hero-mobile {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-desktop {
+                display: none;
+            }
+            
+            .hero-mobile {
+                display: block;
+            }
+        }
+
+        /* Estilos para scroll horizontal nas categorias no mobile */
+        .categories-scroll {
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE 10+ */
+        }
+        
+        .categories-scroll::-webkit-scrollbar {
+            display: none; /* Chrome/Safari/Edge */
+        }
+        
+        @media (max-width: 768px) {
+            .categories-scroll {
+                scroll-snap-type: x mandatory;
+                scroll-behavior: smooth;
+            }
+            
+            .categories-scroll .filter-btn {
+                scroll-snap-align: start;
+                flex-shrink: 0;
+                white-space: nowrap;
+            }
+        }
+    </style>
+</head>
+
+<body class="font-sans bg-light-200 dark:bg-dark-400 text-gray-800 dark:text-gray-200">
+    <!-- Header -->
+    <header class="bg-white dark:bg-dark-300 shadow-md py-4">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between">
+                <a href="#" class="flex items-center space-x-3 group no-underline">
+                    <!-- Container da logo -->
+                    <div class="flex items-center space-x-3">
+                        <div class="w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] md:w-[70px] md:h-[70px] overflow-hidden rounded-full transition-all duration-300 group-hover:scale-105 shadow-lg">
+                            <img src="https://pfst.cf2.poecdn.net/base/image/d1f85532876f53ac1e8b5772d3928c91b46d0255ed1d3a5dfa568c3ee0207bdc?w=1024&h=1024" 
+                                 alt="Logo Suplementos BAHIA"
+                                 class="w-full h-full object-cover"
+                                 width="70"
+                                 height="70">
+                        </div>
+                        <div class="block">
+                            <h1 class="text-sm sm:text-lg md:text-xl font-bold text-black dark:text-white tracking-wide">SUPLEMENTOS</h1>
+                            <h2 class="text-base sm:text-xl md:text-2xl font-black text-black dark:text-white tracking-wider -mt-1">BAHIA</h2>
+                        </div>
+                    </div>
+                </a>
+                
+                <!-- Breadcrumbs (visível apenas em páginas internas) -->
+                <nav aria-label="Breadcrumb" class="hidden breadcrumb-nav max-w-xs overflow-hidden">
+                    <ol class="flex flex-nowrap text-sm text-gray-600 dark:text-gray-400">
+                        <li class="breadcrumb-item flex items-center truncate">
+                            <a href="#" class="hover:text-primary truncate">Home</a>
+                        </li>
+                        <li class="breadcrumb-item flex items-center truncate current-breadcrumb">
+                            <span class="truncate">Produtos</span>
+                        </li>
+                    </ol>
+                </nav>
+                
+                <!-- Menu de navegação (desktop) -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#" class="font-medium hover:text-primary transition-colors">Home</a>
+                    <a href="#produtos" class="font-medium hover:text-primary transition-colors">Produtos</a>
+                    <a href="#guia" class="font-medium hover:text-primary transition-colors">Guia Nutricional</a>
+                    <a href="#faq" class="font-medium hover:text-primary transition-colors">FAQ</a>
+                    <a href="#local" class="font-medium hover:text-primary transition-colors">Nossa Loja</a>
+                </nav>
+                
+                <!-- Ações do header -->
+                <div class="flex items-center space-x-4">
+                    <!-- Busca -->
+                    <button id="search-toggle" class="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors" aria-label="Abrir busca">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    
+                    <!-- Toggle dark mode -->
+                    <button id="theme-toggle" class="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors" aria-label="Alternar tema claro/escuro">
+                        <i class="fas fa-moon dark:fas fa-sun"></i>
+                    </button>
+                    
+                    <!-- Carrinho -->
+                    <button id="cart-toggle" class="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors relative" aria-label="Abrir carrinho">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span id="cart-count" class="absolute -top-2 -right-2 bg-primary text-white text-xs rounded-full w-5 h-5 flex items-center justify-center transition-all">0</span>
+                    </button>
+                    
+                    <!-- Menu mobile toggle -->
+                    <button id="mobile-toggle" class="md:hidden text-gray-600 dark:text-gray-300 hover:text-primary" aria-label="Abrir menu">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Menu mobile (colapsado por padrão) -->
+            <nav id="mobile-menu" class="md:hidden hidden pt-4 pb-2">
+                <div class="flex flex-col space-y-3">
+                    <a href="#" class="font-medium hover:text-primary py-1">Home</a>
+                    <a href="#produtos" class="font-medium hover:text-primary py-1">Produtos</a>
+                    <a href="#guia" class="font-medium hover:text-primary py-1">Guia Nutricional</a>
+                    <a href="#faq" class="font-medium hover:text-primary py-1">FAQ</a>
+                    <a href="#local" class="font-medium hover:text-primary py-1">Nossa Loja</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Busca -->
+    <div id="search-container" class="hidden bg-white dark:bg-dark-300 shadow-md py-4 absolute w-full z-40">
+        <div class="container mx-auto px-4">
+            <div class="relative max-w-2xl mx-auto">
+                <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                <input id="search-input" type="text" placeholder="Buscar produtos..." class="w-full pl-10 pr-10 py-3 text-base border border-gray-300 dark:border-gray-600 rounded-full focus:outline-none focus:ring-2 focus:ring-primary bg-white dark:bg-dark-200" aria-label="Buscar produtos">
+                <button id="search-close" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200" aria-label="Fechar busca">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div id="search-results" class="mt-4 max-w-2xl mx-auto"></div>
+        </div>
+    </div>
+
+    <!-- Hero Banner -->
+    <section class="relative h-[450px] md:h-[550px] overflow-hidden">
+        <div id="hero-gallery">
+            <!-- Banners para Desktop -->
+            <div class="hero-slide hero-desktop active" style="background-image: url('https://pfst.cf2.poecdn.net/base/image/31f8533b1af5fddb3c4175b98977324f0daf755cd0aa61474a1c3d9cdadd4894?w=1600&h=500')"></div>
+            <div class="hero-slide hero-desktop" style="background-image: url('https://pfst.cf2.poecdn.net/base/image/c5c13de287bad78527b00af41e09529d0a228a4dea7282f9b0097e085be650db?w=1600&h=500')"></div>
+            
+            <!-- Banners para Mobile -->
+            <div class="hero-slide hero-mobile active" style="background-image: url('https://pfst.cf2.poecdn.net/base/image/731ea01c8b0f45d61ac4abfeb9f55a347dcbbd8d5741562e8b72576a0274e290?w=1080&h=720')"></div>
+            <div class="hero-slide hero-mobile" style="background-image: url('https://pfst.cf2.poecdn.net/base/image/4acac24422bf439e20d581fcd72995e1d6765dcfadefc9b44188941d0c346fa6?w=1080&h=720')"></div>
+        </div>
+        
+        <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-center px-4">
+             <!-- Indicadores de slide -->
+            <div id="hero-controls" class="absolute bottom-6 flex space-x-3"></div>
+        </div>
+    </section>
+
+    <!-- Produtos -->
+    <section id="produtos" class="py-16 md:py-20">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl md:text-3xl font-bold text-center font-heading mb-10 relative">
+                Nossos Produtos
+                <span class="block w-20 h-1 bg-primary mx-auto mt-3"></span>
+            </h2>
+            
+            <!-- Filtros avançados -->
+            <div class="mb-8">
+                <div class="flex md:justify-center gap-3 mb-6 overflow-x-auto categories-scroll pb-2">
+                    <button data-filter="todos" class="filter-btn bg-primary text-white hover:bg-primary hover:bg-opacity-90 px-6 py-2.5 rounded-full text-sm font-medium transition active">Todos</button>
+                    <button data-filter="proteinas-aminoacidos" class="filter-btn bg-gray-100 dark:bg-dark-200 hover:bg-primary hover:text-white px-6 py-2.5 rounded-full text-sm font-medium transition">Proteínas</button>
+                    <button data-filter="energia-performance" class="filter-btn bg-gray-100 dark:bg-dark-200 hover:bg-primary hover:text-white px-6 py-2.5 rounded-full text-sm font-medium transition">Performance</button>
+                    <button data-filter="saude-bem-estar" class="filter-btn bg-gray-100 dark:bg-dark-200 hover:bg-primary hover:text-white px-6 py-2.5 rounded-full text-sm font-medium transition">Saúde</button>
+                    <button data-filter="emagrecimento-dieta" class="filter-btn bg-gray-100 dark:bg-dark-200 hover:bg-primary hover:text-white px-6 py-2.5 rounded-full text-sm font-medium transition">Emagrecimento</button>
+                </div>
+                
+                <!-- Filtros adicionais foram removidos conforme solicitado -->
+            </div>
+            
+            <!-- Grid de produtos -->
+            <div id="products-container" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-7"></div>
+            
+            <!-- Paginação / Load More -->
+            <div class="mt-12 flex justify-center">
+                <button id="load-more" class="bg-white dark:bg-dark-200 hover:bg-gray-100 dark:hover:bg-dark-100 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-medium py-2.5 px-7 rounded-full transition-colors hidden">
+                    Carregar mais produtos
+                    <i class="fas fa-chevron-down ml-2"></i>
+                </button>
+                
+                <div id="pagination" class="flex space-x-2"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guia Nutricional -->
+    <section id="guia" class="py-16 md:py-20 bg-gray-50 dark:bg-dark-300">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl md:text-3xl font-bold text-center font-heading mb-10 relative">
+                Guia Nutricional
+                <span class="block w-20 h-1 bg-primary mx-auto mt-3"></span>
+            </h2>
+            
+            <div class="max-w-3xl mx-auto">
+                <div class="bg-white dark:bg-dark-200 rounded-xl shadow-card dark:shadow-card-dark mb-5 overflow-hidden">
+                    <div class="accordion-header cursor-pointer p-5 bg-gray-100 dark:bg-dark-100 font-medium flex justify-between items-center" role="button" aria-expanded="false" aria-controls="accordion-1">
+                        <h3 class="text-lg">Proteínas e Aminoácidos</h3>
+                        <i class="fas fa-chevron-down transition-transform"></i>
+                    </div>
+                    <div id="accordion-1" class="accordion-content hidden p-5">
+                        <p class="mb-4">As proteínas são macronutrientes essenciais para a construção e recuperação muscular. Os aminoácidos são os blocos construtores das proteínas.</p>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li><strong>Whey Protein:</strong> Rápida absorção, ideal para pós-treino</li>
+                            <li><strong>BCAA:</strong> Aminoácidos que estimulam a síntese proteica</li>
+                            <li><strong>Glutamina:</strong> Essencial para recuperação muscular</li>
+                            <li><strong>Albumina:</strong> Proteína extraída da clara do ovo</li>
+                            <li><strong>Caseína:</strong> Proteína de digestão lenta, ideal antes de dormir</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="bg-white dark:bg-dark-200 rounded-xl shadow-card dark:shadow-card-dark mb-5 overflow-hidden">
+                    <div class="accordion-header cursor-pointer p-5 bg-gray-100 dark:bg-dark-100 font-medium flex justify-between items-center" role="button" aria-expanded="false" aria-controls="accordion-2">
+                        <h3 class="text-lg">Energia e Performance</h3>
+                        <i class="fas fa-chevron-down transition-transform"></i>
+                    </div>
+                    <div id="accordion-2" class="accordion-content hidden p-5">
+                        <p class="mb-4">Suplementos que melhoram a capacidade energética e performance durante o exercício.</p>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li><strong>Creatina:</strong> Aumenta força, potência e massa muscular</li>
+                            <li><strong>Pré-Treino:</strong> Combinação de ingredientes para energia e foco</li>
+                            <li><strong>Termogênicos:</strong> Aceleram o metabolismo</li>
+                            <li><strong>Beta-Alanina:</strong> Reduz fadiga muscular</li>
+                            <li><strong>Cafeína:</strong> Melhora concentração e reduz percepção de esforço</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="bg-white dark:bg-dark-200 rounded-xl shadow-card dark:shadow-card-dark overflow-hidden">
+                    <div class="accordion-header cursor-pointer p-5 bg-gray-100 dark:bg-dark-100 font-medium flex justify-between items-center" role="button" aria-expanded="false" aria-controls="accordion-3">
+                        <h3 class="text-lg">Saúde e Bem-Estar</h3>
+                        <i class="fas fa-chevron-down transition-transform"></i>
+                    </div>
+                    <div id="accordion-3" class="accordion-content hidden p-5">
+                        <p class="mb-4">Suplementos que auxiliam na manutenção da saúde geral do corpo.</p>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li><strong>Multivitamínicos:</strong> Combinação de vitaminas e minerais essenciais</li>
+                            <li><strong>Ômega 3:</strong> Ácidos graxos com efeitos anti-inflamatórios</li>
+                            <li><strong>Colágeno:</strong> Beneficia pele, cabelos, unhas e articulações</li>
+                            <li><strong>Vitamina D:</strong> Essencial para imunidade e saúde óssea</li>
+                            <li><strong>Magnésio:</strong> Crucial para produção de energia e função muscular</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="py-16 md:py-20">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl md:text-3xl font-bold text-center font-heading mb-10 relative">
+                Perguntas Frequentes
+                <span class="block w-20 h-1 bg-primary mx-auto mt-3"></span>
+            </h2>
+            
+            <div class="max-w-3xl mx-auto">
+                <div class="bg-white dark:bg-dark-200 rounded-xl shadow-card dark:shadow-card-dark mb-5 overflow-hidden">
+                    <div class="faq-header cursor-pointer p-5 font-medium flex justify-between items-center" role="button" aria-expanded="false" aria-controls="faq-1">
+                        <h3 class="text-lg">Como escolher o suplemento ideal para meus objetivos?</h3>
+                        <i class="fas fa-chevron-down transition-transform"></i>
+                    </div>
+                    <div id="faq-1" class="faq-content hidden p-5 border-t border-gray-200 dark:border-gray-600">
+                        <p>A escolha do suplemento ideal depende diretamente dos seus objetivos:</p>
+                        <ul class="list-disc pl-5 mt-3">
+                            <li><strong>Para ganho de massa muscular:</strong> Whey protein, creatina, hipercalóricos</li>
+                            <li><strong>Para perda de gordura:</strong> Termogênicos, proteínas, L-carnitina</li>
+                            <li><strong>Para performance:</strong> Creatina, beta-alanina, cafeína</li>
+                            <li><strong>Para saúde geral:</strong> Multivitamínicos, ômega-3, vitamina D</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="bg-white dark:bg-dark-200 rounded-xl shadow-card dark:shadow-card-dark mb-5 overflow-hidden">
+                    <div class="faq-header cursor-pointer p-5 font-medium flex justify-between items-center" role="button" aria-expanded="false" aria-controls="faq-2">
+                        <h3 class="text-lg">Qual é o melhor horário para tomar proteína?</h3>
+                        <i class="fas fa-chevron-down transition-transform"></i>
+                    </div>
+                    <div id="faq-2" class="faq-content hidden p-5 border-t border-gray-200 dark:border-gray-600">
+                        <p>O horário ideal para consumo de proteína varia conforme o tipo e seu objetivo:</p>
+                        <ul class="list-disc pl-5 mt-3">
+                            <li><strong>Whey Protein:</strong> Ideal logo após o treino devido à rápida absorção</li>
+                            <li><strong>Caseína:</strong> Melhor consumida antes de dormir por ter digestão lenta</li>
+                            <li><strong>Proteínas vegetais:</strong> Podem ser consumidas em qualquer horário</li>
+                        </ul>
+                        <p class="mt-3">O mais importante é garantir um consumo adequado de proteínas ao longo do dia.</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white dark:bg-dark-200 rounded-xl shadow-card dark:shadow-card-dark overflow-hidden">
+                    <div class="faq-header cursor-pointer p-5 font-medium flex justify-between items-center" role="button" aria-expanded="false" aria-controls="faq-3">
+                        <h3 class="text-lg">Qual a diferença entre Whey Concentrado, Isolado e Hidrolisado?</h3>
+                        <i class="fas fa-chevron-down transition-transform"></i>
+                    </div>
+                    <div id="faq-3" class="faq-content hidden p-5 border-t border-gray-200 dark:border-gray-600">
+                        <p>A principal diferença está no processo de fabricação e no teor de proteínas:</p>
+                        <ul class="list-disc pl-5 mt-3">
+                            <li><strong>Whey Concentrado:</strong> 70-80% de proteína, com pequenas quantidades de lactose e gordura. Opção mais econômica.</li>
+                            <li><strong>Whey Isolado:</strong> 90-95% de proteína, quantidades mínimas de lactose e gordura. Ideal para sensíveis à lactose.</li>
+                            <li><strong>Whey Hidrolisado:</strong> Proteínas quebradas em peptídeos menores, absorção mais rápida. Opção mais cara.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Localização da Loja -->
+    <section id="local" class="py-16 md:py-20 bg-gray-50 dark:bg-dark-300">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl md:text-3xl font-bold text-center font-heading mb-10 relative">
+                Nossa Loja
+                <span class="block w-20 h-1 bg-primary mx-auto mt-3"></span>
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <div class="flex flex-col justify-center">
+                    <h3 class="text-xl font-medium mb-5">Encontre-nos em Carinhanha</h3>
+                    <p class="mb-6">Visite nossa loja física e conheça todo o nosso catálogo de produtos. Nossa equipe está pronta para te auxiliar a encontrar os suplementos ideais para seus objetivos.</p>
+                    
+                    <div class="space-y-4 mb-6">
+                        <div class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-primary mt-1 mr-3 text-lg"></i>
+                            <span>Avenida São José, Centro, Carinhanha - Bahia</span>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-phone text-primary mt-1 mr-3 text-lg"></i>
+                            <span>(77) 99915-2558</span>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-clock text-primary mt-1 mr-3 text-lg"></i>
+                            <span>Segunda a Sexta: 8h às 18h<br>Sábado: 8h às 12h</span>
+                        </div>
+                    </div>
+                    
+                    <a href="https://maps.google.com/?q=Avenida São José, Centro, Carinhanha, BA" target="_blank" rel="noopener" class="inline-flex items-center text-primary hover:underline text-lg">
+                        <i class="fas fa-directions mr-2"></i>
+                        Como chegar
+                    </a>
+                </div>
+                
+                <div class="map-container rounded-xl overflow-hidden shadow-card dark:shadow-card-dark">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15490.527985759187!2d-43.7732847!3d-14.3053!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x75bb041f6d7f0123%3A0x123456789abcdef!2sAvenida%20São%20José%2C%20Centro%2C%20Carinhanha%20-%20BA!5e0!3m2!1spt-BR!2sbr!4v1695306789012!5m2!1spt-BR!2sbr" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa da loja Suplementos BAHIA em Carinhanha"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+<footer class="bg-gray-800 text-white dark:bg-dark-300">
+    <div class="container mx-auto px-4">
+        <!-- Centraliza no mobile -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center md:text-left">
+            <div class="flex flex-col items-center md:items-start">
+                <div class="flex flex-col items-center md:flex-row md:items-center md:space-x-3 mb-5">
+                    <!-- Logo da Suplementos BAHIA -->
+                    <div class="w-[60px] h-[60px] overflow-hidden transition-all duration-300 rounded-full mb-3 md:mb-0">
+                        <img src="https://pfst.cf2.poecdn.net/base/image/d1f85532876f53ac1e8b5772d3928c91b46d0255ed1d3a5dfa568c3ee0207bdc?w=1024&h=1024" 
+                             alt="Logo Suplementos BAHIA"
+                             class="w-full h-full object-cover"
+                             width="60"  
+                             height="60">
+                    </div>
+                    <div>
+                        <div class="text-lg font-bold text-white dark:text-white tracking-wide">SUPLEMENTOS</div>
+                        <div class="text-xl font-black text-white dark:text-white tracking-wider -mt-1">BAHIA</div>
+                    </div>
+                </div>
+                <p class="text-gray-300 mb-5 max-w-sm md:max-w-none">Suplementos alimentares de alta qualidade para potencializar seus resultados.</p>
+                <div class="flex justify-center md:justify-start space-x-4">
+                    <a href="#" class="text-gray-300 hover:text-white transition-colors text-lg" aria-label="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="text-gray-300 hover:text-white transition-colors text-lg" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://wa.me/5577999152558" class="text-gray-300 hover:text-white transition-colors text-lg" aria-label="WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div>
+                <h4 class="text-lg font-medium mb-4">Navegação</h4>
+                <ul class="space-y-2.5">
+                    <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Home</a></li>
+                    <li><a href="#produtos" class="text-gray-300 hover:text-white transition-colors">Produtos</a></li>
+                    <li><a href="#guia" class="text-gray-300 hover:text-white transition-colors">Guia Nutricional</a></li>
+                    <li><a href="#faq" class="text-gray-300 hover:text-white transition-colors">FAQ</a></li>
+                    <li><a href="#local" class="text-gray-300 hover:text-white transition-colors">Nossa Loja</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h4 class="text-lg font-medium mb-4">Categorias</h4>
+                <ul class="space-y-2.5">
+                    <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Proteínas</a></li>
+                    <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Performance</a></li>
+                    <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Saúde</a></li>
+                    <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Emagrecimento</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h4 class="text-lg font-medium mb-4">Contato</h4>
+                <ul class="space-y-2.5">
+                    <li class="flex justify-center md:justify-start items-center">
+                        <i class="fas fa-phone text-primary mr-2.5"></i>
+                        <span>(77) 99915-2558</span>
+                    </li>
+                    <li class="flex justify-center md:justify-start items-center">
+                        <i class="fas fa-envelope text-primary mr-2.5"></i>
+                        <span>contato@suplementosbahia.com.br</span>
+                    </li>
+                    <li class="flex justify-center md:justify-start items-center">
+                        <i class="fas fa-map-marker-alt text-primary mr-2.5"></i>
+                        <span>Avenida São José, Centro, Carinhanha - BA</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="border-t border-gray-700 mt-10 pt-6 text-center text-gray-400">
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2025 Suplementos BAHIA. Todos os direitos reservados.</p>
+                    <p class="developer-credit mt-1">
+                        <i class="fas fa-code"></i> Desenvolvido por 
+                        <a href="https://wa.me/5575991342279" target="_blank" class="developer-link text-orange-500 hover:underline">
+                            PeagahTech
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <!-- Carrinho de compras -->
+    <div id="cart-panel" class="fixed inset-y-0 right-0 w-full md:w-96 bg-white dark:bg-dark-200 shadow-lg transform translate-x-full transition-transform z-50">
+        <div class="flex flex-col h-full">
+            <div class="p-5 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
+                <h2 class="text-lg font-medium">Seu Carrinho (<span id="cart-items-count">0</span>)</h2>
+                <button id="close-cart" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300" aria-label="Fechar carrinho">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div id="cart-items" class="flex-grow overflow-auto p-5">
+                <div id="empty-cart" class="flex flex-col items-center justify-center h-full text-gray-500 dark:text-gray-400">
+                    <i class="fas fa-shopping-cart text-4xl mb-4"></i>
+                    <p class="mb-4">Seu carrinho está vazio</p>
+                    <a href="#produtos" class="text-primary hover:underline">Comprar agora</a>
+                </div>
+            </div>
+            
+            <div class="p-5 border-t border-gray-200 dark:border-gray-700">
+                <div class="flex justify-between mb-4">
+                    <span>Subtotal:</span>
+                    <span id="cart-subtotal" class="font-medium">R$0,00</span>
+                </div>
+                <button id="finalizar-pedido" class="w-full bg-primary hover:bg-opacity-90 text-white py-3 rounded-full transition-all hover:shadow-lg transform hover:-translate-y-1">
+                    Finalizar Pedido
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick View Modal -->
+    <div id="quickview-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden quick-view-modal">
+        <div class="bg-white dark:bg-dark-200 rounded-xl shadow-xl max-w-4xl w-full mx-4 max-h-[90vh] overflow-auto">
+            <div class="flex justify-between items-center p-5 border-b border-gray-200 dark:border-gray-700">
+                <h3 class="text-lg font-medium" id="quickview-title">Detalhes do Produto</h3>
+                <button id="close-quickview" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300" aria-label="Fechar detalhes">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="p-5" id="quickview-content">
+                <div class="animate-pulse">
+                    <div class="h-64 bg-gray-200 dark:bg-gray-700 rounded-lg mb-4"></div>
+                    <div class="h-6 bg-gray-200 dark:bg-gray-700 rounded-lg w-3/4 mb-2"></div>
+                    <div class="h-4 bg-gray-200 dark:bg-gray-700 rounded-lg w-1/2 mb-4"></div>
+                    <div class="h-32 bg-gray-200 dark:bg-gray-700 rounded-lg mb-4"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay para fechar menus -->
+    <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden"></div>
+
+    <!-- Botão voltar ao topo -->
+    <button id="back-to-top" class="fixed bottom-6 right-6 bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg opacity-0 invisible transition-all z-30" aria-label="Voltar ao topo">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Botão do WhatsApp -->
+    <a href="https://wa.me/5577999152558" target="_blank" class="whatsapp-button" aria-label="Contato pelo WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Toast notifications container (mantido, mas não será usado) -->
+    <div id="toast-container" class="fixed bottom-4 right-4 z-50"></div>
+
+    <script>
+        // Dados dos produtos com Schema.org markup para SEO
+        const productsData = [
+            // Proteínas e Aminoácidos
+            {
+                id: 1,
+                name: "Whey Protein Isolado - Dymatize",
+                price: 149.90,
+                oldPrice: 189.90,
+                category: "proteinas-aminoacidos",
+                rating: 4.5,
+                image: "images/whey-iso.png",
+                badge: "sale",
+                description: "Whey Protein Isolado da Dymatize, com 27g de proteína por dose e baixo teor de gordura e carboidratos. Ideal para atletas que buscam um produto de alta qualidade.",
+                nutrition: {
+                    sabor: "Chocolate",
+                    proteina: "27g",
+                    carboidrato: "1g",
+                    fat: "0.5g",
+                    servingSize: "30g"
+                    
+                },
+                schema: {
+                    "@type": "Product",
+                    name: "Whey Protein Isolado - Dymatize",
+                    description: "Whey Protein Isolado da Dymatize, com 27g de proteína por dose.",
+                    offers: {
+                        "@type": "Offer",
+                        price: "149.90",
+                        priceCurrency: "BRL",
+                        availability: "https://schema.org/InStock"
+                    },
+                    aggregateRating: {
+                        "@type": "AggregateRating",
+                        ratingValue: "4.5",
+                        reviewCount: "89"
+                    }
+                }
+            },
+            {
+                id: 2,
+                name: "100% Whey Protein - Max Titanium",
+                price: 119.90,
+                category: "proteinas-aminoacidos",
+                rating: 4.0,
+                image: "images/whey2.png",
+                badge: "best",
+                description: "Whey Protein da Max Titanium, com blend de concentrado e isolado, oferecendo 25g de proteína por dose. Perfeito para o pós-treino e recuperação muscular.",
+                nutrition: {
+                    sabor: "Baunilha",
+                    protein: "25g",
+                    carbs: "3g",
+                    fat: "1.5g",
+                    servingSize: "30g"
+                },
+                schema: {
+                    "@type": "Product",
+                    name: "100% Whey Protein - Max Titanium",
+                    description: "Whey Protein da Max Titanium com blend de concentrado e isolado.",
+                    offers: {
+                        "@type": "Offer",
+                        price: "119.90",
+                        priceCurrency: "BRL",
+                        availability: "https://schema.org/InStock"
+                    },
+                    aggregateRating: {
+                        "@type": "AggregateRating",
+                        ratingValue: "4.0",
+                        reviewCount: "64"
+                    }
+                }
+            },
+            {
+                id: 3,
+                name: "Whey Protein Isolado - Integralmédica",
+                price: 79.90,
+                category: "proteinas-aminoacidos",
+                rating: 4.0,
+                image: "images/whey-iso2.png",
+                description: "Whey Protein Isolado da Integralmédica, oferecendo alta concentração proteica e rápida absorção. Baixo teor de carboidratos e gorduras.",
+                nutrition: {
+                    sabor: "Morango",
+                    protein: "26g",
+                    carbs: "1.5g",
+                    fat: "0.8g",
+                    servingSize: "30g"
+                },
+                schema: {
+                    "@type": "Product",
+                    name: "Whey Protein Isolado - Integralmédica",
+                    description: "Whey Protein Isolado da Integralmédica com rápida absorção.",
+                    offers: {
+                        "@type": "Offer",
+                        price: "79.90",
+                        priceCurrency: "BRL",
+                        availability: "https://schema.org/InStock"
+                    },
+                    aggregateRating: {
+                        "@type": "AggregateRating",
+                        ratingValue: "4.0",
+                        reviewCount: "47"
+                    }
+                }
+            },
+            {
+                id: 4,
+                name: "BCAA 2400 - Combat",
+                price: 89.90,
+                oldPrice: 99.90,
+                category: "proteinas-aminoacidos",
+                rating: 4.5,
+                image: "images/bcaa-btx.png",
+                badge: "sale",
+                description: "BCAA 2400 da Combat, com aminoácidos de cadeia ramificada essenciais para recuperação muscular e síntese proteica. Contém 120 cápsulas.",
+                nutrition: {
+                    bcaa: "2400mg",
+                    leucine: "1200mg",
+                    isoleucine: "600mg",
+                    valine: "600mg",
+                    servingSize: "3 cápsulas"
+                },
+                schema: {
+                    "@type": "Product",
+                    name: "BCAA 2400 - Combat",
+                    description: "BCAA 2400 da Combat com aminoácidos de cadeia ramificada essenciais.",
+                    offers: {
+                        "@type": "Offer",
+                        price: "89.90",
+                        priceCurrency: "BRL",
+                        availability: "https://schema.org/InStock"
+                    },
+                    aggregateRating: {
+                        "@type": "AggregateRating",
+                        ratingValue: "4.5",
+                        reviewCount: "56"
+                    }
+                }
+            },
+            {
+                id: 5,
+                name: "BCAA 2400 - Black Skull",
+                price: 79.90,
+                oldPrice: 99.90,
+                category: "proteinas-aminoacidos",
+                rating: 5.0,
+                image: "images/bcaa-2400.png",
+                badge: "sale",
+                description: "BCAA 2400 da Black Skull, com proporção 2:1:1 de aminoácidos essenciais. Auxiliam na recuperação muscular e previnem o catabolismo.",
+                nutrition: {
+                    bcaa: "2400mg",
+                    leucine: "1200mg",
+                    isoleucine: "600mg",
+                    valine: "600mg",
+                    servingSize: "3 cápsulas"
+                },
+                schema: {
+                    "@type": "Product",
+                    name: "BCAA 2400 - Black Skull",
+                    description: "BCAA 2400 da Black Skull com proporção 2:1:1 de aminoácidos essenciais.",
+                    offers: {
+                        "@type": "Offer",
+                        price: "79.90",
+                        priceCurrency: "BRL",
+                        availability: "https://schema.org/InStock"
+                    },
+                    aggregateRating: {
+                        "@type": "AggregateRating",
+                        ratingValue: "5.0",
+                        reviewCount: "38"
+                    }
+                }
+            },
+            {
+                id: 6,
+                name: "BCAA - DC X",
+                price: 99.90,
+                oldPrice: 119.90,
+                category: "proteinas-aminoacidos",
+                rating: 5.0,
+                image: "images/bcaa-prox.png",
+                badge: "sale",
+                description: "BCAA da DC X, com fórmula avançada para máxima absorção e resultado. Proporção 4:1:1 para potencializar os resultados nos treinos intensos.",
+                nutrition: {
+                    bcaa: "5000mg",
+                    leucine: "2500mg",
+                    isoleucine: "1250mg",
+                    valine: "1250mg",
+                    servingSize: "7g"
+                },
+                schema: {
+                    "@type": "Product",
+                    name: "BCAA - DC X",
+                    description: "BCAA da DC X com fórmula avançada para máxima absorção e resultado.",
+                    offers: {
+                        "@type": "Offer",
+                        price: "99.90",
+                        priceCurrency: "BRL",
+                        availability: "https://schema.org/InStock"
+                    },
+                    aggregateRating: {
+                        "@type": "AggregateRating",
+                        ratingValue: "5.0",
+                        reviewCount: "42"
+                    }
+                }
+            },
+            
+            // Energia e Performance
+            
+            {
+                id: 7,
+                name: "Creatina Hardcore - Integralmédica",
+                price: 89.90,
+                oldPrice: 109.90,
+                category: "energia-performance",
+                rating: 5.0,
+                image: "images/creatina-int.png",
+                badge: "best",
+                description: "Creatina Hardcore da Integralmédica, 100% monohidratada e micronizada para melhor absorção. Aumenta a força, potência e recuperação muscular.",
+                nutrition: {
+                    creatine: "5g",
+                    servingSize: "5g"
+                },
+                schema: {
+                    "@type": "Product",
+                    name: "Creatina Hardcore - Integralmédica",
+                    description: "Creatina Hardcore da Integralmédica, 100% monohidratada e micronizada.",
+                    offers: {
+                        "@type": "Offer",
+                        price: "89.90",
+                        priceCurrency: "BRL",
+                        availability: "https://schema.org/InStock"
+                    },
+                    aggregateRating: {
+                        "@type": "AggregateRating",
+                        ratingValue: "5.0",
+                        reviewCount: "75"
+                    }
+                }
+            },
+            {
+                id: 8,
+                name: "Creatina - Probiótica",
+                price: 89.90,
+                oldPrice: 109.90,
+                category: "energia-performance",
+                rating: 5.0,
+                image: "images/creatina-1.png",
+                badge: "best",
+                description: "Creatina da Probiótica, pura monohidratada, sem adição de outros compostos. Ideal para aumentar a força e potência nos treinos.",
+                nutrition: {
+                    creatine: "5g",
+                    servingSize: "5g"
+                },
+                schema: {
+                    "@type": "Product",
+                    name: "Creatina - Probiótica",
+                    description: "Creatina da Probiótica, pura monohidratada, sem adição de outros compostos.",
+                    offers: {
+                        "@type": "Offer",
+                        price: "89.90",
+                        priceCurrency: "BRL",
+                        availability: "https://schema.org/InStock"
+                    },
+                    aggregateRating: {
+                        "@type": "AggregateRating",
+                        ratingValue: "5.0",
+                        reviewCount: "68"
+                    }
+                }
+            },
+            {
+                id: 9,
+                name: "Pré-Treino C4",
+                price: 149.90,
+                category: "energia-performance",
+                rating: 4.5,
+                image: "images/c4-cellucor.png",
+                badge: "new",
+                description: "Pré-Treino C4, com fórmula explosiva contendo cafeína, beta-alanina e creatina. Fornece energia, foco e força para treinos intensos.",
+                nutrition: {
+                    caffeine: "150mg",
+                    betaAlanine: "1.6g",
+                    creatine: "1g",
+                    servingSize: "6g"
+                },
+                schema: {
+                    "@type": "Product",
+                    name: "Pré-Treino C4",
+                    description: "Pré-Treino C4, com fórmula explosiva para energia, foco e força.",
+                    offers: {
+                        "@type": "Offer",
+                        price: "149.90",
+                        priceCurrency: "BRL",
+                        availability: "https://schema.org/InStock"
+                    },
+                    aggregateRating: {
+                        "@type": "AggregateRating",
+                        ratingValue: "4.5",
+                        reviewCount: "92"
+                    }
+                }
+            },
+            
+            {
+                id: 10,
+                name: "Termogênico Black Burn - BioTech",
+                price: 99.90,
+                oldPrice: 119.90,
+                category: "energia-performance",
+                rating: 4.0,
+                image: "images/termo.png",
+                badge: "sale",
+                description: "Termogênico Black Burn da BioTech, contém cafeína, L-carnitina e extratos vegetais que auxiliam na queima de gordura e aceleração do metabolismo.",
+                nutrition: {
+                    caffeine: "200mg",
+                    lCarnitine: "500mg",
+                    greenTea: "300mg",
+                    servingSize: "2 cápsulas"
+                },
+                schema: {
+                    "@type": "Product",
+                    name: "Termogênico Black Burn - BioTech",
+                    description: "Termogênico Black Burn da BioTech para queima de gordura e aceleração do metabolismo.",
+                    offers: {
+                        "@type": "Offer",
+                        price: "99.90",
+                        priceCurrency: "BRL",
+                        availability: "https://schema.org/InStock"
+                    },
+                    aggregateRating: {
+                        "@type": "AggregateRating",
+                        ratingValue: "4.0",
+                        reviewCount: "53"
+                    }
+                }
+            },
+            {
+                id: 11,
+                name: "Beta-Alanina 200g - 3VS",
+                price: 69.90,
+                category: "energia-performance",
+                rating: 4.5,
+                image: "images/beta.png",
+                description: "Beta-Alanina da 3VS, aminoácido não essencial que aumenta os níveis de carnosina muscular, reduzindo a fadiga durante treinos de alta intensidade.",
+                nutrition: {
+                    betaAlanine: "3.2g",
+                    servingSize: "3.2g"
+                },
+                schema: {
+                    "@type": "Product",
+                    name: "Beta-Alanina 200g - 3VS",
+                    description: "Beta-Alanina da 3VS que aumenta os níveis de carnosina muscular, reduzindo a fadiga.",
+                    offers: {
+                        "@type": "Offer",
+                        price: "69.90",
+                        priceCurrency: "BRL",
+                        availability: "https://schema.org/InStock"
+                    },
+                    aggregateRating: {
+                        "@type": "AggregateRating",
+                        ratingValue: "4.5",
+                        reviewCount: "38"
+                    }
+                }
+            },
+            
+            // Saúde e Bem-Estar
+            {
+                id: 12,
+                name: "Multivitamínico Fullife",
+                price: 69.90,
+                oldPrice: 89.90,
+                category: "saude-bem-estar",
+                rating: 5.0,
+                image: "images/multivita.png",
+                badge: "best",
+                description: "Multivitamínico Fullife, completo com vitaminas e minerais essenciais para suprir as necessidades diárias e fortalecer o sistema imunológico.",
+                nutrition: {
+                    vitamins: "A, C, D, E, K, B1, B2, B3, B5, B6, B9, B12",
+                    minerals: "Cálcio, Ferro, Magnésio, Zinco, Selênio",
+                    servingSize: "1 cápsula"
+                },
+                schema: {
+                    "@type": "Product",
+                    name: "Multivitamínico Fullife",
+                    description: "Multivitamínico Fullife, completo com vitaminas e minerais essenciais.",
+                    offers: {
+                        "@type": "Offer",
+                        price: "69.90",
+                        priceCurrency: "BRL",
+                        availability: "https://schema.org/InStock"
+                    },
+                    aggregateRating: {
+                        "@type": "AggregateRating",
+                        ratingValue: "5.0",
+                        reviewCount: "61"
+                    }
+                }
+            },
+            {
+                id: 13,
+                name: "Ômega 3 120 caps",
+                price: 49.90,
+                oldPrice: 59.90,
+                category: "saude-bem-estar",
+                rating: 4.5,
+                image: "images/ome3.png",
+                badge: "sale",
+                description: "Ômega 3 com 120 cápsulas, rico em EPA e DHA. Contribui para a saúde cardiovascular, função cerebral e redução de inflamações.",
+                nutrition: {
+                    epa: "180mg",
+                    dha: "120mg",
+                    servingSize: "1 cápsula"
+                },
+                schema: {
+                    "@type": "Product",
+                    name: "Ômega 3 120 caps",
+                    description: "Ômega 3 com 120 cápsulas, rico em EPA e DHA para saúde cardiovascular.",
+                    offers: {
+                        "@type": "Offer",
+                        price: "49.90",
+                        priceCurrency: "BRL",
+                        availability: "https://schema.org/InStock"
+                    },
+                    aggregateRating: {
+                        "@type": "AggregateRating",
+                        ratingValue: "4.5",
+                        reviewCount: "47"
+                    }
+                }
+            },
+            {
+                id: 14,
+                name: "Colágeno Hidrolisado",
+                price: 69.90,
+                category: "saude-bem-estar",
+                rating: 5.0,
+                image: "images/colage.png",
+                description: "Colágeno Hidrolisado em pó, facilmente absorvido pelo organismo. Contribui para saúde da pele, cabelos, unhas e articulações.",
+                nutrition: {
+                    collagen: "10g",
+                    servingSize: "10g"
+                },
+                schema: {
+                    "@type": "Product",
+                    name: "Colágeno Hidrolisado",
+                    description: "Colágeno Hidrolisado para saúde da pele, cabelos, unhas e articulações.",
+                    offers: {
+                        "@type": "Offer",
+                        price: "69.90",
+                        priceCurrency: "BRL",
+                        availability: "https://schema.org/InStock"
+                    },
+                    aggregateRating: {
+                        "@type": "AggregateRating",
+                        ratingValue: "5.0",
+                        reviewCount: "52"
+                    }
+                }
+            },
+            {
+                id: 15,
+                name: "Vitamina D3 2000UI",
+                price: 59.90,
+                category: "saude-bem-estar",
+                rating: 4.5,
+                image: "images/d3.png",
+                description: "Vitamina D3 2000UI, essencial para absorção de cálcio, saúde óssea e fortalecimento do sistema imunológico.",
+                nutrition: {
+                    vitaminD3: "2000UI",
+                    servingSize: "1 cápsula"
+                },
+                schema: {
+                    "@type": "Product",
+                    name: "Vitamina D3 2000UI",
+                    description: "Vitamina D3 2000UI, essencial para absorção de cálcio e saúde óssea.",
+                    offers: {
+                        "@type": "Offer",
+                        price: "59.90",
+                        priceCurrency: "BRL",
+                        availability: "https://schema.org/InStock"
+                    },
+                    aggregateRating: {
+                        "@type": "AggregateRating",
+                        ratingValue: "4.5",
+                        reviewCount: "39"
+                    }
+                }
+            },
+            
+            // Emagrecimento e Dieta
+            
+            {
+                id: 16,
+                name: "Psyllium em Pó 200g",
+                price: 39.90,
+                oldPrice: 49.90,
+                category: "emagrecimento-dieta",
+                rating: 4.5,
+                image: "images/psyllium.png",
+                badge: "sale",
+                description: "Psyllium em Pó, fibra natural que auxilia no funcionamento intestinal, controle do apetite e redução da absorção de gorduras.",
+                nutrition: {
+                    fiber: "5g",
+                    servingSize: "5g"
+                },
+                schema: {
+                    "@type": "Product",
+                    name: "Psyllium em Pó 200g",
+                    description: "Psyllium em Pó, fibra natural para funcionamento intestinal e controle do apetite.",
+                    offers: {
+                        "@type": "Offer",
+                        price: "39.90",
+                        priceCurrency: "BRL",
+                        availability: "https://schema.org/InStock"
+                    },
+                    aggregateRating: {
+                        "@type": "AggregateRating",
+                        ratingValue: "4.5",
+                        reviewCount: "33"
+                    }
+                }
+            },
+            {
+                id: 17,
+                name: "Quitosana 500mg",
+                price: 39.90,
+                oldPrice: 49.90,
+                category: "emagrecimento-dieta",
+                rating: 4.5,
+                image: "images/quitosana.png",
+                badge: "sale",
+                description: "Quitosana 500mg, fibra derivada da quitina que se liga às gorduras alimentares, reduzindo sua absorção e auxiliando na perda de peso.",
+                nutrition: {
+                    chitosan: "500mg",
+                    servingSize: "1 cápsula"
+                },
+                schema: {
+                    "@type": "Product",
+                    name: "Quitosana 500mg",
+                    description: "Quitosana 500mg, fibra que se liga às gorduras alimentares, reduzindo sua absorção.",
+                    offers: {
+                        "@type": "Offer",
+                        price: "39.90",
+                        priceCurrency: "BRL",
+                        availability: "https://schema.org/InStock"
+                    },
+                    aggregateRating: {
+                        "@type": "AggregateRating",
+                        ratingValue: "4.5",
+                        reviewCount: "28"
+                    }
+                }
+            },
+            {
+                id: 18,
+                name: "CLA 90 caps",
+                price: 59.90,
+                category: "emagrecimento-dieta",
+                rating: 4.0,
+                image: "images/cla.png",
+                description: "Ácido Linoleico Conjugado (CLA), auxilia na redução da gordura corporal e aumento da massa magra quando associado a exercícios físicos.",
+                nutrition: {
+                    cla: "1000mg",
+                    servingSize: "1 cápsula"
+                },
+                schema: {
+                    "@type": "Product",
+                    name: "CLA 90 caps",
+                    description: "Ácido Linoleico Conjugado (CLA) para redução da gordura corporal.",
+                    offers: {
+                        "@type": "Offer",
+                        price: "59.90",
+                        priceCurrency: "BRL",
+                        availability: "https://schema.org/InStock"
+                    },
+                    aggregateRating: {
+                        "@type": "AggregateRating",
+                        ratingValue: "4.0",
+                        reviewCount: "31"
+                    }
+                }
+            },
+            {
+                id: 19,
+                name: "L-Carnitina 60 caps",
+                price: 69.90,
+                oldPrice: 79.90,
+                category: "emagrecimento-dieta",
+                rating: 4.5,
+                image: "images/carni.png",
+                badge: "sale",
+                description: "L-Carnitina, aminoácido que transporta ácidos graxos para as mitocôndrias, onde são utilizados para produção de energia, auxiliando na queima de gordura.",
+                nutrition: {
+                    lCarnitine: "500mg",
+                    servingSize: "1 cápsula"
+                },
+                schema: {
+                    "@type": "Product",
+                    name: "L-Carnitina 60 caps",
+                    description: "L-Carnitina, aminoácido que auxilia na queima de gordura.",
+                    offers: {
+                        "@type": "Offer",
+                        price: "69.90",
+                        priceCurrency: "BRL",
+                        availability: "https://schema.org/InStock"
+                    },
+                    aggregateRating: {
+                        "@type": "AggregateRating",
+                        ratingValue: "4.5",
+                        reviewCount: "44"
+                    }
+                }
+            },
+            {
+                id: 20,
+                name: "Chá Verde 120 caps",
+                price: 44.90,
+                oldPrice: 54.90,
+                category: "emagrecimento-dieta",
+                rating: 5.0,
+                image: "images/cha-verde.png",
+                badge: "sale",
+                description: "Chá Verde em cápsulas, rico em catequinas e antioxidantes. Auxilia na aceleração do metabolismo, oxidação de gorduras e oferece proteção celular.",
+                nutrition: {
+                    greenTeaExtract: "500mg",
+                    egcg: "250mg",
+                    servingSize: "1 cápsula"
+                },
+                schema: {
+                    "@type": "Product",
+                    name: "Chá Verde 120 caps",
+                    description: "Chá Verde em cápsulas para aceleração do metabolismo e oxidação de gorduras.",
+                    offers: {
+                        "@type": "Offer",
+                        price: "44.90",
+                        priceCurrency: "BRL",
+                        availability: "https://schema.org/InStock"
+                    },
+                    aggregateRating: {
+                        "@type": "AggregateRating",
+                        ratingValue: "5.0",
+                        reviewCount: "37"
+                    }
+                }
+            }
+        ];
+
+        // Sistema de carrinho
+        const cart = {
+            items: [],
+            
+            init() {
+                this.loadCart();
+                this.updateUI();
+            },
+            
+            loadCart() {
+                try {
+                    const savedCart = sessionStorage.getItem('suplementos-bahia-cart');
+                    if (savedCart) {
+                        this.items = JSON.parse(savedCart);
+                    }
+                } catch (e) {
+                    console.log('Erro ao carregar carrinho:', e);
+                }
+            },
+            
+            saveCart() {
+                try {
+                    sessionStorage.setItem('suplementos-bahia-cart', JSON.stringify(this.items));
+                } catch (e) {
+                    console.log('Erro ao salvar carrinho:', e);
+                }
+            },
+            
+            addItem(product, quantity = 1) {
+                const existingItem = this.items.find(item => item.id === product.id);
+                
+                if (existingItem) {
+                    existingItem.quantity += quantity;
+                } else {
+                    this.items.push({
+                        id: product.id,
+                        name: product.name,
+                        price: product.price,
+                        image: product.image,
+                        quantity: quantity
+                    });
+                }
+                
+                this.saveCart();
+                this.updateUI();
+                return true;
+            },
+            
+            removeItem(id) {
+                this.items = this.items.filter(item => item.id !== id);
+                this.saveCart();
+                this.updateUI();
+            },
+            
+            updateQuantity(id, quantity) {
+                const item = this.items.find(item => item.id === id);
+                if (item) {
+                    if (quantity <= 0) {
+                        this.removeItem(id);
+                    } else {
+                        item.quantity = quantity;
+                        this.saveCart();
+                        this.updateUI();
+                    }
+                }
+            },
+            
+            getTotal() {
+                return this.items.reduce((total, item) => total + (item.price * item.quantity), 0);
+            },
+            
+            getCount() {
+                return this.items.reduce((count, item) => count + item.quantity, 0);
+            },
+            
+            updateUI() {
+                // Atualizar contador
+                const count = this.getCount();
+                document.getElementById('cart-count').textContent = count;
+                document.getElementById('cart-items-count').textContent = count;
+                
+                // Atualizar subtotal
+                document.getElementById('cart-subtotal').textContent = `R$${this.getTotal().toFixed(2).replace('.', ',')}`;
+                
+                // Mostrar/ocultar mensagem de carrinho vazio
+                const emptyCart = document.getElementById('empty-cart');
+                emptyCart.style.display = this.items.length === 0 ? 'flex' : 'none';
+                
+                // Renderizar itens
+                this.renderItems();
+                
+                // Adicionar efeito de pulso ao botão do carrinho quando adicionar item
+                if (count > 0) {
+                    const cartBtn = document.getElementById('cart-toggle');
+                    cartBtn.classList.add('btn-pulse');
+                    setTimeout(() => {
+                        cartBtn.classList.remove('btn-pulse');
+                    }, 1000);
+                }
+            },
+            
+            renderItems() {
+                const container = document.getElementById('cart-items');
+                
+                // Remover itens existentes (exceto mensagem de carrinho vazio)
+                const existingItems = container.querySelectorAll('.cart-item');
+                existingItems.forEach(item => container.removeChild(item));
+                
+                // Adicionar itens
+                this.items.forEach(item => {
+                    const cartItem = document.createElement('div');
+                    cartItem.className = 'cart-item flex items-center p-4 border-b border-gray-200 dark:border-gray-700 animate-fade-in';
+                    
+                    cartItem.innerHTML = `
+                        <div class="w-16 h-16 bg-white dark:bg-gray-700 rounded-lg overflow-hidden mr-3 flex-shrink-0">
+                            <img src="${item.image}" alt="${item.name}" class="w-full h-full object-contain" loading="lazy">
+                        </div>
+                        <div class="flex-grow min-w-0">
+                            <h4 class="font-medium text-sm truncate">${item.name}</h4>
+                            <div class="text-primary font-medium">R$${item.price.toFixed(2).replace('.', ',')}</div>
+                            <div class="flex items-center mt-2">
+                                <button class="decrease-btn w-7 h-7 bg-gray-100 dark:bg-gray-600 rounded-full flex items-center justify-center transition-colors hover:bg-gray-200 dark:hover:bg-gray-500" data-id="${item.id}" aria-label="Diminuir quantidade">-</button>
+                                <span class="mx-3">${item.quantity}</span>
+                                <button class="increase-btn w-7 h-7 bg-gray-100 dark:bg-gray-600 rounded-full flex items-center justify-center transition-colors hover:bg-gray-200 dark:hover:bg-gray-500" data-id="${item.id}" aria-label="Aumentar quantidade">+</button>
+                            </div>
+                        </div>
+                        <button class="remove-item text-gray-400 hover:text-red-500 ml-2 transition-colors" data-id="${item.id}" aria-label="Remover item">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    `;
+                    
+                    container.appendChild(cartItem);
+                });
+                
+                // Adicionar eventos
+                document.querySelectorAll('.decrease-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const id = parseInt(btn.getAttribute('data-id'));
+                        const item = this.items.find(item => item.id === id);
+                        if (item) this.updateQuantity(id, item.quantity - 1);
+                    });
+                });
+                
+                document.querySelectorAll('.increase-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const id = parseInt(btn.getAttribute('data-id'));
+                        const item = this.items.find(item => item.id === id);
+                        if (item) this.updateQuantity(id, item.quantity + 1);
+                    });
+                });
+                
+                document.querySelectorAll('.remove-item').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const id = parseInt(btn.getAttribute('data-id'));
+                        this.removeItem(id);
+                    });
+                });
+            },
+            
+            sendToWhatsApp() {
+                if (this.items.length === 0) {
+                    // Notificação removida
+                    return;
+                }
+                
+                let message = "Olá! Gostaria de fazer o seguinte pedido:\n\n";
+                
+                this.items.forEach((item, index) => {
+                    const itemTotal = item.price * item.quantity;
+                    message += `${index + 1}. ${item.name} - Qtd: ${item.quantity} - R$${itemTotal.toFixed(2).replace('.', ',')}\n`;
+                });
+                
+                message += `\nTotal: R$${this.getTotal().toFixed(2).replace('.', ',')}`;
+                message += "\n\nPoderia me informar o prazo de entrega e as formas de pagamento?";
+                
+                window.open(`https://wa.me/5577999152558?text=${encodeURIComponent(message)}`, '_blank');
+            }
+        };
+
+        // Carregar produtos
+        function loadProducts(startIndex = 0, count = 8, filters = {}) {
+            const container = document.getElementById('products-container');
+            
+            if (startIndex === 0) {
+                container.innerHTML = '';
+            }
+            
+            // Aplicar filtros
+            let filteredProducts = productsData;
+            
+            // Filtro de categoria
+            if (filters.category && filters.category !== 'todos') {
+                filteredProducts = filteredProducts.filter(product => product.category === filters.category);
+            }
+            
+            // Filtro de preço
+            if (filters.maxPrice) {
+                filteredProducts = filteredProducts.filter(product => product.price <= filters.maxPrice);
+            }
+            
+            // Filtro de avaliação
+            if (filters.minRating) {
+                filteredProducts = filteredProducts.filter(product => product.rating >= filters.minRating);
+            }
+            
+            // Ordenação
+            if (filters.sort) {
+                switch (filters.sort) {
+                    case 'price-asc':
+                        filteredProducts.sort((a, b) => a.price - b.price);
+                        break;
+                    case 'price-desc':
+                        filteredProducts.sort((a, b) => b.price - a.price);
+                        break;
+                    case 'rating-desc':
+                        filteredProducts.sort((a, b) => b.rating - a.rating);
+                        break;
+                    case 'name-asc':
+                        filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
+                        break;
+                    // relevance é a ordem padrão
+                }
+            }
+            
+            // Paginação
+            const productsToShow = filteredProducts.slice(startIndex, startIndex + count);
+            
+            // Atualizar controles de paginação
+            updatePagination(startIndex, count, filteredProducts.length);
+            
+            // Gerar HTML dos produtos
+            productsToShow.forEach((product, index) => {
+                // Adicionar Schema.org para produto
+                const schemaScript = document.createElement('script');
+                schemaScript.type = 'application/ld+json';
+                schemaScript.textContent = JSON.stringify(product.schema);
+                document.head.appendChild(schemaScript);
+                
+                // Gerar HTML para avaliação
+                let starsHTML = '';
+                const fullStars = Math.floor(product.rating);
+                const hasHalfStar = product.rating % 1 >= 0.5;
+                
+                for (let i = 0; i < 5; i++) {
+                    if (i < fullStars) {
+                        starsHTML += '<i class="fas fa-star text-yellow-400"></i>';
+                    } else if (hasHalfStar && i === fullStars) {
+                        starsHTML += '<i class="fas fa-star-half-alt text-yellow-400"></i>';
+                    } else {
+                        starsHTML += '<i class="far fa-star text-yellow-400"></i>';
+                    }
+                }
+                
+                // Badge do produto
+                let badgeHTML = '';
+                if (product.badge === 'sale') {
+                    badgeHTML = '<span class="absolute top-2 left-2 bg-red-500 text-white text-xs font-medium px-2.5 py-1 rounded-full">Oferta</span>';
+                } else if (product.badge === 'new') {
+                    badgeHTML = '<span class="absolute top-2 left-2 bg-green-500 text-white text-xs font-medium px-2.5 py-1 rounded-full">Novo</span>';
+                } else if (product.badge === 'best') {
+                    badgeHTML = '<span class="absolute top-2 left-2 bg-blue-500 text-white text-xs font-medium px-2.5 py-1 rounded-full">Destaque</span>';
+                }
+                
+                // Criar card do produto
+                const productCard = document.createElement('div');
+                productCard.className = 'bg-white dark:bg-dark-200 rounded-xl shadow-card dark:shadow-card-dark overflow-hidden transition-transform hover-scale hover:shadow-card-hover animate-fade-in product-card';
+                productCard.setAttribute('data-id', product.id);
+                productCard.setAttribute('data-category', product.category);
+                
+                productCard.innerHTML = `
+                    <div class="relative h-44 bg-white dark:bg-dark-100 p-3 flex items-center justify-center">
+                        ${badgeHTML}
+                        <img src="${product.image}" alt="${product.name}" class="max-h-full max-w-full object-contain" loading="lazy">
+                        <button class="quick-view-btn absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-20 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity" data-id="${product.id}" aria-label="Visualização rápida">
+                            <span class="bg-white dark:bg-dark-200 text-gray-800 dark:text-white px-3 py-1.5 rounded-full text-sm font-medium">
+                                <i class="fas fa-eye mr-1"></i> Ver detalhes
+                            </span>
+                        </button>
+                    </div>
+                    <div class="p-4">
+                        <div class="text-xs text-gray-500 dark:text-gray-400 mb-1">${getCategoryName(product.category)}</div>
+                        <h3 class="font-medium text-sm md:text-base mb-1 line-clamp-2 h-10">${product.name}</h3>
+                        <div class="flex mb-2 text-xs">${starsHTML} <span class="ml-1 text-gray-500">(${Math.floor(Math.random() * 100)})</span></div>
+                        <div class="flex items-center justify-between mb-3">
+                            ${product.oldPrice ? `<span class="text-gray-500 dark:text-gray-400 line-through text-sm">R$${product.oldPrice.toFixed(2).replace('.', ',')}</span>` : '<span></span>'}
+                            <span class="text-primary font-bold text-lg">R$${product.price.toFixed(2).replace('.', ',')}</span>
+                        </div>
+                        <button class="add-to-cart w-full bg-primary hover:bg-opacity-90 text-white py-2.5 rounded-full transition-all hover:shadow-lg transform hover:-translate-y-1">
+                            <i class="fas fa-shopping-cart mr-2"></i>Adicionar
+                        </button>
+                    </div>
+                `;
+                
+                container.appendChild(productCard);
+                
+                // Adicionar animação de entrada com delay baseado no índice
+                setTimeout(() => {
+                    productCard.classList.add('animate-fade-in');
+                }, index * 100);
+                
+                // Adicionar evento ao botão
+                productCard.querySelector('.add-to-cart').addEventListener('click', (e) => {
+                    e.stopPropagation();  // Evitar que o click seja propagado para o card
+                    cart.addItem(product);
+                    
+                    // Animação de adição ao carrinho
+                    const button = e.currentTarget;
+                    button.innerHTML = '<i class="fas fa-check mr-2"></i>Adicionado';
+                    button.classList.add('bg-green-500');
+                    
+                    setTimeout(() => {
+                        button.innerHTML = '<i class="fas fa-shopping-cart mr-2"></i>Adicionar';
+                        button.classList.remove('bg-green-500');
+                    }, 1500);
+                });
+                
+                // Adicionar evento para quick view
+                productCard.querySelector('.quick-view-btn').addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    showQuickView(product);
+                });
+            });
+            
+            // Se não houver produtos, mostrar mensagem
+            if (productsToShow.length === 0) {
+                const noProducts = document.createElement('div');
+                noProducts.className = 'col-span-full py-8 text-center text-gray-500 dark:text-gray-400';
+                noProducts.innerHTML = `
+                    <i class="fas fa-search text-4xl mb-3"></i>
+                    <p>Nenhum produto encontrado com esses filtros.</p>
+                    <button id="reset-filters" class="mt-3 text-primary hover:underline">Limpar filtros</button>
+                `;
+                container.appendChild(noProducts);
+                
+                document.getElementById('reset-filters')?.addEventListener('click', () => {
+                    resetFilters();
+                });
+            }
+            
+            return productsToShow.length;
+        }
+        
+        // Atualizar paginação
+        function updatePagination(startIndex, count, totalCount) {
+            const loadMoreBtn = document.getElementById('load-more');
+            const paginationContainer = document.getElementById('pagination');
+            
+            // Configurar botão "Carregar mais"
+            if (startIndex + count < totalCount) {
+                loadMoreBtn.classList.remove('hidden');
+                
+                // Remover event listeners antigos
+                const newLoadMoreBtn = loadMoreBtn.cloneNode(true);
+                loadMoreBtn.parentNode.replaceChild(newLoadMoreBtn, loadMoreBtn);
+                
+                newLoadMoreBtn.addEventListener('click', () => {
+                    const activeFilter = document.querySelector('.filter-btn.active');
+                    const category = activeFilter ? activeFilter.getAttribute('data-filter') : 'todos';
+                    
+                    loadProducts(startIndex + count, count, {
+                        category: category === 'todos' ? null : category
+                    });
+                });
+            } else {
+                loadMoreBtn.classList.add('hidden');
+            }
+            
+            // Configurar paginação numérica
+            paginationContainer.innerHTML = '';
+            const totalPages = Math.ceil(totalCount / count);
+            const currentPage = Math.floor(startIndex / count) + 1;
+            
+            if (totalPages <= 1) {
+                return;
+            }
+            
+            // Criar botões de paginação
+            for (let i = 1; i <= totalPages; i++) {
+                const pageBtn = document.createElement('button');
+                pageBtn.className = `w-9 h-9 flex items-center justify-center rounded-full ${i === currentPage ? 'bg-primary text-white' : 'bg-gray-100 dark:bg-dark-200 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-dark-100'}`;
+                pageBtn.textContent = i;
+                pageBtn.setAttribute('aria-label', `Página ${i}`);
+                
+                pageBtn.addEventListener('click', () => {
+                    if (i !== currentPage) {
+                        const activeFilter = document.querySelector('.filter-btn.active');
+                        const category = activeFilter ? activeFilter.getAttribute('data-filter') : 'todos';
+                        
+                        // Rolar para o topo da seção de produtos
+                        document.getElementById('produtos').scrollIntoView({ behavior: 'smooth' });
+                        
+                        loadProducts((i - 1) * count, count, {
+                            category: category === 'todos' ? null : category
+                        });
+                    }
+                });
+                
+                paginationContainer.appendChild(pageBtn);
+            }
+        }
+        
+        // Pesquisa de produtos
+        function setupSearch() {
+            const searchInput = document.getElementById('search-input');
+            const searchResults = document.getElementById('search-results');
+            
+            searchInput.addEventListener('input', () => {
+                const query = searchInput.value.toLowerCase().trim();
+                
+                if (query.length < 2) {
+                    searchResults.innerHTML = '';
+                    return;
+                }
+                
+                const results = productsData.filter(product => 
+                    product.name.toLowerCase().includes(query) ||
+                    getCategoryName(product.category).toLowerCase().includes(query)
+                );
+                
+                renderSearchResults(results, query);
+            });
+        }
+        
+        function renderSearchResults(results, query) {
+            const searchResults = document.getElementById('search-results');
+            searchResults.innerHTML = '';
+            
+            if (results.length === 0) {
+                searchResults.innerHTML = `
+                    <div class="bg-white dark:bg-dark-200 rounded-xl shadow-card p-4 text-center text-gray-500 dark:text-gray-400">
+                        <p>Nenhum produto encontrado para "${query}"</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Limitar a 5 resultados
+            const limitedResults = results.slice(0, 5);
+            
+            // Criar container para resultados
+            const resultsContainer = document.createElement('div');
+            resultsContainer.className = 'bg-white dark:bg-dark-200 rounded-xl shadow-card overflow-hidden';
+            
+            // Adicionar cada resultado
+            limitedResults.forEach(product => {
+                const resultItem = document.createElement('div');
+                resultItem.className = 'flex items-center p-3 border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-dark-100 cursor-pointer transition-colors';
+                
+                resultItem.innerHTML = `
+                    <div class="w-12 h-12 bg-white dark:bg-dark-300 rounded-lg overflow-hidden mr-3 flex-shrink-0">
+                        <img src="${product.image}" alt="${product.name}" class="w-full h-full object-contain" loading="lazy">
+                    </div>
+                    <div>
+                        <h4 class="font-medium text-sm">${highlightSearch(product.name, query)}</h4>
+                        <div class="text-xs text-gray-500 dark:text-gray-400">${getCategoryName(product.category)}</div>
+                        <div class="text-primary font-medium text-sm">R$${product.price.toFixed(2).replace('.', ',')}</div>
+                    </div>
+                `;
+                
+                resultItem.addEventListener('click', () => {
+                    showQuickView(product);
+                    document.getElementById('search-container').classList.add('hidden');
+                });
+                
+                resultsContainer.appendChild(resultItem);
+            });
+            
+            // Adicionar link para ver todos os resultados
+            if (results.length > 5) {
+                const viewAllLink = document.createElement('div');
+                viewAllLink.className = 'p-3 text-center text-primary hover:underline cursor-pointer';
+                viewAllLink.textContent = `Ver todos os ${results.length} resultados`;
+                
+                viewAllLink.addEventListener('click', () => {
+                    document.getElementById('search-container').classList.add('hidden');
+                    
+                    // Filtrar produtos para mostrar apenas resultados da busca
+                    const container = document.getElementById('products-container');
+                    container.innerHTML = '';
+                    
+                    // Destacar os resultados da busca
+                    results.forEach(product => {
+                        // Similar ao loadProducts mas específico para resultados da busca
+                        const productCard = createProductCard(product);
+                        container.appendChild(productCard);
+                    });
+                    
+                    // Rolar para a seção de produtos
+                    document.getElementById('produtos').scrollIntoView({ behavior: 'smooth' });
+                    
+                    // Adicionar breadcrumb para voltar aos produtos
+                    document.querySelector('.breadcrumb-nav').classList.remove('hidden');
+                    document.querySelector('.current-breadcrumb').textContent = `Busca: "${query}" (${results.length})`;
+                });
+                
+                resultsContainer.appendChild(viewAllLink);
+            }
+            
+            searchResults.appendChild(resultsContainer);
+        }
+        
+        // Destaca o texto de busca nos resultados
+        function highlightSearch(text, query) {
+            const regex = new RegExp(`(${query})`, 'gi');
+            return text.replace(regex, '<span class="bg-yellow-100 dark:bg-yellow-800 text-gray-800 dark:text-yellow-100">$1</span>');
+        }
+        
+        // Criar card de produto (usado na busca e outras funções)
+        function createProductCard(product) {
+            // Gerar HTML para avaliação
+            let starsHTML = '';
+            const fullStars = Math.floor(product.rating);
+            const hasHalfStar = product.rating % 1 >= 0.5;
+            
+            for (let i = 0; i < 5; i++) {
+                if (i < fullStars) {
+                    starsHTML += '<i class="fas fa-star text-yellow-400"></i>';
+                } else if (hasHalfStar && i === fullStars) {
+                    starsHTML += '<i class="fas fa-star-half-alt text-yellow-400"></i>';
+                } else {
+                    starsHTML += '<i class="far fa-star text-yellow-400"></i>';
+                }
+            }
+            
+            // Badge do produto
+            let badgeHTML = '';
+            if (product.badge === 'sale') {
+                badgeHTML = '<span class="absolute top-2 left-2 bg-red-500 text-white text-xs font-medium px-2.5 py-1 rounded-full">Oferta</span>';
+            } else if (product.badge === 'new') {
+                badgeHTML = '<span class="absolute top-2 left-2 bg-green-500 text-white text-xs font-medium px-2.5 py-1 rounded-full">Novo</span>';
+            } else if (product.badge === 'best') {
+                badgeHTML = '<span class="absolute top-2 left-2 bg-blue-500 text-white text-xs font-medium px-2.5 py-1 rounded-full">Destaque</span>';
+            }
+            
+            // Criar card do produto
+            const productCard = document.createElement('div');
+            productCard.className = 'bg-white dark:bg-dark-200 rounded-xl shadow-card dark:shadow-card-dark overflow-hidden transition-transform hover-scale hover:shadow-card-hover animate-fade-in product-card';
+            productCard.setAttribute('data-id', product.id);
+            productCard.setAttribute('data-category', product.category);
+            
+            productCard.innerHTML = `
+                <div class="relative h-44 bg-white dark:bg-dark-100 p-3 flex items-center justify-center">
+                    ${badgeHTML}
+                    <img src="${product.image}" alt="${product.name}" class="max-h-full max-w-full object-contain" loading="lazy">
+                    <button class="quick-view-btn absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-20 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity" data-id="${product.id}" aria-label="Visualização rápida">
+                        <span class="bg-white dark:bg-dark-200 text-gray-800 dark:text-white px-3 py-1.5 rounded-full text-sm font-medium">
+                            <i class="fas fa-eye mr-1"></i> Ver detalhes
+                        </span>
+                    </button>
+                </div>
+                <div class="p-4">
+                    <div class="text-xs text-gray-500 dark:text-gray-400 mb-1">${getCategoryName(product.category)}</div>
+                    <h3 class="font-medium text-sm md:text-base mb-1 line-clamp-2 h-10">${product.name}</h3>
+                    <div class="flex mb-2 text-xs">${starsHTML} <span class="ml-1 text-gray-500">(${Math.floor(Math.random() * 100)})</span></div>
+                    <div class="flex items-center justify-between mb-3">
+                        ${product.oldPrice ? `<span class="text-gray-500 dark:text-gray-400 line-through text-sm">R$${product.oldPrice.toFixed(2).replace('.', ',')}</span>` : '<span></span>'}
+                        <span class="text-primary font-bold text-lg">R$${product.price.toFixed(2).replace('.', ',')}</span>
+                    </div>
+                    <button class="add-to-cart w-full bg-primary hover:bg-opacity-90 text-white py-2.5 rounded-full transition-all hover:shadow-lg transform hover:-translate-y-1">
+                        <i class="fas fa-shopping-cart mr-2"></i>Adicionar
+                    </button>
+                </div>
+            `;
+            
+            // Adicionar evento ao botão
+            productCard.querySelector('.add-to-cart').addEventListener('click', (e) => {
+                e.stopPropagation();
+                cart.addItem(product);
+                
+                // Animação de adição ao carrinho
+                const button = e.currentTarget;
+                button.innerHTML = '<i class="fas fa-check mr-2"></i>Adicionado';
+                button.classList.add('bg-green-500');
+                
+                setTimeout(() => {
+                    button.innerHTML = '<i class="fas fa-shopping-cart mr-2"></i>Adicionar';
+                    button.classList.remove('bg-green-500');
+                }, 1500);
+            });
+            
+            // Adicionar evento para quick view
+            productCard.querySelector('.quick-view-btn').addEventListener('click', (e) => {
+                e.stopPropagation();
+                showQuickView(product);
+            });
+            
+            return productCard;
+        }
+        
+        // Mostrar modal de quick view
+        function showQuickView(product) {
+            const modal = document.getElementById('quickview-modal');
+            const content = document.getElementById('quickview-content');
+            const title = document.getElementById('quickview-title');
+            
+            title.textContent = product.name;
+            
+            // Gerar HTML para avaliação
+            let starsHTML = '';
+            const fullStars = Math.floor(product.rating);
+            const hasHalfStar = product.rating % 1 >= 0.5;
+            
+            for (let i = 0; i < 5; i++) {
+                if (i < fullStars) {
+                    starsHTML += '<i class="fas fa-star text-yellow-400"></i>';
+                } else if (hasHalfStar && i === fullStars) {
+                    starsHTML += '<i class="fas fa-star-half-alt text-yellow-400"></i>';
+                } else {
+                    starsHTML += '<i class="far fa-star text-yellow-400"></i>';
+                }
+            }
+            
+            // Informações nutricionais
+            let nutritionHTML = '';
+            if (product.nutrition) {
+                nutritionHTML = `
+                    <div class="mt-6">
+                        <h4 class="font-medium text-lg mb-2">Informações Nutricionais</h4>
+                        <div class="bg-gray-50 dark:bg-dark-100 rounded-xl p-4">
+                            <table class="w-full text-sm">
+                                <tbody>
+                `;
+                
+                for (const [key, value] of Object.entries(product.nutrition)) {
+                    if (key !== 'servingSize') {
+                        const label = key.replace(/([A-Z])/g, ' $1').trim();
+                        const formattedLabel = label.charAt(0).toUpperCase() + label.slice(1);
+                        
+                        nutritionHTML += `
+                            <tr>
+                                <td class="py-1">${formattedLabel}</td>
+                                <td class="py-1 text-right font-medium">${value}</td>
+                            </tr>
+                        `;
+                    }
+                }
+                
+                if (product.nutrition.servingSize) {
+                    nutritionHTML += `
+                        <tr class="border-t border-gray-200 dark:border-gray-600">
+                            <td class="py-1 pt-2">Porção</td>
+                            <td class="py-1 pt-2 text-right font-medium">${product.nutrition.servingSize}</td>
+                        </tr>
+                    `;
+                }
+                
+                nutritionHTML += `
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            content.innerHTML = `
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white dark:bg-dark-100 rounded-xl p-5 flex items-center justify-center">
+                        <img src="${product.image}" alt="${product.name}" class="max-h-64 max-w-full object-contain">
+                    </div>
+                    <div>
+                        <div class="flex justify-between items-start mb-1">
+                            <span class="text-sm text-gray-500 dark:text-gray-400">${getCategoryName(product.category)}</span>
+                            <div class="flex text-sm">${starsHTML} <span class="ml-1 text-gray-500">(${Math.floor(Math.random() * 100)})</span></div>
+                        </div>
+                        
+                        <h3 class="text-xl font-medium mb-2">${product.name}</h3>
+                        
+                        <div class="flex items-center mb-4">
+                            ${product.oldPrice ? `<span class="text-gray-500 dark:text-gray-400 line-through mr-2">R$${product.oldPrice.toFixed(2).replace('.', ',')}</span>` : ''}
+                            <span class="text-primary font-bold text-2xl">R$${product.price.toFixed(2).replace('.', ',')}</span>
+                        </div>
+                        
+                        <p class="text-gray-700 dark:text-gray-300 mb-6">${product.description}</p>
+                        
+                        <div class="flex space-x-3">
+                            <div class="w-24">
+                                <label for="product-quantity" class="block text-sm font-medium mb-1">Quantidade</label>
+                                <select id="product-quantity" class="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-full bg-white dark:bg-dark-300 focus:outline-none focus:ring-2 focus:ring-primary">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </div>
+                            <div class="flex-grow">
+                                <button class="quickview-add-to-cart w-full bg-primary hover:bg-opacity-90 text-white py-2.5 rounded-full transition-all hover:shadow-lg transform hover:-translate-y-1 flex items-center justify-center mt-6" data-id="${product.id}">
+                                    <i class="fas fa-shopping-cart mr-2"></i>
+                                    Adicionar ao Carrinho
+                                </button>
+                            </div>
+                        </div>
+                        
+                        ${nutritionHTML}
+                    </div>
+                </div>
+            `;
+            
+            // Mostrar modal
+            modal.classList.remove('hidden');
+            
+            // Adicionar evento ao botão de adicionar ao carrinho
+            const addToCartBtn = content.querySelector('.quickview-add-to-cart');
+            addToCartBtn.addEventListener('click', () => {
+                const quantity = parseInt(document.getElementById('product-quantity').value);
+                cart.addItem(product, quantity);
+                
+                // Animação de adição ao carrinho
+                addToCartBtn.innerHTML = '<i class="fas fa-check mr-2"></i>Adicionado com sucesso!';
+                addToCartBtn.classList.add('bg-green-500');
+                
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                }, 1000);
+            });
+            
+            // Fechar modal quando clicar no X
+            document.getElementById('close-quickview').addEventListener('click', () => {
+                modal.classList.add('hidden');
+            });
+            
+            // Fechar modal quando clicar fora dele
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.add('hidden');
+                }
+            });
+        }
+
+        // Setup acordeões
+        function setupAccordions() {
+            document.querySelectorAll('.accordion-header').forEach(header => {
+                header.addEventListener('click', () => {
+                    const content = header.nextElementSibling;
+                    const icon = header.querySelector('i');
+                    const isExpanded = header.getAttribute('aria-expanded') === 'true';
+                    
+                    // Atualizar atributo ARIA
+                    header.setAttribute('aria-expanded', !isExpanded);
+                    
+                    // Toggle conteúdo
+                    content.classList.toggle('hidden');
+                    
+                    // Rotação do ícone
+                    if (content.classList.contains('hidden')) {
+                        icon.style.transform = 'rotate(0deg)';
+                    } else {
+                        icon.style.transform = 'rotate(180deg)';
+                    }
+                });
+            });
+        }
+
+        // Setup FAQ
+        function setupFAQ() {
+            document.querySelectorAll('.faq-header').forEach(header => {
+                header.addEventListener('click', () => {
+                    const content = header.nextElementSibling;
+                    const icon = header.querySelector('i');
+                    const isExpanded = header.getAttribute('aria-expanded') === 'true';
+                    
+                    // Atualizar atributo ARIA
+                    header.setAttribute('aria-expanded', !isExpanded);
+                    
+                    // Toggle conteúdo
+                    content.classList.toggle('hidden');
+                    
+                    // Rotação do ícone
+                    if (content.classList.contains('hidden')) {
+                        icon.style.transform = 'rotate(0deg)';
+                    } else {
+                        icon.style.transform = 'rotate(180deg)';
+                    }
+                });
+            });
+        }
+
+        // Setup Hero Slider - versão corrigida
+        function setupHeroSlider() {
+            // Função para verificar se estamos no mobile
+            function isMobile() {
+                return window.innerWidth <= 768;
+            }
+            
+            let currentSlide = 0;
+            let interval;
+            let slidesData = [];
+            
+            function updateSlides() {
+                const allSlides = document.querySelectorAll('.hero-slide');
+                const controls = document.getElementById('hero-controls');
+                
+                // Filtrar slides baseado no viewport atual
+                if (isMobile()) {
+                    slidesData = Array.from(allSlides).filter(slide => slide.classList.contains('hero-mobile'));
+                } else {
+                    slidesData = Array.from(allSlides).filter(slide => slide.classList.contains('hero-desktop'));
+                }
+                
+                // Limpar controles existentes
+                controls.innerHTML = '';
+                
+                // Criar novos pontos de controle
+                slidesData.forEach((_, index) => {
+                    const dot = document.createElement('button');
+                    dot.className = `w-3 h-3 rounded-full bg-white bg-opacity-50 ${index === 0 ? 'bg-opacity-100' : ''}`;
+                    dot.addEventListener('click', () => goToSlide(index));
+                    dot.setAttribute('aria-label', `Slide ${index + 1}`);
+                    controls.appendChild(dot);
+                });
+                
+                // Reset para o primeiro slide
+                currentSlide = 0;
+                goToSlide(0);
+            }
+            
+            function goToSlide(index) {
+                // Remover classe ativa de todos os slides
+                slidesData.forEach(slide => slide.classList.remove('active'));
+                
+                // Adicionar classe ativa ao slide atual
+                if (slidesData[index]) {
+                    slidesData[index].classList.add('active');
+                }
+                
+                // Atualizar pontos de controle
+                const dots = document.getElementById('hero-controls').querySelectorAll('button');
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('bg-opacity-100', i === index);
+                    dot.classList.toggle('bg-opacity-50', i !== index);
+                    dot.setAttribute('aria-current', i === index ? 'true' : 'false');
+                });
+                
+                currentSlide = index;
+            }
+            
+            function nextSlide() {
+                if (slidesData.length > 0) {
+                    goToSlide((currentSlide + 1) % slidesData.length);
+                }
+            }
+            
+            function startAutoplay() {
+                clearInterval(interval);
+                if (slidesData.length > 1) {
+                    interval = setInterval(nextSlide, 5000);
+                }
+            }
+            
+            // Inicializar
+            updateSlides();
+            startAutoplay();
+            
+            // Atualizar slides quando redimensionar a janela
+            window.addEventListener('resize', () => {
+                updateSlides();
+                startAutoplay();
+            });
+            
+            // Pausar autoplay ao passar mouse
+            const heroGallery = document.getElementById('hero-gallery');
+            heroGallery.addEventListener('mouseenter', () => clearInterval(interval));
+            heroGallery.addEventListener('mouseleave', startAutoplay);
+        }
+
+        // Filtros de categoria
+        function setupCategoryFilters() {
+            const filters = document.querySelectorAll('.filter-btn');
+            
+            filters.forEach(filter => {
+                filter.addEventListener('click', function() {
+                    // Remover classe ativa de todos os filtros
+                    filters.forEach(f => {
+                        f.classList.remove('bg-primary', 'text-white', 'active');
+                        f.classList.add('bg-gray-100', 'dark:bg-dark-200');
+                    });
+                    
+                    // Adicionar classe ativa ao filtro clicado
+                    this.classList.remove('bg-gray-100', 'dark:bg-dark-200');
+                    this.classList.add('bg-primary', 'text-white', 'active');
+                    
+                    const category = this.getAttribute('data-filter');
+                    
+                    // Carregar produtos filtrados
+                    loadProducts(0, 8, {
+                        category: category === 'todos' ? null : category
+                    });
+                });
+            });
+        }
+        
+        // Resetar filtros
+        function resetFilters() {
+            // Reset de categoria
+            const categoryFilters = document.querySelectorAll('.filter-btn');
+            categoryFilters.forEach(f => {
+                f.classList.remove('bg-primary', 'text-white', 'active');
+                f.classList.add('bg-gray-100', 'dark:bg-dark-200');
+            });
+            
+            const allFilter = document.querySelector('[data-filter="todos"]');
+            allFilter.classList.remove('bg-gray-100', 'dark:bg-dark-200');
+            allFilter.classList.add('bg-primary', 'text-white', 'active');
+            
+            // Recarregar produtos
+            loadProducts(0, 8);
+        }
+
+        // Botão voltar ao topo
+        function setupBackToTop() {
+            const backToTop = document.getElementById('back-to-top');
+            
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    backToTop.classList.remove('opacity-0', 'invisible');
+                    backToTop.classList.add('opacity-100', 'visible');
+                } else {
+                    backToTop.classList.add('opacity-0', 'invisible');
+                    backToTop.classList.remove('opacity-100', 'visible');
+                }
+            });
+            
+            backToTop.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        }
+
+        // Sistema de notificações toast - Função alterada para não exibir notificações
+        function showToast(type, message) {
+            // Função desativada conforme solicitado - não mostra notificações
+            console.log(`Notificação (${type}): ${message}`);
+        }
+
+        // Toggle para busca, menu mobile e carrinho
+        function setupToggles() {
+            // Busca
+            const searchToggle = document.getElementById('search-toggle');
+            const searchContainer = document.getElementById('search-container');
+            const searchClose = document.getElementById('search-close');
+            const searchInput = document.getElementById('search-input');
+            
+            searchToggle.addEventListener('click', () => {
+                searchContainer.classList.toggle('hidden');
+                if (!searchContainer.classList.contains('hidden')) {
+                    searchInput.focus();
+                }
+            });
+            
+            searchClose.addEventListener('click', () => {
+                searchContainer.classList.add('hidden');
+            });
+            
+            // Menu mobile
+            const mobileToggle = document.getElementById('mobile-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            mobileToggle.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                
+                // Trocar ícone
+                const icon = mobileToggle.querySelector('i');
+                if (mobileMenu.classList.contains('hidden')) {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                    mobileToggle.setAttribute('aria-expanded', 'false');
+                } else {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                    mobileToggle.setAttribute('aria-expanded', 'true');
+                }
+            });
+            
+            // Carrinho
+            const cartToggle = document.getElementById('cart-toggle');
+            const cartPanel = document.getElementById('cart-panel');
+            const closeCart = document.getElementById('close-cart');
+            const overlay = document.getElementById('overlay');
+            
+            cartToggle.addEventListener('click', () => {
+                cartPanel.classList.remove('translate-x-full');
+                overlay.classList.remove('hidden');
+                cartToggle.setAttribute('aria-expanded', 'true');
+            });
+            
+            closeCart.addEventListener('click', () => {
+                cartPanel.classList.add('translate-x-full');
+                overlay.classList.add('hidden');
+                cartToggle.setAttribute('aria-expanded', 'false');
+            });
+            
+            overlay.addEventListener('click', () => {
+                cartPanel.classList.add('translate-x-full');
+                overlay.classList.add('hidden');
+                mobileMenu.classList.add('hidden');
+                
+                // Restaurar ícone
+                const icon = mobileToggle.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+                
+                // Atualizar estado ARIA
+                mobileToggle.setAttribute('aria-expanded', 'false');
+                cartToggle.setAttribute('aria-expanded', 'false');
+                
+                // Fechar quickview se estiver aberto
+                document.getElementById('quickview-modal').classList.add('hidden');
+            });
+            
+            // Fechar menu mobile ao clicar em links
+            document.querySelectorAll('#mobile-menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    const icon = mobileToggle.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                    mobileToggle.setAttribute('aria-expanded', 'false');
+                });
+            });
+            
+            // Toggle modo escuro
+            const themeToggle = document.getElementById('theme-toggle');
+            themeToggle.addEventListener('click', () => {
+                document.documentElement.classList.toggle('dark');
+                
+                // Trocar ícone
+                const isDark = document.documentElement.classList.contains('dark');
+                themeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+                themeToggle.setAttribute('aria-label', isDark ? 'Mudar para tema claro' : 'Mudar para tema escuro');
+            });
+        }
+
+        // Finalizar pedido
+        function setupCheckout() {
+            document.getElementById('finalizar-pedido').addEventListener('click', () => {
+                cart.sendToWhatsApp();
+            });
+        }
+
+        // Formatador para nomes de categorias
+        function getCategoryName(category) {
+            const names = {
+                'proteinas-aminoacidos': 'Proteínas',
+                'energia-performance': 'Performance',
+                'saude-bem-estar': 'Saúde',
+                'emagrecimento-dieta': 'Emagrecimento',
+                'hipertrofia-massa': 'Hipertrofia',
+                'funcionais-especificos': 'Funcionais',
+                'acessorios-combos': 'Acessórios'
+            };
+            
+            return names[category] || category;
+        }
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', () => {
+            // Inicializar o carrinho
+            cart.init();
+            
+            // Carregar produtos com delay para mostrar skeleton loaders
+            setTimeout(() => {
+                loadProducts(0, 8);
+            }, 500);
+            
+            // Configurar acordeões do guia
+            setupAccordions();
+            
+            // Configurar FAQs
+            setupFAQ();
+            
+            // Configurar slider do hero
+            setupHeroSlider();
+            
+            // Configurar filtros de categoria
+            setupCategoryFilters();
+            
+            // Configurar botão voltar ao topo
+            setupBackToTop();
+            
+            // Configurar toggles
+            setupToggles();
+            
+            // Configurar busca
+            setupSearch();
+            
+            // Configurar finalização de pedido
+            setupCheckout();
+        });
+    </script>
+</body>
+</html>
