@@ -767,8 +767,8 @@
 
     <!-- Área Principal do Site -->
     <div id="main-site">
-        <!-- Hero Banner -->
-        <section class="relative h-[450px] md:h-[550px] overflow-hidden">
+        <!-- Hero Banner - Altura reduzida para mobile -->
+        <section class="relative h-[250px] md:h-[400px] overflow-hidden">
             <div id="hero-gallery">
                 <!-- Banners para Desktop -->
                 <div class="hero-slide hero-desktop active" style="background-image: url('https://pfst.cf2.poecdn.net/base/image/31f8533b1af5fddb3c4175b98977324f0daf755cd0aa61474a1c3d9cdadd4894?w=1600&h=500')"></div>
@@ -794,17 +794,12 @@
                     <span class="block w-20 h-1 bg-primary mx-auto mt-3"></span>
                 </h2>
                 
-                <!-- Filtros avançados -->
+                <!-- Filtros de categoria -->
                 <div class="mb-8">
-                    <div class="flex md:justify-center gap-3 mb-6 overflow-x-auto categories-scroll pb-2">
+                    <div id="category-filters" class="flex md:justify-center gap-3 mb-6 overflow-x-auto categories-scroll pb-2">
                         <button data-filter="todos" class="filter-btn bg-primary text-white hover:bg-primary hover:bg-opacity-90 px-6 py-2.5 rounded-full text-sm font-medium transition active">Todos</button>
-                        <button data-filter="proteinas-aminoacidos" class="filter-btn bg-gray-100 dark:bg-dark-200 hover:bg-primary hover:text-white px-6 py-2.5 rounded-full text-sm font-medium transition">Proteínas</button>
-                        <button data-filter="energia-performance" class="filter-btn bg-gray-100 dark:bg-dark-200 hover:bg-primary hover:text-white px-6 py-2.5 rounded-full text-sm font-medium transition">Performance</button>
-                        <button data-filter="saude-bem-estar" class="filter-btn bg-gray-100 dark:bg-dark-200 hover:bg-primary hover:text-white px-6 py-2.5 rounded-full text-sm font-medium transition">Saúde</button>
-                        <button data-filter="emagrecimento-dieta" class="filter-btn bg-gray-100 dark:bg-dark-200 hover:bg-primary hover:text-white px-6 py-2.5 rounded-full text-sm font-medium transition">Emagrecimento</button>
+                        <!-- Categorias dinâmicas serão inseridas aqui -->
                     </div>
-                    
-                    <!-- Filtros adicionais foram removidos conforme solicitado -->
                 </div>
                 
                 <!-- Grid de produtos -->
@@ -1032,11 +1027,8 @@
                     
                     <div>
                         <h4 class="text-lg font-medium mb-4">Categorias</h4>
-                        <ul class="space-y-2.5">
-                            <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Proteínas</a></li>
-                            <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Performance</a></li>
-                            <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Saúde</a></li>
-                            <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Emagrecimento</a></li>
+                        <ul class="space-y-2.5" id="footer-categories">
+                            <!-- Categorias dinâmicas serão inseridas aqui -->
                         </ul>
                     </div>
                     
@@ -1639,10 +1631,13 @@
                         usage: product.sb_usage,
                         description: product.sb_description,
                         images: product.sb_images,
-                        image: product.sb_image_url || (product.sb_images && product.sb_images[0]) || 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400'
+                        image: product.sb_image_url || (product.sb_images && product.sb_images[0]) || 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400',
+                        rating: 4.5 // Rating padrão
                     }));
                     
                     if (currentAdminTab === 'products') loadAdminProducts();
+                    // Recarregar produtos no site
+                    loadProducts(0, 8);
                 }
 
                 // Carregar pedidos
@@ -1693,18 +1688,11 @@
         // Carregar dados demo
         function loadDemoData() {
             categoryData = {
-                'whey-protein': {
-                    sb_category_id: 1,
-                    sb_code: 'whey-protein',
-                    sb_name: 'Whey Protein',
-                    sb_description: 'Proteínas de alta qualidade para ganho de massa muscular',
-                    sb_image_url: null
-                },
-                'creatina': {
-                    sb_category_id: 2,
-                    sb_code: 'creatina',
-                    sb_name: 'Creatina',
-                    sb_description: 'Suplementos de creatina para força e energia',
+                'todos': {
+                    sb_category_id: 0,
+                    sb_code: 'todos',
+                    sb_name: 'Todos',
+                    sb_description: 'Todas as categorias',
                     sb_image_url: null
                 }
             };
@@ -1716,6 +1704,7 @@
             if (currentAdminTab === 'products') loadAdminProducts();
             if (currentAdminTab === 'orders') loadOrders();
             if (currentAdminTab === 'dashboard') updateDashboard();
+            loadProducts(0, 8); // Carregar produtos no site
         }
 
         // Salvar produto
@@ -1933,6 +1922,8 @@
 
             let html = '';
             Object.keys(categoryData).forEach(code => {
+                if (code === 'todos') return; // Não mostrar categoria "todos" no admin
+                
                 const category = categoryData[code];
                 const productCount = productsDB.filter(p => p.category === code).length;
                 
@@ -2250,6 +2241,7 @@
 
         // Atualizar filtros de categoria
         function updateCategoryFilters() {
+            // Atualizar select do produto
             const productCategorySelect = document.getElementById('product-category');
             
             if (productCategorySelect) {
@@ -2258,11 +2250,45 @@
                 }
                 
                 Object.keys(categoryData).forEach(code => {
+                    if (code === 'todos') return; // Não adicionar "todos" no select
+                    
                     const option = document.createElement('option');
                     option.value = code;
                     option.textContent = categoryData[code].sb_name;
                     productCategorySelect.appendChild(option);
                 });
+            }
+
+            // Atualizar filtros de categoria no site
+            const categoryFilters = document.getElementById('category-filters');
+            if (categoryFilters) {
+                // Manter o botão "Todos"
+                let filtersHTML = '<button data-filter="todos" class="filter-btn bg-primary text-white hover:bg-primary hover:bg-opacity-90 px-6 py-2.5 rounded-full text-sm font-medium transition active">Todos</button>';
+                
+                // Adicionar botões para cada categoria
+                Object.keys(categoryData).forEach(code => {
+                    if (code === 'todos') return; // Já adicionamos o botão "todos"
+                    
+                    const category = categoryData[code];
+                    filtersHTML += `<button data-filter="${code}" class="filter-btn bg-gray-100 dark:bg-dark-200 hover:bg-primary hover:text-white px-6 py-2.5 rounded-full text-sm font-medium transition">${category.sb_name}</button>`;
+                });
+                
+                categoryFilters.innerHTML = filtersHTML;
+                setupCategoryFilters(); // Reconfigurar eventos
+            }
+
+            // Atualizar categorias no footer
+            const footerCategories = document.getElementById('footer-categories');
+            if (footerCategories) {
+                let footerHTML = '';
+                Object.keys(categoryData).forEach(code => {
+                    if (code === 'todos') return; // Não mostrar "todos" no footer
+                    
+                    const category = categoryData[code];
+                    footerHTML += `<li><a href="#" class="text-gray-300 hover:text-white transition-colors">${category.sb_name}</a></li>`;
+                });
+                
+                footerCategories.innerHTML = footerHTML;
             }
         }
 
@@ -2352,655 +2378,7 @@
             document.getElementById('admin-panel').classList.remove('active');
         }
 
-        // Dados dos produtos com Schema.org markup para SEO (mantido do código original)
-        const productsData = [
-            // Proteínas e Aminoácidos
-            {
-                id: 1,
-                name: "Whey Protein Isolado - Dymatize",
-                price: 149.90,
-                oldPrice: 189.90,
-                category: "proteinas-aminoacidos",
-                rating: 4.5,
-                image: "images/whey-iso.png",
-                badge: "sale",
-                description: "Whey Protein Isolado da Dymatize, com 27g de proteína por dose e baixo teor de gordura e carboidratos. Ideal para atletas que buscam um produto de alta qualidade.",
-                nutrition: {
-                    sabor: "Chocolate",
-                    proteina: "27g",
-                    carboidrato: "1g",
-                    fat: "0.5g",
-                    servingSize: "30g"
-                    
-                },
-                schema: {
-                    "@type": "Product",
-                    name: "Whey Protein Isolado - Dymatize",
-                    description: "Whey Protein Isolado da Dymatize, com 27g de proteína por dose.",
-                    offers: {
-                        "@type": "Offer",
-                        price: "149.90",
-                        priceCurrency: "BRL",
-                        availability: "https://schema.org/InStock"
-                    },
-                    aggregateRating: {
-                        "@type": "AggregateRating",
-                        ratingValue: "4.5",
-                        reviewCount: "89"
-                    }
-                }
-            },
-            {
-                id: 2,
-                name: "100% Whey Protein - Max Titanium",
-                price: 119.90,
-                category: "proteinas-aminoacidos",
-                rating: 4.0,
-                image: "images/whey2.png",
-                badge: "best",
-                description: "Whey Protein da Max Titanium, com blend de concentrado e isolado, oferecendo 25g de proteína por dose. Perfeito para o pós-treino e recuperação muscular.",
-                nutrition: {
-                    sabor: "Baunilha",
-                    protein: "25g",
-                    carbs: "3g",
-                    fat: "1.5g",
-                    servingSize: "30g"
-                },
-                schema: {
-                    "@type": "Product",
-                    name: "100% Whey Protein - Max Titanium",
-                    description: "Whey Protein da Max Titanium com blend de concentrado e isolado.",
-                    offers: {
-                        "@type": "Offer",
-                        price: "119.90",
-                        priceCurrency: "BRL",
-                        availability: "https://schema.org/InStock"
-                    },
-                    aggregateRating: {
-                        "@type": "AggregateRating",
-                        ratingValue: "4.0",
-                        reviewCount: "64"
-                    }
-                }
-            },
-            {
-                id: 3,
-                name: "Whey Protein Isolado - Integralmédica",
-                price: 79.90,
-                category: "proteinas-aminoacidos",
-                rating: 4.0,
-                image: "images/whey-iso2.png",
-                description: "Whey Protein Isolado da Integralmédica, oferecendo alta concentração proteica e rápida absorção. Baixo teor de carboidratos e gorduras.",
-                nutrition: {
-                    sabor: "Morango",
-                    protein: "26g",
-                    carbs: "1.5g",
-                    fat: "0.8g",
-                    servingSize: "30g"
-                },
-                schema: {
-                    "@type": "Product",
-                    name: "Whey Protein Isolado - Integralmédica",
-                    description: "Whey Protein Isolado da Integralmédica com rápida absorção.",
-                    offers: {
-                        "@type": "Offer",
-                        price: "79.90",
-                        priceCurrency: "BRL",
-                        availability: "https://schema.org/InStock"
-                    },
-                    aggregateRating: {
-                        "@type": "AggregateRating",
-                        ratingValue: "4.0",
-                        reviewCount: "47"
-                    }
-                }
-            },
-            {
-                id: 4,
-                name: "BCAA 2400 - Combat",
-                price: 89.90,
-                oldPrice: 99.90,
-                category: "proteinas-aminoacidos",
-                rating: 4.5,
-                image: "images/bcaa-btx.png",
-                badge: "sale",
-                description: "BCAA 2400 da Combat, com aminoácidos de cadeia ramificada essenciais para recuperação muscular e síntese proteica. Contém 120 cápsulas.",
-                nutrition: {
-                    bcaa: "2400mg",
-                    leucine: "1200mg",
-                    isoleucine: "600mg",
-                    valine: "600mg",
-                    servingSize: "3 cápsulas"
-                },
-                schema: {
-                    "@type": "Product",
-                    name: "BCAA 2400 - Combat",
-                    description: "BCAA 2400 da Combat com aminoácidos de cadeia ramificada essenciais.",
-                    offers: {
-                        "@type": "Offer",
-                        price: "89.90",
-                        priceCurrency: "BRL",
-                        availability: "https://schema.org/InStock"
-                    },
-                    aggregateRating: {
-                        "@type": "AggregateRating",
-                        ratingValue: "4.5",
-                        reviewCount: "56"
-                    }
-                }
-            },
-            {
-                id: 5,
-                name: "BCAA 2400 - Black Skull",
-                price: 79.90,
-                oldPrice: 99.90,
-                category: "proteinas-aminoacidos",
-                rating: 5.0,
-                image: "images/bcaa-2400.png",
-                badge: "sale",
-                description: "BCAA 2400 da Black Skull, com proporção 2:1:1 de aminoácidos essenciais. Auxiliam na recuperação muscular e previnem o catabolismo.",
-                nutrition: {
-                    bcaa: "2400mg",
-                    leucine: "1200mg",
-                    isoleucine: "600mg",
-                    valine: "600mg",
-                    servingSize: "3 cápsulas"
-                },
-                schema: {
-                    "@type": "Product",
-                    name: "BCAA 2400 - Black Skull",
-                    description: "BCAA 2400 da Black Skull com proporção 2:1:1 de aminoácidos essenciais.",
-                    offers: {
-                        "@type": "Offer",
-                        price: "79.90",
-                        priceCurrency: "BRL",
-                        availability: "https://schema.org/InStock"
-                    },
-                    aggregateRating: {
-                        "@type": "AggregateRating",
-                        ratingValue: "5.0",
-                        reviewCount: "38"
-                    }
-                }
-            },
-            {
-                id: 6,
-                name: "BCAA - DC X",
-                price: 99.90,
-                oldPrice: 119.90,
-                category: "proteinas-aminoacidos",
-                rating: 5.0,
-                image: "images/bcaa-prox.png",
-                badge: "sale",
-                description: "BCAA da DC X, com fórmula avançada para máxima absorção e resultado. Proporção 4:1:1 para potencializar os resultados nos treinos intensos.",
-                nutrition: {
-                    bcaa: "5000mg",
-                    leucine: "2500mg",
-                    isoleucine: "1250mg",
-                    valine: "1250mg",
-                    servingSize: "7g"
-                },
-                schema: {
-                    "@type": "Product",
-                    name: "BCAA - DC X",
-                    description: "BCAA da DC X com fórmula avançada para máxima absorção e resultado.",
-                    offers: {
-                        "@type": "Offer",
-                        price: "99.90",
-                        priceCurrency: "BRL",
-                        availability: "https://schema.org/InStock"
-                    },
-                    aggregateRating: {
-                        "@type": "AggregateRating",
-                        ratingValue: "5.0",
-                        reviewCount: "42"
-                    }
-                }
-            },
-            
-            // Energia e Performance
-            
-            {
-                id: 7,
-                name: "Creatina Hardcore - Integralmédica",
-                price: 89.90,
-                oldPrice: 109.90,
-                category: "energia-performance",
-                rating: 5.0,
-                image: "images/creatina-int.png",
-                badge: "best",
-                description: "Creatina Hardcore da Integralmédica, 100% monohidratada e micronizada para melhor absorção. Aumenta a força, potência e recuperação muscular.",
-                nutrition: {
-                    creatine: "5g",
-                    servingSize: "5g"
-                },
-                schema: {
-                    "@type": "Product",
-                    name: "Creatina Hardcore - Integralmédica",
-                    description: "Creatina Hardcore da Integralmédica, 100% monohidratada e micronizada.",
-                    offers: {
-                        "@type": "Offer",
-                        price: "89.90",
-                        priceCurrency: "BRL",
-                        availability: "https://schema.org/InStock"
-                    },
-                    aggregateRating: {
-                        "@type": "AggregateRating",
-                        ratingValue: "5.0",
-                        reviewCount: "75"
-                    }
-                }
-            },
-            {
-                id: 8,
-                name: "Creatina - Probiótica",
-                price: 89.90,
-                oldPrice: 109.90,
-                category: "energia-performance",
-                rating: 5.0,
-                image: "images/creatina-1.png",
-                badge: "best",
-                description: "Creatina da Probiótica, pura monohidratada, sem adição de outros compostos. Ideal para aumentar a força e potência nos treinos.",
-                nutrition: {
-                    creatine: "5g",
-                    servingSize: "5g"
-                },
-                schema: {
-                    "@type": "Product",
-                    name: "Creatina - Probiótica",
-                    description: "Creatina da Probiótica, pura monohidratada, sem adição de outros compostos.",
-                    offers: {
-                        "@type": "Offer",
-                        price: "89.90",
-                        priceCurrency: "BRL",
-                        availability: "https://schema.org/InStock"
-                    },
-                    aggregateRating: {
-                        "@type": "AggregateRating",
-                        ratingValue: "5.0",
-                        reviewCount: "68"
-                    }
-                }
-            },
-            {
-                id: 9,
-                name: "Pré-Treino C4",
-                price: 149.90,
-                category: "energia-performance",
-                rating: 4.5,
-                image: "images/c4-cellucor.png",
-                badge: "new",
-                description: "Pré-Treino C4, com fórmula explosiva contendo cafeína, beta-alanina e creatina. Fornece energia, foco e força para treinos intensos.",
-                nutrition: {
-                    caffeine: "150mg",
-                    betaAlanine: "1.6g",
-                    creatine: "1g",
-                    servingSize: "6g"
-                },
-                schema: {
-                    "@type": "Product",
-                    name: "Pré-Treino C4",
-                    description: "Pré-Treino C4, com fórmula explosiva para energia, foco e força.",
-                    offers: {
-                        "@type": "Offer",
-                        price: "149.90",
-                        priceCurrency: "BRL",
-                        availability: "https://schema.org/InStock"
-                    },
-                    aggregateRating: {
-                        "@type": "AggregateRating",
-                        ratingValue: "4.5",
-                        reviewCount: "92"
-                    }
-                }
-            },
-            
-            {
-                id: 10,
-                name: "Termogênico Black Burn - BioTech",
-                price: 99.90,
-                oldPrice: 119.90,
-                category: "energia-performance",
-                rating: 4.0,
-                image: "images/termo.png",
-                badge: "sale",
-                description: "Termogênico Black Burn da BioTech, contém cafeína, L-carnitina e extratos vegetais que auxiliam na queima de gordura e aceleração do metabolismo.",
-                nutrition: {
-                    caffeine: "200mg",
-                    lCarnitine: "500mg",
-                    greenTea: "300mg",
-                    servingSize: "2 cápsulas"
-                },
-                schema: {
-                    "@type": "Product",
-                    name: "Termogênico Black Burn - BioTech",
-                    description: "Termogênico Black Burn da BioTech para queima de gordura e aceleração do metabolismo.",
-                    offers: {
-                        "@type": "Offer",
-                        price: "99.90",
-                        priceCurrency: "BRL",
-                        availability: "https://schema.org/InStock"
-                    },
-                    aggregateRating: {
-                        "@type": "AggregateRating",
-                        ratingValue: "4.0",
-                        reviewCount: "53"
-                    }
-                }
-            },
-            {
-                id: 11,
-                name: "Beta-Alanina 200g - 3VS",
-                price: 69.90,
-                category: "energia-performance",
-                rating: 4.5,
-                image: "images/beta.png",
-                description: "Beta-Alanina da 3VS, aminoácido não essencial que aumenta os níveis de carnosina muscular, reduzindo a fadiga durante treinos de alta intensidade.",
-                nutrition: {
-                    betaAlanine: "3.2g",
-                    servingSize: "3.2g"
-                },
-                schema: {
-                    "@type": "Product",
-                    name: "Beta-Alanina 200g - 3VS",
-                    description: "Beta-Alanina da 3VS que aumenta os níveis de carnosina muscular, reduzindo a fadiga.",
-                    offers: {
-                        "@type": "Offer",
-                        price: "69.90",
-                        priceCurrency: "BRL",
-                        availability: "https://schema.org/InStock"
-                    },
-                    aggregateRating: {
-                        "@type": "AggregateRating",
-                        ratingValue: "4.5",
-                        reviewCount: "38"
-                    }
-                }
-            },
-            
-            // Saúde e Bem-Estar
-            {
-                id: 12,
-                name: "Multivitamínico Fullife",
-                price: 69.90,
-                oldPrice: 89.90,
-                category: "saude-bem-estar",
-                rating: 5.0,
-                image: "images/multivita.png",
-                badge: "best",
-                description: "Multivitamínico Fullife, completo com vitaminas e minerais essenciais para suprir as necessidades diárias e fortalecer o sistema imunológico.",
-                nutrition: {
-                    vitamins: "A, C, D, E, K, B1, B2, B3, B5, B6, B9, B12",
-                    minerals: "Cálcio, Ferro, Magnésio, Zinco, Selênio",
-                    servingSize: "1 cápsula"
-                },
-                schema: {
-                    "@type": "Product",
-                    name: "Multivitamínico Fullife",
-                    description: "Multivitamínico Fullife, completo com vitaminas e minerais essenciais.",
-                    offers: {
-                        "@type": "Offer",
-                        price: "69.90",
-                        priceCurrency: "BRL",
-                        availability: "https://schema.org/InStock"
-                    },
-                    aggregateRating: {
-                        "@type": "AggregateRating",
-                        ratingValue: "5.0",
-                        reviewCount: "61"
-                    }
-                }
-            },
-            {
-                id: 13,
-                name: "Ômega 3 120 caps",
-                price: 49.90,
-                oldPrice: 59.90,
-                category: "saude-bem-estar",
-                rating: 4.5,
-                image: "images/ome3.png",
-                badge: "sale",
-                description: "Ômega 3 com 120 cápsulas, rico em EPA e DHA. Contribui para a saúde cardiovascular, função cerebral e redução de inflamações.",
-                nutrition: {
-                    epa: "180mg",
-                    dha: "120mg",
-                    servingSize: "1 cápsula"
-                },
-                schema: {
-                    "@type": "Product",
-                    name: "Ômega 3 120 caps",
-                    description: "Ômega 3 com 120 cápsulas, rico em EPA e DHA para saúde cardiovascular.",
-                    offers: {
-                        "@type": "Offer",
-                        price: "49.90",
-                        priceCurrency: "BRL",
-                        availability: "https://schema.org/InStock"
-                    },
-                    aggregateRating: {
-                        "@type": "AggregateRating",
-                        ratingValue: "4.5",
-                        reviewCount: "47"
-                    }
-                }
-            },
-            {
-                id: 14,
-                name: "Colágeno Hidrolisado",
-                price: 69.90,
-                category: "saude-bem-estar",
-                rating: 5.0,
-                image: "images/colage.png",
-                description: "Colágeno Hidrolisado em pó, facilmente absorvido pelo organismo. Contribui para saúde da pele, cabelos, unhas e articulações.",
-                nutrition: {
-                    collagen: "10g",
-                    servingSize: "10g"
-                },
-                schema: {
-                    "@type": "Product",
-                    name: "Colágeno Hidrolisado",
-                    description: "Colágeno Hidrolisado para saúde da pele, cabelos, unhas e articulações.",
-                    offers: {
-                        "@type": "Offer",
-                        price: "69.90",
-                        priceCurrency: "BRL",
-                        availability: "https://schema.org/InStock"
-                    },
-                    aggregateRating: {
-                        "@type": "AggregateRating",
-                        ratingValue: "5.0",
-                        reviewCount: "52"
-                    }
-                }
-            },
-            {
-                id: 15,
-                name: "Vitamina D3 2000UI",
-                price: 59.90,
-                category: "saude-bem-estar",
-                rating: 4.5,
-                image: "images/d3.png",
-                description: "Vitamina D3 2000UI, essencial para absorção de cálcio, saúde óssea e fortalecimento do sistema imunológico.",
-                nutrition: {
-                    vitaminD3: "2000UI",
-                    servingSize: "1 cápsula"
-                },
-                schema: {
-                    "@type": "Product",
-                    name: "Vitamina D3 2000UI",
-                    description: "Vitamina D3 2000UI, essencial para absorção de cálcio e saúde óssea.",
-                    offers: {
-                        "@type": "Offer",
-                        price: "59.90",
-                        priceCurrency: "BRL",
-                        availability: "https://schema.org/InStock"
-                    },
-                    aggregateRating: {
-                        "@type": "AggregateRating",
-                        ratingValue: "4.5",
-                        reviewCount: "39"
-                    }
-                }
-            },
-            
-            // Emagrecimento e Dieta
-            
-            {
-                id: 16,
-                name: "Psyllium em Pó 200g",
-                price: 39.90,
-                oldPrice: 49.90,
-                category: "emagrecimento-dieta",
-                rating: 4.5,
-                image: "images/psyllium.png",
-                badge: "sale",
-                description: "Psyllium em Pó, fibra natural que auxilia no funcionamento intestinal, controle do apetite e redução da absorção de gorduras.",
-                nutrition: {
-                    fiber: "5g",
-                    servingSize: "5g"
-                },
-                schema: {
-                    "@type": "Product",
-                    name: "Psyllium em Pó 200g",
-                    description: "Psyllium em Pó, fibra natural para funcionamento intestinal e controle do apetite.",
-                    offers: {
-                        "@type": "Offer",
-                        price: "39.90",
-                        priceCurrency: "BRL",
-                        availability: "https://schema.org/InStock"
-                    },
-                    aggregateRating: {
-                        "@type": "AggregateRating",
-                        ratingValue: "4.5",
-                        reviewCount: "33"
-                    }
-                }
-            },
-            {
-                id: 17,
-                name: "Quitosana 500mg",
-                price: 39.90,
-                oldPrice: 49.90,
-                category: "emagrecimento-dieta",
-                rating: 4.5,
-                image: "images/quitosana.png",
-                badge: "sale",
-                description: "Quitosana 500mg, fibra derivada da quitina que se liga às gorduras alimentares, reduzindo sua absorção e auxiliando na perda de peso.",
-                nutrition: {
-                    chitosan: "500mg",
-                    servingSize: "1 cápsula"
-                },
-                schema: {
-                    "@type": "Product",
-                    name: "Quitosana 500mg",
-                    description: "Quitosana 500mg, fibra que se liga às gorduras alimentares, reduzindo sua absorção.",
-                    offers: {
-                        "@type": "Offer",
-                        price: "39.90",
-                        priceCurrency: "BRL",
-                        availability: "https://schema.org/InStock"
-                    },
-                    aggregateRating: {
-                        "@type": "AggregateRating",
-                        ratingValue: "4.5",
-                        reviewCount: "28"
-                    }
-                }
-            },
-            {
-                id: 18,
-                name: "CLA 90 caps",
-                price: 59.90,
-                category: "emagrecimento-dieta",
-                rating: 4.0,
-                image: "images/cla.png",
-                description: "Ácido Linoleico Conjugado (CLA), auxilia na redução da gordura corporal e aumento da massa magra quando associado a exercícios físicos.",
-                nutrition: {
-                    cla: "1000mg",
-                    servingSize: "1 cápsula"
-                },
-                schema: {
-                    "@type": "Product",
-                    name: "CLA 90 caps",
-                    description: "Ácido Linoleico Conjugado (CLA) para redução da gordura corporal.",
-                    offers: {
-                        "@type": "Offer",
-                        price: "59.90",
-                        priceCurrency: "BRL",
-                        availability: "https://schema.org/InStock"
-                    },
-                    aggregateRating: {
-                        "@type": "AggregateRating",
-                        ratingValue: "4.0",
-                        reviewCount: "31"
-                    }
-                }
-            },
-            {
-                id: 19,
-                name: "L-Carnitina 60 caps",
-                price: 69.90,
-                oldPrice: 79.90,
-                category: "emagrecimento-dieta",
-                rating: 4.5,
-                image: "images/carni.png",
-                badge: "sale",
-                description: "L-Carnitina, aminoácido que transporta ácidos graxos para as mitocôndrias, onde são utilizados para produção de energia, auxiliando na queima de gordura.",
-                nutrition: {
-                    lCarnitine: "500mg",
-                    servingSize: "1 cápsula"
-                },
-                schema: {
-                    "@type": "Product",
-                    name: "L-Carnitina 60 caps",
-                    description: "L-Carnitina, aminoácido que auxilia na queima de gordura.",
-                    offers: {
-                        "@type": "Offer",
-                        price: "69.90",
-                        priceCurrency: "BRL",
-                        availability: "https://schema.org/InStock"
-                    },
-                    aggregateRating: {
-                        "@type": "AggregateRating",
-                        ratingValue: "4.5",
-                        reviewCount: "44"
-                    }
-                }
-            },
-            {
-                id: 20,
-                name: "Chá Verde 120 caps",
-                price: 44.90,
-                oldPrice: 54.90,
-                category: "emagrecimento-dieta",
-                rating: 5.0,
-                image: "images/cha-verde.png",
-                badge: "sale",
-                description: "Chá Verde em cápsulas, rico em catequinas e antioxidantes. Auxilia na aceleração do metabolismo, oxidação de gorduras e oferece proteção celular.",
-                nutrition: {
-                    greenTeaExtract: "500mg",
-                    egcg: "250mg",
-                    servingSize: "1 cápsula"
-                },
-                schema: {
-                    "@type": "Product",
-                    name: "Chá Verde 120 caps",
-                    description: "Chá Verde em cápsulas para aceleração do metabolismo e oxidação de gorduras.",
-                    offers: {
-                        "@type": "Offer",
-                        price: "44.90",
-                        priceCurrency: "BRL",
-                        availability: "https://schema.org/InStock"
-                    },
-                    aggregateRating: {
-                        "@type": "AggregateRating",
-                        ratingValue: "5.0",
-                        reviewCount: "37"
-                    }
-                }
-            }
-        ];
-
-        // Sistema de carrinho (mantido do código original)
+        // Sistema de carrinho
         const cart = {
             items: [],
             
@@ -3178,7 +2556,7 @@
             }
         };
 
-        // Carregar produtos (mantido do código original)
+        // Carregar produtos do banco
         function loadProducts(startIndex = 0, count = 8, filters = {}) {
             const container = document.getElementById('products-container');
             
@@ -3186,8 +2564,8 @@
                 container.innerHTML = '';
             }
             
-            // Aplicar filtros
-            let filteredProducts = productsData;
+            // Aplicar filtros nos produtos do banco
+            let filteredProducts = productsDB;
             
             // Filtro de categoria
             if (filters.category && filters.category !== 'todos') {
@@ -3231,12 +2609,6 @@
             
             // Gerar HTML dos produtos
             productsToShow.forEach((product, index) => {
-                // Adicionar Schema.org para produto
-                const schemaScript = document.createElement('script');
-                schemaScript.type = 'application/ld+json';
-                schemaScript.textContent = JSON.stringify(product.schema);
-                document.head.appendChild(schemaScript);
-                
                 // Gerar HTML para avaliação
                 let starsHTML = '';
                 const fullStars = Math.floor(product.rating);
@@ -3254,12 +2626,8 @@
                 
                 // Badge do produto
                 let badgeHTML = '';
-                if (product.badge === 'sale') {
+                if (product.oldPrice && product.oldPrice > product.price) {
                     badgeHTML = '<span class="absolute top-2 left-2 bg-red-500 text-white text-xs font-medium px-2.5 py-1 rounded-full">Oferta</span>';
-                } else if (product.badge === 'new') {
-                    badgeHTML = '<span class="absolute top-2 left-2 bg-green-500 text-white text-xs font-medium px-2.5 py-1 rounded-full">Novo</span>';
-                } else if (product.badge === 'best') {
-                    badgeHTML = '<span class="absolute top-2 left-2 bg-blue-500 text-white text-xs font-medium px-2.5 py-1 rounded-full">Destaque</span>';
                 }
                 
                 // Criar card do produto
@@ -3301,7 +2669,7 @@
                 
                 // Adicionar evento ao botão
                 productCard.querySelector('.add-to-cart').addEventListener('click', (e) => {
-                    e.stopPropagation();  // Evitar que o click seja propagado para o card
+                    e.stopPropagation();
                     cart.addItem(product);
                     
                     // Animação de adição ao carrinho
@@ -3328,20 +2696,16 @@
                 noProducts.className = 'col-span-full py-8 text-center text-gray-500 dark:text-gray-400';
                 noProducts.innerHTML = `
                     <i class="fas fa-search text-4xl mb-3"></i>
-                    <p>Nenhum produto encontrado com esses filtros.</p>
-                    <button id="reset-filters" class="mt-3 text-primary hover:underline">Limpar filtros</button>
+                    <p>Nenhum produto encontrado.</p>
+                    <p class="text-sm mt-2">Adicione produtos através do painel administrativo.</p>
                 `;
                 container.appendChild(noProducts);
-                
-                document.getElementById('reset-filters')?.addEventListener('click', () => {
-                    resetFilters();
-                });
             }
             
             return productsToShow.length;
         }
         
-        // Atualizar paginação (mantido do código original)
+        // Atualizar paginação
         function updatePagination(startIndex, count, totalCount) {
             const loadMoreBtn = document.getElementById('load-more');
             const paginationContainer = document.getElementById('pagination');
@@ -3366,41 +2730,11 @@
                 loadMoreBtn.classList.add('hidden');
             }
             
-            // Configurar paginação numérica
+            // Limpar paginação numérica por enquanto
             paginationContainer.innerHTML = '';
-            const totalPages = Math.ceil(totalCount / count);
-            const currentPage = Math.floor(startIndex / count) + 1;
-            
-            if (totalPages <= 1) {
-                return;
-            }
-            
-            // Criar botões de paginação
-            for (let i = 1; i <= totalPages; i++) {
-                const pageBtn = document.createElement('button');
-                pageBtn.className = `w-9 h-9 flex items-center justify-center rounded-full ${i === currentPage ? 'bg-primary text-white' : 'bg-gray-100 dark:bg-dark-200 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-dark-100'}`;
-                pageBtn.textContent = i;
-                pageBtn.setAttribute('aria-label', `Página ${i}`);
-                
-                pageBtn.addEventListener('click', () => {
-                    if (i !== currentPage) {
-                        const activeFilter = document.querySelector('.filter-btn.active');
-                        const category = activeFilter ? activeFilter.getAttribute('data-filter') : 'todos';
-                        
-                        // Rolar para o topo da seção de produtos
-                        document.getElementById('produtos').scrollIntoView({ behavior: 'smooth' });
-                        
-                        loadProducts((i - 1) * count, count, {
-                            category: category === 'todos' ? null : category
-                        });
-                    }
-                });
-                
-                paginationContainer.appendChild(pageBtn);
-            }
         }
         
-        // Pesquisa de produtos (mantido do código original)
+        // Pesquisa de produtos
         function setupSearch() {
             const searchInput = document.getElementById('search-input');
             const searchResults = document.getElementById('search-results');
@@ -3413,7 +2747,7 @@
                     return;
                 }
                 
-                const results = productsData.filter(product => 
+                const results = productsDB.filter(product => 
                     product.name.toLowerCase().includes(query) ||
                     getCategoryName(product.category).toLowerCase().includes(query)
                 );
@@ -3466,37 +2800,6 @@
                 resultsContainer.appendChild(resultItem);
             });
             
-            // Adicionar link para ver todos os resultados
-            if (results.length > 5) {
-                const viewAllLink = document.createElement('div');
-                viewAllLink.className = 'p-3 text-center text-primary hover:underline cursor-pointer';
-                viewAllLink.textContent = `Ver todos os ${results.length} resultados`;
-                
-                viewAllLink.addEventListener('click', () => {
-                    document.getElementById('search-container').classList.add('hidden');
-                    
-                    // Filtrar produtos para mostrar apenas resultados da busca
-                    const container = document.getElementById('products-container');
-                    container.innerHTML = '';
-                    
-                    // Destacar os resultados da busca
-                    results.forEach(product => {
-                        // Similar ao loadProducts mas específico para resultados da busca
-                        const productCard = createProductCard(product);
-                        container.appendChild(productCard);
-                    });
-                    
-                    // Rolar para a seção de produtos
-                    document.getElementById('produtos').scrollIntoView({ behavior: 'smooth' });
-                    
-                    // Adicionar breadcrumb para voltar aos produtos
-                    document.querySelector('.breadcrumb-nav').classList.remove('hidden');
-                    document.querySelector('.current-breadcrumb').textContent = `Busca: "${query}" (${results.length})`;
-                });
-                
-                resultsContainer.appendChild(viewAllLink);
-            }
-            
             searchResults.appendChild(resultsContainer);
         }
         
@@ -3506,90 +2809,7 @@
             return text.replace(regex, '<span class="bg-yellow-100 dark:bg-yellow-800 text-gray-800 dark:text-yellow-100">$1</span>');
         }
         
-        // Criar card de produto (usado na busca e outras funções)
-        function createProductCard(product) {
-            // Similar ao loadProducts - código mantido
-            // Gerar HTML para avaliação
-            let starsHTML = '';
-            const fullStars = Math.floor(product.rating);
-            const hasHalfStar = product.rating % 1 >= 0.5;
-            
-            for (let i = 0; i < 5; i++) {
-                if (i < fullStars) {
-                    starsHTML += '<i class="fas fa-star text-yellow-400"></i>';
-                } else if (hasHalfStar && i === fullStars) {
-                    starsHTML += '<i class="fas fa-star-half-alt text-yellow-400"></i>';
-                } else {
-                    starsHTML += '<i class="far fa-star text-yellow-400"></i>';
-                }
-            }
-            
-            // Badge do produto
-            let badgeHTML = '';
-            if (product.badge === 'sale') {
-                badgeHTML = '<span class="absolute top-2 left-2 bg-red-500 text-white text-xs font-medium px-2.5 py-1 rounded-full">Oferta</span>';
-            } else if (product.badge === 'new') {
-                badgeHTML = '<span class="absolute top-2 left-2 bg-green-500 text-white text-xs font-medium px-2.5 py-1 rounded-full">Novo</span>';
-            } else if (product.badge === 'best') {
-                badgeHTML = '<span class="absolute top-2 left-2 bg-blue-500 text-white text-xs font-medium px-2.5 py-1 rounded-full">Destaque</span>';
-            }
-            
-            // Criar card do produto
-            const productCard = document.createElement('div');
-            productCard.className = 'bg-white dark:bg-dark-200 rounded-xl shadow-card dark:shadow-card-dark overflow-hidden transition-transform hover-scale hover:shadow-card-hover animate-fade-in product-card';
-            productCard.setAttribute('data-id', product.id);
-            productCard.setAttribute('data-category', product.category);
-            
-            productCard.innerHTML = `
-                <div class="relative h-44 bg-white dark:bg-dark-100 p-3 flex items-center justify-center">
-                    ${badgeHTML}
-                    <img src="${product.image}" alt="${product.name}" class="max-h-full max-w-full object-contain" loading="lazy">
-                    <button class="quick-view-btn absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-20 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity" data-id="${product.id}" aria-label="Visualização rápida">
-                        <span class="bg-white dark:bg-dark-200 text-gray-800 dark:text-white px-3 py-1.5 rounded-full text-sm font-medium">
-                            <i class="fas fa-eye mr-1"></i> Ver detalhes
-                        </span>
-                    </button>
-                </div>
-                <div class="p-4">
-                    <div class="text-xs text-gray-500 dark:text-gray-400 mb-1">${getCategoryName(product.category)}</div>
-                    <h3 class="font-medium text-sm md:text-base mb-1 line-clamp-2 h-10">${product.name}</h3>
-                    <div class="flex mb-2 text-xs">${starsHTML} <span class="ml-1 text-gray-500">(${Math.floor(Math.random() * 100)})</span></div>
-                    <div class="flex items-center justify-between mb-3">
-                        ${product.oldPrice ? `<span class="text-gray-500 dark:text-gray-400 line-through text-sm">R$${product.oldPrice.toFixed(2).replace('.', ',')}</span>` : '<span></span>'}
-                        <span class="text-primary font-bold text-lg">R$${product.price.toFixed(2).replace('.', ',')}</span>
-                    </div>
-                    <button class="add-to-cart w-full bg-primary hover:bg-opacity-90 text-white py-2.5 rounded-full transition-all hover:shadow-lg transform hover:-translate-y-1">
-                        <i class="fas fa-shopping-cart mr-2"></i>Adicionar
-                    </button>
-                </div>
-            `;
-            
-            // Adicionar evento ao botão
-            productCard.querySelector('.add-to-cart').addEventListener('click', (e) => {
-                e.stopPropagation();
-                cart.addItem(product);
-                
-                // Animação de adição ao carrinho
-                const button = e.currentTarget;
-                button.innerHTML = '<i class="fas fa-check mr-2"></i>Adicionado';
-                button.classList.add('bg-green-500');
-                
-                setTimeout(() => {
-                    button.innerHTML = '<i class="fas fa-shopping-cart mr-2"></i>Adicionar';
-                    button.classList.remove('bg-green-500');
-                }, 1500);
-            });
-            
-            // Adicionar evento para quick view
-            productCard.querySelector('.quick-view-btn').addEventListener('click', (e) => {
-                e.stopPropagation();
-                showQuickView(product);
-            });
-            
-            return productCard;
-        }
-        
-        // Mostrar modal de quick view (mantido do código original)
+        // Mostrar modal de quick view
         function showQuickView(product) {
             const modal = document.getElementById('quickview-modal');
             const content = document.getElementById('quickview-content');
@@ -3612,48 +2832,6 @@
                 }
             }
             
-            // Informações nutricionais
-            let nutritionHTML = '';
-            if (product.nutrition) {
-                nutritionHTML = `
-                    <div class="mt-6">
-                        <h4 class="font-medium text-lg mb-2">Informações Nutricionais</h4>
-                        <div class="bg-gray-50 dark:bg-dark-100 rounded-xl p-4">
-                            <table class="w-full text-sm">
-                                <tbody>
-                `;
-                
-                for (const [key, value] of Object.entries(product.nutrition)) {
-                    if (key !== 'servingSize') {
-                        const label = key.replace(/([A-Z])/g, ' $1').trim();
-                        const formattedLabel = label.charAt(0).toUpperCase() + label.slice(1);
-                        
-                        nutritionHTML += `
-                            <tr>
-                                <td class="py-1">${formattedLabel}</td>
-                                <td class="py-1 text-right font-medium">${value}</td>
-                            </tr>
-                        `;
-                    }
-                }
-                
-                if (product.nutrition.servingSize) {
-                    nutritionHTML += `
-                        <tr class="border-t border-gray-200 dark:border-gray-600">
-                            <td class="py-1 pt-2">Porção</td>
-                            <td class="py-1 pt-2 text-right font-medium">${product.nutrition.servingSize}</td>
-                        </tr>
-                    `;
-                }
-                
-                nutritionHTML += `
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                `;
-            }
-            
             content.innerHTML = `
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="bg-white dark:bg-dark-100 rounded-xl p-5 flex items-center justify-center">
@@ -3672,7 +2850,7 @@
                             <span class="text-primary font-bold text-2xl">R$${product.price.toFixed(2).replace('.', ',')}</span>
                         </div>
                         
-                        <p class="text-gray-700 dark:text-gray-300 mb-6">${product.description}</p>
+                        <p class="text-gray-700 dark:text-gray-300 mb-6">${product.description || 'Produto de alta qualidade para suas necessidades.'}</p>
                         
                         <div class="flex space-x-3">
                             <div class="w-24">
@@ -3692,8 +2870,6 @@
                                 </button>
                             </div>
                         </div>
-                        
-                        ${nutritionHTML}
                     </div>
                 </div>
             `;
@@ -3729,7 +2905,7 @@
             });
         }
 
-        // Setup acordeões (mantido do código original)
+        // Setup acordeões
         function setupAccordions() {
             document.querySelectorAll('.accordion-header').forEach(header => {
                 header.addEventListener('click', () => {
@@ -3753,7 +2929,7 @@
             });
         }
 
-        // Setup FAQ (mantido do código original)
+        // Setup FAQ
         function setupFAQ() {
             document.querySelectorAll('.faq-header').forEach(header => {
                 header.addEventListener('click', () => {
@@ -3777,7 +2953,7 @@
             });
         }
 
-        // Setup Hero Slider - versão corrigida (mantido do código original)
+        // Setup Hero Slider
         function setupHeroSlider() {
             // Função para verificar se estamos no mobile
             function isMobile() {
@@ -3865,7 +3041,7 @@
             heroGallery.addEventListener('mouseleave', startAutoplay);
         }
 
-        // Filtros de categoria (mantido do código original)
+        // Filtros de categoria
         function setupCategoryFilters() {
             const filters = document.querySelectorAll('.filter-btn');
             
@@ -3891,7 +3067,7 @@
             });
         }
         
-        // Resetar filtros (mantido do código original)
+        // Resetar filtros
         function resetFilters() {
             // Reset de categoria
             const categoryFilters = document.querySelectorAll('.filter-btn');
@@ -3901,14 +3077,16 @@
             });
             
             const allFilter = document.querySelector('[data-filter="todos"]');
-            allFilter.classList.remove('bg-gray-100', 'dark:bg-dark-200');
-            allFilter.classList.add('bg-primary', 'text-white', 'active');
+            if (allFilter) {
+                allFilter.classList.remove('bg-gray-100', 'dark:bg-dark-200');
+                allFilter.classList.add('bg-primary', 'text-white', 'active');
+            }
             
             // Recarregar produtos
             loadProducts(0, 8);
         }
 
-        // Botão voltar ao topo (mantido do código original)
+        // Botão voltar ao topo
         function setupBackToTop() {
             const backToTop = document.getElementById('back-to-top');
             
@@ -3930,13 +3108,7 @@
             });
         }
 
-        // Sistema de notificações toast - Função alterada para não exibir notificações (mantido do código original)
-        function showToast(type, message) {
-            // Função desativada conforme solicitado - não mostra notificações
-            console.log(`Notificação (${type}): ${message}`);
-        }
-
-        // Toggle para busca, menu mobile e carrinho (mantido do código original)
+        // Toggle para busca, menu mobile e carrinho
         function setupToggles() {
             // Busca
             const searchToggle = document.getElementById('search-toggle');
@@ -4046,26 +3218,16 @@
             }
         }
 
-        // Finalizar pedido (mantido do código original)
+        // Finalizar pedido
         function setupCheckout() {
             document.getElementById('finalizar-pedido').addEventListener('click', () => {
                 cart.sendToWhatsApp();
             });
         }
 
-        // Formatador para nomes de categorias (mantido do código original)
+        // Formatador para nomes de categorias
         function getCategoryName(category) {
-            const names = {
-                'proteinas-aminoacidos': 'Proteínas',
-                'energia-performance': 'Performance',
-                'saude-bem-estar': 'Saúde',
-                'emagrecimento-dieta': 'Emagrecimento',
-                'hipertrofia-massa': 'Hipertrofia',
-                'funcionais-especificos': 'Funcionais',
-                'acessorios-combos': 'Acessórios'
-            };
-            
-            return names[category] || category;
+            return categoryData[category]?.sb_name || category;
         }
 
         // Inicialização
@@ -4073,15 +3235,13 @@
             // Inicializar Supabase
             if (initSupabase()) {
                 loadAdminData();
+            } else {
+                // Carregar dados demo se não conseguir conectar
+                loadDemoData();
             }
 
             // Inicializar o carrinho
             cart.init();
-            
-            // Carregar produtos com delay para mostrar skeleton loaders
-            setTimeout(() => {
-                loadProducts(0, 8);
-            }, 500);
             
             // Configurar acordeões do guia
             setupAccordions();
