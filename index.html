@@ -54,6 +54,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/marked@4.0.0/marked.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
     <script>
         // Configuração do Tailwind
@@ -484,6 +485,186 @@
                 white-space: nowrap;
             }
         }
+
+        /* Estilos da área administrativa */
+        .admin-panel {
+            display: none;
+        }
+        
+        .admin-panel.active {
+            display: block;
+        }
+        
+        .admin-nav {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 40px;
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.3);
+        }
+        
+        .admin-nav-tabs {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            flex-wrap: wrap;
+        }
+        
+        .admin-nav-item {
+            padding: 20px 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            min-width: 160px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .admin-nav-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+        
+        .admin-nav-item.active {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ffa500 100%);
+            color: white;
+        }
+        
+        .admin-form-container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+        }
+        
+        .dark .admin-form-container {
+            background-color: #2a2a2a;
+        }
+        
+        .admin-form-input, .admin-form-select, .admin-form-textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .dark .admin-form-input, .dark .admin-form-select, .dark .admin-form-textarea {
+            background-color: #3a3a3a;
+            border-color: #4a5568;
+            color: #fff;
+        }
+        
+        .admin-form-input:focus, .admin-form-select:focus, .admin-form-textarea:focus {
+            border-color: #5D5CDE;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(93, 92, 222, 0.1);
+        }
+        
+        .admin-form-button {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #5D5CDE 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .admin-form-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(93, 92, 222, 0.4);
+        }
+        
+        .admin-form-button.secondary {
+            background: linear-gradient(135deg, #6B7280 0%, #4B5563 100%);
+        }
+        
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border-left-color: #5D5CDE;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .error-message {
+            background: #fee2e2;
+            border: 1px solid #fca5a5;
+            color: #dc2626;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+        }
+        
+        .dark .error-message {
+            background: #7f1d1d;
+            border-color: #b91c1c;
+            color: #fca5a5;
+        }
+        
+        .admin-product-card, .admin-category-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .dark .admin-product-card, .dark .admin-category-card {
+            background-color: #2a2a2a;
+        }
+        
+        .admin-product-card:hover, .admin-category-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .image-upload-container {
+            border: 2px dashed #d1d5db;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .image-upload-container:hover {
+            border-color: #5D5CDE;
+            background-color: #f8f9ff;
+        }
+        
+        .image-preview {
+            max-width: 150px;
+            max-height: 150px;
+            border-radius: 8px;
+            margin: 10px;
+        }
+        
+        .modal-backdrop {
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+        }
+
+        @media (max-width: 768px) {
+            .admin-nav-tabs {
+                flex-direction: column;
+            }
+            
+            .admin-nav-item {
+                min-width: 100%;
+            }
+        }
     </style>
 </head>
 
@@ -528,6 +709,7 @@
                     <a href="#guia" class="font-medium hover:text-primary transition-colors">Guia Nutricional</a>
                     <a href="#faq" class="font-medium hover:text-primary transition-colors">FAQ</a>
                     <a href="#local" class="font-medium hover:text-primary transition-colors">Nossa Loja</a>
+                    <a href="#" id="admin-link" class="font-medium hover:text-primary transition-colors">Admin</a>
                 </nav>
                 
                 <!-- Ações do header -->
@@ -563,6 +745,7 @@
                     <a href="#guia" class="font-medium hover:text-primary py-1">Guia Nutricional</a>
                     <a href="#faq" class="font-medium hover:text-primary py-1">FAQ</a>
                     <a href="#local" class="font-medium hover:text-primary py-1">Nossa Loja</a>
+                    <a href="#" id="admin-link-mobile" class="font-medium hover:text-primary py-1">Admin</a>
                 </div>
             </nav>
         </div>
@@ -582,314 +765,692 @@
         </div>
     </div>
 
-    <!-- Hero Banner -->
-    <section class="relative h-[450px] md:h-[550px] overflow-hidden">
-        <div id="hero-gallery">
-            <!-- Banners para Desktop -->
-            <div class="hero-slide hero-desktop active" style="background-image: url('https://pfst.cf2.poecdn.net/base/image/31f8533b1af5fddb3c4175b98977324f0daf755cd0aa61474a1c3d9cdadd4894?w=1600&h=500')"></div>
-            <div class="hero-slide hero-desktop" style="background-image: url('https://pfst.cf2.poecdn.net/base/image/c5c13de287bad78527b00af41e09529d0a228a4dea7282f9b0097e085be650db?w=1600&h=500')"></div>
-            
-            <!-- Banner para Mobile - Usando a nova imagem banner-br -->
-            <div class="hero-slide hero-mobile active" style="background-image: url('https://pfst.cf2.poecdn.net/base/image/b585629e710d2091e1032fcb619bb055e4fa48c773e79caa952950ad3bee250a?w=1080&h=720')"></div>
-            <div class="hero-slide hero-mobile active" style="background-image: url('images/bahia-mobile.jpg')"></div>
-        </div>
-
-        
-        <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-center px-4">
-             <!-- Indicadores de slide -->
-            <div id="hero-controls" class="absolute bottom-6 flex space-x-3"></div>
-        </div>
-    </section>
-
-    <!-- Produtos -->
-    <section id="produtos" class="py-16 md:py-20">
-        <div class="container mx-auto px-4">
-            <h2 class="text-2xl md:text-3xl font-bold text-center font-heading mb-10 relative">
-                Nossos Produtos
-                <span class="block w-20 h-1 bg-primary mx-auto mt-3"></span>
-            </h2>
-            
-            <!-- Filtros avançados -->
-            <div class="mb-8">
-                <div class="flex md:justify-center gap-3 mb-6 overflow-x-auto categories-scroll pb-2">
-                    <button data-filter="todos" class="filter-btn bg-primary text-white hover:bg-primary hover:bg-opacity-90 px-6 py-2.5 rounded-full text-sm font-medium transition active">Todos</button>
-                    <button data-filter="proteinas-aminoacidos" class="filter-btn bg-gray-100 dark:bg-dark-200 hover:bg-primary hover:text-white px-6 py-2.5 rounded-full text-sm font-medium transition">Proteínas</button>
-                    <button data-filter="energia-performance" class="filter-btn bg-gray-100 dark:bg-dark-200 hover:bg-primary hover:text-white px-6 py-2.5 rounded-full text-sm font-medium transition">Performance</button>
-                    <button data-filter="saude-bem-estar" class="filter-btn bg-gray-100 dark:bg-dark-200 hover:bg-primary hover:text-white px-6 py-2.5 rounded-full text-sm font-medium transition">Saúde</button>
-                    <button data-filter="emagrecimento-dieta" class="filter-btn bg-gray-100 dark:bg-dark-200 hover:bg-primary hover:text-white px-6 py-2.5 rounded-full text-sm font-medium transition">Emagrecimento</button>
-                </div>
+    <!-- Área Principal do Site -->
+    <div id="main-site">
+        <!-- Hero Banner -->
+        <section class="relative h-[450px] md:h-[550px] overflow-hidden">
+            <div id="hero-gallery">
+                <!-- Banners para Desktop -->
+                <div class="hero-slide hero-desktop active" style="background-image: url('https://pfst.cf2.poecdn.net/base/image/31f8533b1af5fddb3c4175b98977324f0daf755cd0aa61474a1c3d9cdadd4894?w=1600&h=500')"></div>
+                <div class="hero-slide hero-desktop" style="background-image: url('https://pfst.cf2.poecdn.net/base/image/c5c13de287bad78527b00af41e09529d0a228a4dea7282f9b0097e085be650db?w=1600&h=500')"></div>
                 
-                <!-- Filtros adicionais foram removidos conforme solicitado -->
+                <!-- Banner para Mobile - Usando a nova imagem banner-br -->
+                <div class="hero-slide hero-mobile active" style="background-image: url('https://pfst.cf2.poecdn.net/base/image/b585629e710d2091e1032fcb619bb055e4fa48c773e79caa952950ad3bee250a?w=1080&h=720')"></div>
+                <div class="hero-slide hero-mobile active" style="background-image: url('images/bahia-mobile.jpg')"></div>
             </div>
-            
-            <!-- Grid de produtos -->
-            <div id="products-container" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-7"></div>
-            
-            <!-- Paginação / Load More -->
-            <div class="mt-12 flex justify-center">
-                <button id="load-more" class="bg-white dark:bg-dark-200 hover:bg-gray-100 dark:hover:bg-dark-100 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-medium py-2.5 px-7 rounded-full transition-colors hidden">
-                    Carregar mais produtos
-                    <i class="fas fa-chevron-down ml-2"></i>
-                </button>
-                
-                <div id="pagination" class="flex space-x-2"></div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Guia Nutricional -->
-    <section id="guia" class="py-16 md:py-20 bg-gray-50 dark:bg-dark-300">
-        <div class="container mx-auto px-4">
-            <h2 class="text-2xl md:text-3xl font-bold text-center font-heading mb-10 relative">
-                Guia Nutricional
-                <span class="block w-20 h-1 bg-primary mx-auto mt-3"></span>
-            </h2>
             
-            <div class="max-w-3xl mx-auto">
-                <div class="bg-white dark:bg-dark-200 rounded-xl shadow-card dark:shadow-card-dark mb-5 overflow-hidden">
-                    <div class="accordion-header cursor-pointer p-5 bg-gray-100 dark:bg-dark-100 font-medium flex justify-between items-center" role="button" aria-expanded="false" aria-controls="accordion-1">
-                        <h3 class="text-lg">Proteínas e Aminoácidos</h3>
-                        <i class="fas fa-chevron-down transition-transform"></i>
-                    </div>
-                    <div id="accordion-1" class="accordion-content hidden p-5">
-                        <p class="mb-4">As proteínas são macronutrientes essenciais para a construção e recuperação muscular. Os aminoácidos são os blocos construtores das proteínas.</p>
-                        <ul class="list-disc pl-5 space-y-2">
-                            <li><strong>Whey Protein:</strong> Rápida absorção, ideal para pós-treino</li>
-                            <li><strong>BCAA:</strong> Aminoácidos que estimulam a síntese proteica</li>
-                            <li><strong>Glutamina:</strong> Essencial para recuperação muscular</li>
-                            <li><strong>Albumina:</strong> Proteína extraída da clara do ovo</li>
-                            <li><strong>Caseína:</strong> Proteína de digestão lenta, ideal antes de dormir</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="bg-white dark:bg-dark-200 rounded-xl shadow-card dark:shadow-card-dark mb-5 overflow-hidden">
-                    <div class="accordion-header cursor-pointer p-5 bg-gray-100 dark:bg-dark-100 font-medium flex justify-between items-center" role="button" aria-expanded="false" aria-controls="accordion-2">
-                        <h3 class="text-lg">Energia e Performance</h3>
-                        <i class="fas fa-chevron-down transition-transform"></i>
-                    </div>
-                    <div id="accordion-2" class="accordion-content hidden p-5">
-                        <p class="mb-4">Suplementos que melhoram a capacidade energética e performance durante o exercício.</p>
-                        <ul class="list-disc pl-5 space-y-2">
-                            <li><strong>Creatina:</strong> Aumenta força, potência e massa muscular</li>
-                            <li><strong>Pré-Treino:</strong> Combinação de ingredientes para energia e foco</li>
-                            <li><strong>Termogênicos:</strong> Aceleram o metabolismo</li>
-                            <li><strong>Beta-Alanina:</strong> Reduz fadiga muscular</li>
-                            <li><strong>Cafeína:</strong> Melhora concentração e reduz percepção de esforço</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="bg-white dark:bg-dark-200 rounded-xl shadow-card dark:shadow-card-dark overflow-hidden">
-                    <div class="accordion-header cursor-pointer p-5 bg-gray-100 dark:bg-dark-100 font-medium flex justify-between items-center" role="button" aria-expanded="false" aria-controls="accordion-3">
-                        <h3 class="text-lg">Saúde e Bem-Estar</h3>
-                        <i class="fas fa-chevron-down transition-transform"></i>
-                    </div>
-                    <div id="accordion-3" class="accordion-content hidden p-5">
-                        <p class="mb-4">Suplementos que auxiliam na manutenção da saúde geral do corpo.</p>
-                        <ul class="list-disc pl-5 space-y-2">
-                            <li><strong>Multivitamínicos:</strong> Combinação de vitaminas e minerais essenciais</li>
-                            <li><strong>Ômega 3:</strong> Ácidos graxos com efeitos anti-inflamatórios</li>
-                            <li><strong>Colágeno:</strong> Beneficia pele, cabelos, unhas e articulações</li>
-                            <li><strong>Vitamina D:</strong> Essencial para imunidade e saúde óssea</li>
-                            <li><strong>Magnésio:</strong> Crucial para produção de energia e função muscular</li>
-                        </ul>
-                    </div>
-                </div>
+            <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-center px-4">
+                 <!-- Indicadores de slide -->
+                <div id="hero-controls" class="absolute bottom-6 flex space-x-3"></div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- FAQ -->
-    <section id="faq" class="py-16 md:py-20">
-        <div class="container mx-auto px-4">
-            <h2 class="text-2xl md:text-3xl font-bold text-center font-heading mb-10 relative">
-                Perguntas Frequentes
-                <span class="block w-20 h-1 bg-primary mx-auto mt-3"></span>
-            </h2>
-            
-            <div class="max-w-3xl mx-auto">
-                <div class="bg-white dark:bg-dark-200 rounded-xl shadow-card dark:shadow-card-dark mb-5 overflow-hidden">
-                    <div class="faq-header cursor-pointer p-5 font-medium flex justify-between items-center" role="button" aria-expanded="false" aria-controls="faq-1">
-                        <h3 class="text-lg">Como escolher o suplemento ideal para meus objetivos?</h3>
-                        <i class="fas fa-chevron-down transition-transform"></i>
-                    </div>
-                    <div id="faq-1" class="faq-content hidden p-5 border-t border-gray-200 dark:border-gray-600">
-                        <p>A escolha do suplemento ideal depende diretamente dos seus objetivos:</p>
-                        <ul class="list-disc pl-5 mt-3">
-                            <li><strong>Para ganho de massa muscular:</strong> Whey protein, creatina, hipercalóricos</li>
-                            <li><strong>Para perda de gordura:</strong> Termogênicos, proteínas, L-carnitina</li>
-                            <li><strong>Para performance:</strong> Creatina, beta-alanina, cafeína</li>
-                            <li><strong>Para saúde geral:</strong> Multivitamínicos, ômega-3, vitamina D</li>
-                        </ul>
-                    </div>
-                </div>
+        <!-- Produtos -->
+        <section id="produtos" class="py-16 md:py-20">
+            <div class="container mx-auto px-4">
+                <h2 class="text-2xl md:text-3xl font-bold text-center font-heading mb-10 relative">
+                    Nossos Produtos
+                    <span class="block w-20 h-1 bg-primary mx-auto mt-3"></span>
+                </h2>
                 
-                <div class="bg-white dark:bg-dark-200 rounded-xl shadow-card dark:shadow-card-dark mb-5 overflow-hidden">
-                    <div class="faq-header cursor-pointer p-5 font-medium flex justify-between items-center" role="button" aria-expanded="false" aria-controls="faq-2">
-                        <h3 class="text-lg">Qual é o melhor horário para tomar proteína?</h3>
-                        <i class="fas fa-chevron-down transition-transform"></i>
+                <!-- Filtros avançados -->
+                <div class="mb-8">
+                    <div class="flex md:justify-center gap-3 mb-6 overflow-x-auto categories-scroll pb-2">
+                        <button data-filter="todos" class="filter-btn bg-primary text-white hover:bg-primary hover:bg-opacity-90 px-6 py-2.5 rounded-full text-sm font-medium transition active">Todos</button>
+                        <button data-filter="proteinas-aminoacidos" class="filter-btn bg-gray-100 dark:bg-dark-200 hover:bg-primary hover:text-white px-6 py-2.5 rounded-full text-sm font-medium transition">Proteínas</button>
+                        <button data-filter="energia-performance" class="filter-btn bg-gray-100 dark:bg-dark-200 hover:bg-primary hover:text-white px-6 py-2.5 rounded-full text-sm font-medium transition">Performance</button>
+                        <button data-filter="saude-bem-estar" class="filter-btn bg-gray-100 dark:bg-dark-200 hover:bg-primary hover:text-white px-6 py-2.5 rounded-full text-sm font-medium transition">Saúde</button>
+                        <button data-filter="emagrecimento-dieta" class="filter-btn bg-gray-100 dark:bg-dark-200 hover:bg-primary hover:text-white px-6 py-2.5 rounded-full text-sm font-medium transition">Emagrecimento</button>
                     </div>
-                    <div id="faq-2" class="faq-content hidden p-5 border-t border-gray-200 dark:border-gray-600">
-                        <p>O horário ideal para consumo de proteína varia conforme o tipo e seu objetivo:</p>
-                        <ul class="list-disc pl-5 mt-3">
-                            <li><strong>Whey Protein:</strong> Ideal logo após o treino devido à rápida absorção</li>
-                            <li><strong>Caseína:</strong> Melhor consumida antes de dormir por ter digestão lenta</li>
-                            <li><strong>Proteínas vegetais:</strong> Podem ser consumidas em qualquer horário</li>
-                        </ul>
-                        <p class="mt-3">O mais importante é garantir um consumo adequado de proteínas ao longo do dia.</p>
-                    </div>
-                </div>
-                
-                <div class="bg-white dark:bg-dark-200 rounded-xl shadow-card dark:shadow-card-dark overflow-hidden">
-                    <div class="faq-header cursor-pointer p-5 font-medium flex justify-between items-center" role="button" aria-expanded="false" aria-controls="faq-3">
-                        <h3 class="text-lg">Qual a diferença entre Whey Concentrado, Isolado e Hidrolisado?</h3>
-                        <i class="fas fa-chevron-down transition-transform"></i>
-                    </div>
-                    <div id="faq-3" class="faq-content hidden p-5 border-t border-gray-200 dark:border-gray-600">
-                        <p>A principal diferença está no processo de fabricação e no teor de proteínas:</p>
-                        <ul class="list-disc pl-5 mt-3">
-                            <li><strong>Whey Concentrado:</strong> 70-80% de proteína, com pequenas quantidades de lactose e gordura. Opção mais econômica.</li>
-                            <li><strong>Whey Isolado:</strong> 90-95% de proteína, quantidades mínimas de lactose e gordura. Ideal para sensíveis à lactose.</li>
-                            <li><strong>Whey Hidrolisado:</strong> Proteínas quebradas em peptídeos menores, absorção mais rápida. Opção mais cara.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Localização da Loja -->
-    <section id="local" class="py-16 md:py-20 bg-gray-50 dark:bg-dark-300">
-        <div class="container mx-auto px-4">
-            <h2 class="text-2xl md:text-3xl font-bold text-center font-heading mb-10 relative">
-                Nossa Loja
-                <span class="block w-20 h-1 bg-primary mx-auto mt-3"></span>
-            </h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-                <div class="flex flex-col justify-center">
-                    <h3 class="text-xl font-medium mb-5">Encontre-nos em Carinhanha</h3>
-                    <p class="mb-6">Visite nossa loja física e conheça todo o nosso catálogo de produtos. Nossa equipe está pronta para te auxiliar a encontrar os suplementos ideais para seus objetivos.</p>
                     
-                    <div class="space-y-4 mb-6">
-                        <div class="flex items-start">
-                            <i class="fas fa-map-marker-alt text-primary mt-1 mr-3 text-lg"></i>
-                            <span>Avenida São José, Centro, Carinhanha - Bahia</span>
+                    <!-- Filtros adicionais foram removidos conforme solicitado -->
+                </div>
+                
+                <!-- Grid de produtos -->
+                <div id="products-container" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-7"></div>
+                
+                <!-- Paginação / Load More -->
+                <div class="mt-12 flex justify-center">
+                    <button id="load-more" class="bg-white dark:bg-dark-200 hover:bg-gray-100 dark:hover:bg-dark-100 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-medium py-2.5 px-7 rounded-full transition-colors hidden">
+                        Carregar mais produtos
+                        <i class="fas fa-chevron-down ml-2"></i>
+                    </button>
+                    
+                    <div id="pagination" class="flex space-x-2"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Guia Nutricional -->
+        <section id="guia" class="py-16 md:py-20 bg-gray-50 dark:bg-dark-300">
+            <div class="container mx-auto px-4">
+                <h2 class="text-2xl md:text-3xl font-bold text-center font-heading mb-10 relative">
+                    Guia Nutricional
+                    <span class="block w-20 h-1 bg-primary mx-auto mt-3"></span>
+                </h2>
+                
+                <div class="max-w-3xl mx-auto">
+                    <div class="bg-white dark:bg-dark-200 rounded-xl shadow-card dark:shadow-card-dark mb-5 overflow-hidden">
+                        <div class="accordion-header cursor-pointer p-5 bg-gray-100 dark:bg-dark-100 font-medium flex justify-between items-center" role="button" aria-expanded="false" aria-controls="accordion-1">
+                            <h3 class="text-lg">Proteínas e Aminoácidos</h3>
+                            <i class="fas fa-chevron-down transition-transform"></i>
                         </div>
-                        <div class="flex items-start">
-                            <i class="fas fa-phone text-primary mt-1 mr-3 text-lg"></i>
-                            <span>(77) 99915-2558</span>
-                        </div>
-                        <div class="flex items-start">
-                            <i class="fas fa-clock text-primary mt-1 mr-3 text-lg"></i>
-                            <span>Segunda a Sexta: 8h às 18h<br>Sábado: 8h às 12h</span>
+                        <div id="accordion-1" class="accordion-content hidden p-5">
+                            <p class="mb-4">As proteínas são macronutrientes essenciais para a construção e recuperação muscular. Os aminoácidos são os blocos construtores das proteínas.</p>
+                            <ul class="list-disc pl-5 space-y-2">
+                                <li><strong>Whey Protein:</strong> Rápida absorção, ideal para pós-treino</li>
+                                <li><strong>BCAA:</strong> Aminoácidos que estimulam a síntese proteica</li>
+                                <li><strong>Glutamina:</strong> Essencial para recuperação muscular</li>
+                                <li><strong>Albumina:</strong> Proteína extraída da clara do ovo</li>
+                                <li><strong>Caseína:</strong> Proteína de digestão lenta, ideal antes de dormir</li>
+                            </ul>
                         </div>
                     </div>
                     
-                    <a href="https://maps.google.com/?q=Avenida São José, Centro, Carinhanha, BA" target="_blank" rel="noopener" class="inline-flex items-center text-primary hover:underline text-lg">
-                        <i class="fas fa-directions mr-2"></i>
-                        Como chegar
-                    </a>
-                </div>
-                
-                <div class="map-container rounded-xl overflow-hidden shadow-card dark:shadow-card-dark">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15490.527985759187!2d-43.7732847!3d-14.3053!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x75bb041f6d7f0123%3A0x123456789abcdef!2sAvenida%20São%20José%2C%20Centro%2C%20Carinhanha%20-%20BA!5e0!3m2!1spt-BR!2sbr!4v1695306789012!5m2!1spt-BR!2sbr" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa da loja Suplementos BAHIA em Carinhanha"></iframe>
+                    <div class="bg-white dark:bg-dark-200 rounded-xl shadow-card dark:shadow-card-dark mb-5 overflow-hidden">
+                        <div class="accordion-header cursor-pointer p-5 bg-gray-100 dark:bg-dark-100 font-medium flex justify-between items-center" role="button" aria-expanded="false" aria-controls="accordion-2">
+                            <h3 class="text-lg">Energia e Performance</h3>
+                            <i class="fas fa-chevron-down transition-transform"></i>
+                        </div>
+                        <div id="accordion-2" class="accordion-content hidden p-5">
+                            <p class="mb-4">Suplementos que melhoram a capacidade energética e performance durante o exercício.</p>
+                            <ul class="list-disc pl-5 space-y-2">
+                                <li><strong>Creatina:</strong> Aumenta força, potência e massa muscular</li>
+                                <li><strong>Pré-Treino:</strong> Combinação de ingredientes para energia e foco</li>
+                                <li><strong>Termogênicos:</strong> Aceleram o metabolismo</li>
+                                <li><strong>Beta-Alanina:</strong> Reduz fadiga muscular</li>
+                                <li><strong>Cafeína:</strong> Melhora concentração e reduz percepção de esforço</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white dark:bg-dark-200 rounded-xl shadow-card dark:shadow-card-dark overflow-hidden">
+                        <div class="accordion-header cursor-pointer p-5 bg-gray-100 dark:bg-dark-100 font-medium flex justify-between items-center" role="button" aria-expanded="false" aria-controls="accordion-3">
+                            <h3 class="text-lg">Saúde e Bem-Estar</h3>
+                            <i class="fas fa-chevron-down transition-transform"></i>
+                        </div>
+                        <div id="accordion-3" class="accordion-content hidden p-5">
+                            <p class="mb-4">Suplementos que auxiliam na manutenção da saúde geral do corpo.</p>
+                            <ul class="list-disc pl-5 space-y-2">
+                                <li><strong>Multivitamínicos:</strong> Combinação de vitaminas e minerais essenciais</li>
+                                <li><strong>Ômega 3:</strong> Ácidos graxos com efeitos anti-inflamatórios</li>
+                                <li><strong>Colágeno:</strong> Beneficia pele, cabelos, unhas e articulações</li>
+                                <li><strong>Vitamina D:</strong> Essencial para imunidade e saúde óssea</li>
+                                <li><strong>Magnésio:</strong> Crucial para produção de energia e função muscular</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Footer -->
-<footer class="bg-gray-800 text-white dark:bg-dark-300">
-    <div class="container mx-auto px-4">
-        <!-- Centraliza no mobile -->
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center md:text-left">
-            <div class="flex flex-col items-center md:items-start">
-                <div class="flex flex-col items-center md:flex-row md:items-center md:space-x-3 mb-5">
-                    <!-- Logo da Suplementos BAHIA -->
-                    <div class="w-[60px] h-[60px] overflow-hidden transition-all duration-300 rounded-full mb-3 md:mb-0">
-                        <img src="https://pfst.cf2.poecdn.net/base/image/d1f85532876f53ac1e8b5772d3928c91b46d0255ed1d3a5dfa568c3ee0207bdc?w=1024&h=1024" 
-                             alt="Logo Suplementos BAHIA"
-                             class="w-full h-full object-cover"
-                             width="60"  
-                             height="60">
+        <!-- FAQ -->
+        <section id="faq" class="py-16 md:py-20">
+            <div class="container mx-auto px-4">
+                <h2 class="text-2xl md:text-3xl font-bold text-center font-heading mb-10 relative">
+                    Perguntas Frequentes
+                    <span class="block w-20 h-1 bg-primary mx-auto mt-3"></span>
+                </h2>
+                
+                <div class="max-w-3xl mx-auto">
+                    <div class="bg-white dark:bg-dark-200 rounded-xl shadow-card dark:shadow-card-dark mb-5 overflow-hidden">
+                        <div class="faq-header cursor-pointer p-5 font-medium flex justify-between items-center" role="button" aria-expanded="false" aria-controls="faq-1">
+                            <h3 class="text-lg">Como escolher o suplemento ideal para meus objetivos?</h3>
+                            <i class="fas fa-chevron-down transition-transform"></i>
+                        </div>
+                        <div id="faq-1" class="faq-content hidden p-5 border-t border-gray-200 dark:border-gray-600">
+                            <p>A escolha do suplemento ideal depende diretamente dos seus objetivos:</p>
+                            <ul class="list-disc pl-5 mt-3">
+                                <li><strong>Para ganho de massa muscular:</strong> Whey protein, creatina, hipercalóricos</li>
+                                <li><strong>Para perda de gordura:</strong> Termogênicos, proteínas, L-carnitina</li>
+                                <li><strong>Para performance:</strong> Creatina, beta-alanina, cafeína</li>
+                                <li><strong>Para saúde geral:</strong> Multivitamínicos, ômega-3, vitamina D</li>
+                            </ul>
+                        </div>
                     </div>
-                    <div>
-                        <div class="text-lg font-bold text-white dark:text-white tracking-wide">SUPLEMENTOS</div>
-                        <div class="text-xl font-black text-white dark:text-white tracking-wider -mt-1">BAHIA</div>
+                    
+                    <div class="bg-white dark:bg-dark-200 rounded-xl shadow-card dark:shadow-card-dark mb-5 overflow-hidden">
+                        <div class="faq-header cursor-pointer p-5 font-medium flex justify-between items-center" role="button" aria-expanded="false" aria-controls="faq-2">
+                            <h3 class="text-lg">Qual é o melhor horário para tomar proteína?</h3>
+                            <i class="fas fa-chevron-down transition-transform"></i>
+                        </div>
+                        <div id="faq-2" class="faq-content hidden p-5 border-t border-gray-200 dark:border-gray-600">
+                            <p>O horário ideal para consumo de proteína varia conforme o tipo e seu objetivo:</p>
+                            <ul class="list-disc pl-5 mt-3">
+                                <li><strong>Whey Protein:</strong> Ideal logo após o treino devido à rápida absorção</li>
+                                <li><strong>Caseína:</strong> Melhor consumida antes de dormir por ter digestão lenta</li>
+                                <li><strong>Proteínas vegetais:</strong> Podem ser consumidas em qualquer horário</li>
+                            </ul>
+                            <p class="mt-3">O mais importante é garantir um consumo adequado de proteínas ao longo do dia.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white dark:bg-dark-200 rounded-xl shadow-card dark:shadow-card-dark overflow-hidden">
+                        <div class="faq-header cursor-pointer p-5 font-medium flex justify-between items-center" role="button" aria-expanded="false" aria-controls="faq-3">
+                            <h3 class="text-lg">Qual a diferença entre Whey Concentrado, Isolado e Hidrolisado?</h3>
+                            <i class="fas fa-chevron-down transition-transform"></i>
+                        </div>
+                        <div id="faq-3" class="faq-content hidden p-5 border-t border-gray-200 dark:border-gray-600">
+                            <p>A principal diferença está no processo de fabricação e no teor de proteínas:</p>
+                            <ul class="list-disc pl-5 mt-3">
+                                <li><strong>Whey Concentrado:</strong> 70-80% de proteína, com pequenas quantidades de lactose e gordura. Opção mais econômica.</li>
+                                <li><strong>Whey Isolado:</strong> 90-95% de proteína, quantidades mínimas de lactose e gordura. Ideal para sensíveis à lactose.</li>
+                                <li><strong>Whey Hidrolisado:</strong> Proteínas quebradas em peptídeos menores, absorção mais rápida. Opção mais cara.</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-                <p class="text-gray-300 mb-5 max-w-sm md:max-w-none">Suplementos alimentares de alta qualidade para potencializar seus resultados.</p>
-                <div class="flex justify-center md:justify-start space-x-4">
-                    <a href="#" class="text-gray-300 hover:text-white transition-colors text-lg" aria-label="Facebook">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                    <a href="#" class="text-gray-300 hover:text-white transition-colors text-lg" aria-label="Instagram">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="https://wa.me/5577999152558" class="text-gray-300 hover:text-white transition-colors text-lg" aria-label="WhatsApp">
-                        <i class="fab fa-whatsapp"></i>
-                    </a>
-                </div>
             </div>
-            
-            <div>
-                <h4 class="text-lg font-medium mb-4">Navegação</h4>
-                <ul class="space-y-2.5">
-                    <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Home</a></li>
-                    <li><a href="#produtos" class="text-gray-300 hover:text-white transition-colors">Produtos</a></li>
-                    <li><a href="#guia" class="text-gray-300 hover:text-white transition-colors">Guia Nutricional</a></li>
-                    <li><a href="#faq" class="text-gray-300 hover:text-white transition-colors">FAQ</a></li>
-                    <li><a href="#local" class="text-gray-300 hover:text-white transition-colors">Nossa Loja</a></li>
-                </ul>
-            </div>
-            
-            <div>
-                <h4 class="text-lg font-medium mb-4">Categorias</h4>
-                <ul class="space-y-2.5">
-                    <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Proteínas</a></li>
-                    <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Performance</a></li>
-                    <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Saúde</a></li>
-                    <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Emagrecimento</a></li>
-                </ul>
-            </div>
-            
-            <div>
-                <h4 class="text-lg font-medium mb-4">Contato</h4>
-                <ul class="space-y-2.5">
-                    <li class="flex justify-center md:justify-start items-center">
-                        <i class="fas fa-phone text-primary mr-2.5"></i>
-                        <span>(77) 99915-2558</span>
-                    </li>
-                    <li class="flex justify-center md:justify-start items-center">
-                        <i class="fas fa-envelope text-primary mr-2.5"></i>
-                        <span>contato@suplementosbahia.com.br</span>
-                    </li>
-                    <li class="flex justify-center md:justify-start items-center">
-                        <i class="fas fa-map-marker-alt text-primary mr-2.5"></i>
-                        <span>Avenida São José, Centro, Carinhanha - BA</span>
-                    </li>
-                </ul>
-            </div>
-        </div>
+        </section>
         
-        <div class="border-t border-gray-700 mt-10 pt-6 text-center text-gray-400">
-            <div class="footer-bottom">
-                <div class="footer-bottom-content">
-                    <p>&copy; 2025 Suplementos BAHIA. Todos os direitos reservados.</p>
-                    <p class="developer-credit mt-1">
-                        <i class="fas fa-code"></i> Desenvolvido por 
-                        <a href="https://wa.me/5575991342279" target="_blank" class="developer-link text-orange-500 hover:underline">
-                            PeagahTech
-                            <i class="fas fa-external-link-alt"></i>
+        <!-- Localização da Loja -->
+        <section id="local" class="py-16 md:py-20 bg-gray-50 dark:bg-dark-300">
+            <div class="container mx-auto px-4">
+                <h2 class="text-2xl md:text-3xl font-bold text-center font-heading mb-10 relative">
+                    Nossa Loja
+                    <span class="block w-20 h-1 bg-primary mx-auto mt-3"></span>
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                    <div class="flex flex-col justify-center">
+                        <h3 class="text-xl font-medium mb-5">Encontre-nos em Carinhanha</h3>
+                        <p class="mb-6">Visite nossa loja física e conheça todo o nosso catálogo de produtos. Nossa equipe está pronta para te auxiliar a encontrar os suplementos ideais para seus objetivos.</p>
+                        
+                        <div class="space-y-4 mb-6">
+                            <div class="flex items-start">
+                                <i class="fas fa-map-marker-alt text-primary mt-1 mr-3 text-lg"></i>
+                                <span>Avenida São José, Centro, Carinhanha - Bahia</span>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-phone text-primary mt-1 mr-3 text-lg"></i>
+                                <span>(77) 99915-2558</span>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-clock text-primary mt-1 mr-3 text-lg"></i>
+                                <span>Segunda a Sexta: 8h às 18h<br>Sábado: 8h às 12h</span>
+                            </div>
+                        </div>
+                        
+                        <a href="https://maps.google.com/?q=Avenida São José, Centro, Carinhanha, BA" target="_blank" rel="noopener" class="inline-flex items-center text-primary hover:underline text-lg">
+                            <i class="fas fa-directions mr-2"></i>
+                            Como chegar
                         </a>
-                    </p>
+                    </div>
+                    
+                    <div class="map-container rounded-xl overflow-hidden shadow-card dark:shadow-card-dark">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15490.527985759187!2d-43.7732847!3d-14.3053!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x75bb041f6d7f0123%3A0x123456789abcdef!2sAvenida%20São%20José%2C%20Centro%2C%20Carinhanha%20-%20BA!5e0!3m2!1spt-BR!2sbr!4v1695306789012!5m2!1spt-BR!2sbr" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa da loja Suplementos BAHIA em Carinhanha"></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-gray-800 text-white dark:bg-dark-300">
+            <div class="container mx-auto px-4">
+                <!-- Centraliza no mobile -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center md:text-left">
+                    <div class="flex flex-col items-center md:items-start">
+                        <div class="flex flex-col items-center md:flex-row md:items-center md:space-x-3 mb-5">
+                            <!-- Logo da Suplementos BAHIA -->
+                            <div class="w-[60px] h-[60px] overflow-hidden transition-all duration-300 rounded-full mb-3 md:mb-0">
+                                <img src="https://pfst.cf2.poecdn.net/base/image/d1f85532876f53ac1e8b5772d3928c91b46d0255ed1d3a5dfa568c3ee0207bdc?w=1024&h=1024" 
+                                     alt="Logo Suplementos BAHIA"
+                                     class="w-full h-full object-cover"
+                                     width="60"  
+                                     height="60">
+                            </div>
+                            <div>
+                                <div class="text-lg font-bold text-white dark:text-white tracking-wide">SUPLEMENTOS</div>
+                                <div class="text-xl font-black text-white dark:text-white tracking-wider -mt-1">BAHIA</div>
+                            </div>
+                        </div>
+                        <p class="text-gray-300 mb-5 max-w-sm md:max-w-none">Suplementos alimentares de alta qualidade para potencializar seus resultados.</p>
+                        <div class="flex justify-center md:justify-start space-x-4">
+                            <a href="#" class="text-gray-300 hover:text-white transition-colors text-lg" aria-label="Facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="text-gray-300 hover:text-white transition-colors text-lg" aria-label="Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="https://wa.me/5577999152558" class="text-gray-300 hover:text-white transition-colors text-lg" aria-label="WhatsApp">
+                                <i class="fab fa-whatsapp"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-lg font-medium mb-4">Navegação</h4>
+                        <ul class="space-y-2.5">
+                            <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Home</a></li>
+                            <li><a href="#produtos" class="text-gray-300 hover:text-white transition-colors">Produtos</a></li>
+                            <li><a href="#guia" class="text-gray-300 hover:text-white transition-colors">Guia Nutricional</a></li>
+                            <li><a href="#faq" class="text-gray-300 hover:text-white transition-colors">FAQ</a></li>
+                            <li><a href="#local" class="text-gray-300 hover:text-white transition-colors">Nossa Loja</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-lg font-medium mb-4">Categorias</h4>
+                        <ul class="space-y-2.5">
+                            <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Proteínas</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Performance</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Saúde</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Emagrecimento</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-lg font-medium mb-4">Contato</h4>
+                        <ul class="space-y-2.5">
+                            <li class="flex justify-center md:justify-start items-center">
+                                <i class="fas fa-phone text-primary mr-2.5"></i>
+                                <span>(77) 99915-2558</span>
+                            </li>
+                            <li class="flex justify-center md:justify-start items-center">
+                                <i class="fas fa-envelope text-primary mr-2.5"></i>
+                                <span>contato@suplementosbahia.com.br</span>
+                            </li>
+                            <li class="flex justify-center md:justify-start items-center">
+                                <i class="fas fa-map-marker-alt text-primary mr-2.5"></i>
+                                <span>Avenida São José, Centro, Carinhanha - BA</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="border-t border-gray-700 mt-10 pt-6 text-center text-gray-400">
+                    <div class="footer-bottom">
+                        <div class="footer-bottom-content">
+                            <p>&copy; 2025 Suplementos BAHIA. Todos os direitos reservados.</p>
+                            <p class="developer-credit mt-1">
+                                <i class="fas fa-code"></i> Desenvolvido por 
+                                <a href="https://wa.me/5575991342279" target="_blank" class="developer-link text-orange-500 hover:underline">
+                                    PeagahTech
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Área Administrativa -->
+    <div id="admin-panel" class="admin-panel">
+        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
+            <!-- Header Admin -->
+            <header class="bg-white dark:bg-gray-800 shadow-md">
+                <div class="container mx-auto px-4 py-4">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center">
+                                <span class="text-white font-bold">SB</span>
+                            </div>
+                            <div>
+                                <h1 class="text-xl font-bold">PAINEL ADMIN</h1>
+                                <p class="text-sm text-gray-500">Suplementos BAHIA</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center space-x-4">
+                            <button id="admin-theme-toggle" class="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors">
+                                <i class="fas fa-moon dark:fas fa-sun"></i>
+                            </button>
+                            <button id="back-to-site" class="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition">
+                                <i class="fas fa-arrow-left mr-2"></i> Voltar ao Site
+                            </button>
+                            <button id="admin-logout" class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition">
+                                <i class="fas fa-sign-out-alt mr-2"></i> Sair
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Login Admin -->
+            <div id="admin-login" class="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900">
+                <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg w-full max-w-md">
+                    <div class="text-center mb-6">
+                        <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-lock text-white text-2xl"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold">Área Restrita</h2>
+                        <p class="text-gray-600 dark:text-gray-400">Faça login para acessar o painel</p>
+                    </div>
+                    
+                    <div id="admin-login-error" class="error-message hidden">
+                        Usuário ou senha incorretos
+                    </div>
+                    
+                    <form id="admin-login-form">
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium mb-2">Usuário</label>
+                            <input type="text" id="admin-username" class="admin-form-input" required>
+                        </div>
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium mb-2">Senha</label>
+                            <input type="password" id="admin-password" class="admin-form-input" required>
+                        </div>
+                        <button type="submit" class="admin-form-button w-full">
+                            <i class="fas fa-sign-in-alt mr-2"></i> Entrar
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Dashboard Admin -->
+            <div id="admin-dashboard" class="hidden p-6">
+                <!-- Navegação Admin -->
+                <div class="admin-nav mb-8">
+                    <ul class="admin-nav-tabs">
+                        <li class="admin-nav-item active" data-tab="dashboard">
+                            <i class="fas fa-tachometer-alt mr-2"></i> Dashboard
+                        </li>
+                        <li class="admin-nav-item" data-tab="products">
+                            <i class="fas fa-box mr-2"></i> Produtos
+                        </li>
+                        <li class="admin-nav-item" data-tab="categories">
+                            <i class="fas fa-tags mr-2"></i> Categorias
+                        </li>
+                        <li class="admin-nav-item" data-tab="orders">
+                            <i class="fas fa-shopping-bag mr-2"></i> Pedidos
+                        </li>
+                        <li class="admin-nav-item" data-tab="settings">
+                            <i class="fas fa-cog mr-2"></i> Configurações
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Tab Dashboard -->
+                <div id="admin-tab-dashboard" class="admin-tab">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                        <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-gray-500 text-sm">Vendas Hoje</p>
+                                    <p class="text-2xl font-bold text-primary" id="sales-today">R$ 0,00</p>
+                                </div>
+                                <div class="text-3xl text-primary">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-gray-500 text-sm">Vendas Mês</p>
+                                    <p class="text-2xl font-bold text-green-600" id="sales-month">R$ 0,00</p>
+                                </div>
+                                <div class="text-3xl text-green-600">
+                                    <i class="fas fa-calendar-alt"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-gray-500 text-sm">Pedidos Pendentes</p>
+                                    <p class="text-2xl font-bold text-orange-600" id="pending-orders">0</p>
+                                </div>
+                                <div class="text-3xl text-orange-600">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-gray-500 text-sm">Total Produtos</p>
+                                    <p class="text-2xl font-bold text-blue-600" id="total-products">0</p>
+                                </div>
+                                <div class="text-3xl text-blue-600">
+                                    <i class="fas fa-box"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+                            <h3 class="text-lg font-bold mb-4">Últimos Pedidos</h3>
+                            <div id="recent-orders">
+                                <div class="text-center py-8 text-gray-500">
+                                    <i class="fas fa-shopping-bag text-3xl mb-2"></i>
+                                    <p>Nenhum pedido encontrado</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+                            <h3 class="text-lg font-bold mb-4">Produtos Mais Vendidos</h3>
+                            <div id="top-products">
+                                <div class="text-center py-8 text-gray-500">
+                                    <i class="fas fa-chart-bar text-3xl mb-2"></i>
+                                    <p>Sem dados de vendas</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tab Produtos -->
+                <div id="admin-tab-products" class="admin-tab hidden">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-2xl font-bold">Gerenciar Produtos</h2>
+                        <button id="add-product-btn" class="admin-form-button">
+                            <i class="fas fa-plus mr-2"></i> Adicionar Produto
+                        </button>
+                    </div>
+                    
+                    <!-- Formulário de Produto -->
+                    <div id="product-form-container" class="admin-form-container hidden">
+                        <h3 id="product-form-title" class="text-xl font-bold mb-6">Adicionar Produto</h3>
+                        <div id="product-form-error" class="error-message hidden"></div>
+                        
+                        <form id="product-form" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Nome do Produto *</label>
+                                <input type="text" id="product-name" class="admin-form-input" required>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Categoria *</label>
+                                <select id="product-category" class="admin-form-select" required>
+                                    <option value="">Selecione uma categoria</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Preço (R$) *</label>
+                                <input type="number" id="product-price" class="admin-form-input" step="0.01" min="0" required>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Preço Antigo (R$)</label>
+                                <input type="number" id="product-old-price" class="admin-form-input" step="0.01" min="0">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Peso/Gramas</label>
+                                <input type="text" id="product-weight" class="admin-form-input">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Marca</label>
+                                <input type="text" id="product-brand" class="admin-form-input">
+                            </div>
+                            
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-medium mb-2">Sabores (separados por vírgula)</label>
+                                <input type="text" id="product-flavors" class="admin-form-input">
+                            </div>
+                            
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-medium mb-2">Benefícios</label>
+                                <textarea id="product-benefits" class="admin-form-textarea" rows="3"></textarea>
+                            </div>
+                            
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-medium mb-2">Ingredientes</label>
+                                <input type="text" id="product-ingredients" class="admin-form-input">
+                            </div>
+                            
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-medium mb-2">Modo de Uso</label>
+                                <textarea id="product-usage" class="admin-form-textarea" rows="2"></textarea>
+                            </div>
+                            
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-medium mb-2">Descrição</label>
+                                <textarea id="product-description" class="admin-form-textarea" rows="4"></textarea>
+                            </div>
+                            
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-medium mb-2">Imagem do Produto</label>
+                                <div class="image-upload-container" id="product-image-upload">
+                                    <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-4"></i>
+                                    <p class="text-gray-600 dark:text-gray-400">Clique para fazer upload da imagem</p>
+                                    <input type="file" id="product-image-input" class="hidden" accept="image/*">
+                                </div>
+                                <div id="product-image-preview" class="mt-4"></div>
+                            </div>
+                            
+                            <div class="md:col-span-2 flex justify-end space-x-4">
+                                <button type="button" id="cancel-product-btn" class="admin-form-button secondary">
+                                    Cancelar
+                                </button>
+                                <button type="submit" class="admin-form-button">
+                                    <i class="fas fa-save mr-2"></i> Salvar
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <!-- Lista de Produtos -->
+                    <div id="admin-products-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="flex justify-center items-center py-12 col-span-full">
+                            <div class="spinner"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tab Categorias -->
+                <div id="admin-tab-categories" class="admin-tab hidden">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-2xl font-bold">Gerenciar Categorias</h2>
+                        <button id="add-category-btn" class="admin-form-button">
+                            <i class="fas fa-plus mr-2"></i> Adicionar Categoria
+                        </button>
+                    </div>
+                    
+                    <!-- Formulário de Categoria -->
+                    <div id="category-form-container" class="admin-form-container hidden">
+                        <h3 id="category-form-title" class="text-xl font-bold mb-6">Adicionar Categoria</h3>
+                        <div id="category-form-error" class="error-message hidden"></div>
+                        
+                        <form id="category-form" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Nome da Categoria *</label>
+                                <input type="text" id="category-name" class="admin-form-input" required>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Código da Categoria *</label>
+                                <input type="text" id="category-code" class="admin-form-input" required>
+                                <small class="text-gray-500">Apenas letras minúsculas, números e hífens</small>
+                            </div>
+                            
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-medium mb-2">Descrição *</label>
+                                <textarea id="category-description" class="admin-form-textarea" rows="3" required></textarea>
+                            </div>
+                            
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-medium mb-2">Imagem da Categoria</label>
+                                <div class="image-upload-container" id="category-image-upload">
+                                    <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-4"></i>
+                                    <p class="text-gray-600 dark:text-gray-400">Clique para fazer upload da imagem</p>
+                                    <input type="file" id="category-image-input" class="hidden" accept="image/*">
+                                </div>
+                                <div id="category-image-preview" class="mt-4"></div>
+                            </div>
+                            
+                            <div class="md:col-span-2 flex justify-end space-x-4">
+                                <button type="button" id="cancel-category-btn" class="admin-form-button secondary">
+                                    Cancelar
+                                </button>
+                                <button type="submit" class="admin-form-button">
+                                    <i class="fas fa-save mr-2"></i> Salvar
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <!-- Lista de Categorias -->
+                    <div id="admin-categories-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="flex justify-center items-center py-12 col-span-full">
+                            <div class="spinner"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tab Pedidos -->
+                <div id="admin-tab-orders" class="admin-tab hidden">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-2xl font-bold">Gerenciar Pedidos</h2>
+                        <div class="flex gap-4">
+                            <select id="order-status-filter" class="admin-form-select">
+                                <option value="all">Todos os Status</option>
+                                <option value="pending">Pendente</option>
+                                <option value="delivered">Entregue</option>
+                                <option value="cancelled">Cancelado</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div id="orders-list" class="space-y-4">
+                        <div class="flex justify-center items-center py-12">
+                            <div class="spinner"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tab Configurações -->
+                <div id="admin-tab-settings" class="admin-tab hidden">
+                    <h2 class="text-2xl font-bold mb-6">Configurações da Loja</h2>
+                    
+                    <div class="admin-form-container">
+                        <h3 class="text-lg font-bold mb-4">Configurações de Frete</h3>
+                        <div id="settings-form-error" class="error-message hidden"></div>
+                        
+                        <form id="settings-form" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Valor do Frete (R$) *</label>
+                                <input type="number" id="shipping-price" class="admin-form-input" step="0.01" min="0" required>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Frete Grátis a partir de (R$)</label>
+                                <input type="number" id="free-shipping-limit" class="admin-form-input" step="0.01" min="0">
+                                <small class="text-gray-500">Deixe 0 para desabilitar</small>
+                            </div>
+                            
+                            <div class="md:col-span-2 flex justify-end">
+                                <button type="submit" class="admin-form-button">
+                                    <i class="fas fa-save mr-2"></i> Salvar Configurações
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</footer>
 
     <!-- Carrinho de compras -->
     <div id="cart-panel" class="fixed inset-y-0 right-0 w-full md:w-96 bg-white dark:bg-dark-200 shadow-lg transform translate-x-full transition-transform z-50">
@@ -942,6 +1503,22 @@
         </div>
     </div>
 
+    <!-- Order Details Modal -->
+    <div id="order-details-modal" class="fixed inset-0 z-50 hidden modal-backdrop">
+        <div class="flex items-center justify-center min-h-screen px-4">
+            <div class="relative w-full max-w-2xl bg-white dark:bg-gray-800 rounded-lg shadow-xl">
+                <button class="absolute top-4 right-4 text-gray-500 hover:text-gray-700" id="close-order-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+                
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-4">Detalhes do Pedido</h3>
+                    <div id="order-details-content"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Overlay para fechar menus -->
     <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden"></div>
 
@@ -958,8 +1535,824 @@
     <!-- Toast notifications container (mantido, mas não será usado) -->
     <div id="toast-container" class="fixed bottom-4 right-4 z-50"></div>
 
+    <!-- Alert Message -->
+    <div id="alert-message" class="fixed bottom-4 right-4 max-w-md bg-green-500 text-white p-4 rounded-lg shadow-lg transform translate-y-full opacity-0 transition-all duration-300 z-50 flex items-center">
+        <i class="fas fa-check-circle mr-3 text-xl"></i>
+        <span id="alert-text">Operação realizada com sucesso!</span>
+    </div>
+
     <script>
-        // Dados dos produtos com Schema.org markup para SEO
+        // *** Configuração do Supabase ***
+        let supabase = null;
+        let productsDB = [];
+        let categoryData = {};
+        let isAdminLoggedIn = false;
+        let currentAdminTab = 'dashboard';
+        let currentEditingId = null;
+        let ordersDB = [];
+        let shippingConfig = { price: 10.00, freeShippingLimit: 150.00 };
+
+        // Inicializar Supabase
+        function initSupabase() {
+            try {
+                const supabaseUrl = 'https://objhnypjkrocgixsyejf.supabase.co';
+                const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9iamhueXBqa3JvY2dpeHN5ZWpmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA3NzU2MDIsImV4cCI6MjA2NjM1MTYwMn0.tOg52_qdTVwy5N09abTBxmKmFb4h0yJaSutPxKflZKY';
+                
+                supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+                console.log('✅ Supabase inicializado com sucesso!');
+                return true;
+            } catch (error) {
+                console.error('❌ Erro ao inicializar Supabase:', error);
+                return false;
+            }
+        }
+
+        // Upload de imagem para Supabase Storage
+        async function uploadImage(file, folder = 'products') {
+            if (!supabase) {
+                console.log('⚠️ Supabase não configurado.');
+                return `https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=400&fit=crop`;
+            }
+
+            try {
+                const fileExt = file.name.split('.').pop();
+                const fileName = `${Date.now()}_${Math.random().toString(36).substring(7)}.${fileExt}`;
+                const filePath = `${folder}/${fileName}`;
+
+                const { data, error } = await supabase.storage
+                    .from('sb_images')
+                    .upload(filePath, file);
+
+                if (error) throw error;
+
+                const { data: urlData } = supabase.storage
+                    .from('sb_images')
+                    .getPublicUrl(filePath);
+
+                return urlData.publicUrl;
+            } catch (error) {
+                console.error('Erro no upload:', error);
+                return `https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=400&fit=crop`;
+            }
+        }
+
+        // Carregar dados do Supabase
+        async function loadAdminData() {
+            if (!supabase) {
+                console.log('🔄 Supabase não configurado, carregando dados demo...');
+                loadDemoData();
+                return;
+            }
+
+            try {
+                // Carregar categorias
+                const { data: categories } = await supabase
+                    .from('sb_categories')
+                    .select('*');
+
+                if (categories) {
+                    categoryData = {};
+                    categories.forEach(cat => {
+                        categoryData[cat.sb_code] = cat;
+                    });
+                    updateCategoryFilters();
+                }
+
+                // Carregar produtos
+                const { data: products } = await supabase
+                    .from('sb_products')
+                    .select('*');
+
+                if (products) {
+                    productsDB = products.map(product => ({
+                        ...product,
+                        id: product.sb_product_id,
+                        name: product.sb_name,
+                        category: product.sb_category,
+                        price: product.sb_price,
+                        oldPrice: product.sb_old_price,
+                        weight: product.sb_weight,
+                        brand: product.sb_brand,
+                        flavors: product.sb_flavors,
+                        benefits: product.sb_benefits,
+                        ingredients: product.sb_ingredients,
+                        usage: product.sb_usage,
+                        description: product.sb_description,
+                        images: product.sb_images,
+                        image: product.sb_image_url || (product.sb_images && product.sb_images[0]) || 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400'
+                    }));
+                    
+                    if (currentAdminTab === 'products') loadAdminProducts();
+                }
+
+                // Carregar pedidos
+                const { data: orders } = await supabase
+                    .from('sb_orders')
+                    .select('*')
+                    .order('sb_created_at', { ascending: false });
+
+                if (orders) {
+                    ordersDB = orders.map(order => ({
+                        ...order,
+                        id: order.sb_order_id,
+                        customer_name: order.sb_customer_name,
+                        customer_phone: order.sb_customer_phone,
+                        items: order.sb_items,
+                        subtotal_amount: order.sb_subtotal_amount,
+                        shipping_amount: order.sb_shipping_amount,
+                        total_amount: order.sb_total_amount,
+                        payment_method: order.sb_payment_method,
+                        status: order.sb_status,
+                        created_at: order.sb_created_at
+                    }));
+                    
+                    if (currentAdminTab === 'orders') loadOrders();
+                    if (currentAdminTab === 'dashboard') updateDashboard();
+                }
+
+                // Carregar configurações
+                const { data: settings } = await supabase
+                    .from('sb_settings')
+                    .select('*')
+                    .single();
+
+                if (settings) {
+                    shippingConfig = {
+                        price: settings.sb_shipping_price || 10.00,
+                        freeShippingLimit: settings.sb_free_shipping_limit || 150.00
+                    };
+                    updateShippingDisplay();
+                }
+
+            } catch (error) {
+                console.error('Erro ao carregar dados:', error);
+                loadDemoData();
+            }
+        }
+
+        // Carregar dados demo
+        function loadDemoData() {
+            categoryData = {
+                'whey-protein': {
+                    sb_category_id: 1,
+                    sb_code: 'whey-protein',
+                    sb_name: 'Whey Protein',
+                    sb_description: 'Proteínas de alta qualidade para ganho de massa muscular',
+                    sb_image_url: null
+                },
+                'creatina': {
+                    sb_category_id: 2,
+                    sb_code: 'creatina',
+                    sb_name: 'Creatina',
+                    sb_description: 'Suplementos de creatina para força e energia',
+                    sb_image_url: null
+                }
+            };
+
+            productsDB = [];
+            ordersDB = [];
+            
+            updateCategoryFilters();
+            if (currentAdminTab === 'products') loadAdminProducts();
+            if (currentAdminTab === 'orders') loadOrders();
+            if (currentAdminTab === 'dashboard') updateDashboard();
+        }
+
+        // Salvar produto
+        async function saveProduct(productData) {
+            if (!supabase) return { success: false, error: 'Supabase não inicializado' };
+
+            try {
+                if (!productData.sb_name || !productData.sb_category || productData.sb_price <= 0) {
+                    return { success: false, error: 'Nome, categoria e preço são obrigatórios' };
+                }
+
+                if (currentEditingId) {
+                    const { data, error } = await supabase
+                        .from('sb_products')
+                        .update(productData)
+                        .eq('sb_product_id', currentEditingId)
+                        .select();
+                    if (error) throw error;
+                } else {
+                    const { data, error } = await supabase
+                        .from('sb_products')
+                        .insert([productData])
+                        .select();
+                    if (error) throw error;
+                }
+
+                await loadAdminData();
+                return { success: true };
+            } catch (error) {
+                console.error('Erro ao salvar produto:', error);
+                return { success: false, error: error.message };
+            }
+        }
+
+        // Salvar categoria
+        async function saveCategory(categoryData) {
+            if (!supabase) return { success: false, error: 'Supabase não inicializado' };
+
+            try {
+                if (!categoryData.sb_code || !categoryData.sb_name || !categoryData.sb_description) {
+                    return { success: false, error: 'Todos os campos obrigatórios devem ser preenchidos' };
+                }
+
+                categoryData.sb_code = categoryData.sb_code.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+
+                if (currentEditingId) {
+                    const { data, error } = await supabase
+                        .from('sb_categories')
+                        .update(categoryData)
+                        .eq('sb_category_id', currentEditingId)
+                        .select();
+                    if (error) throw error;
+                } else {
+                    const { data, error } = await supabase
+                        .from('sb_categories')
+                        .insert([categoryData])
+                        .select();
+                    if (error) throw error;
+                }
+
+                await loadAdminData();
+                return { success: true };
+            } catch (error) {
+                console.error('Erro ao salvar categoria:', error);
+                return { success: false, error: error.message };
+            }
+        }
+
+        // Atualizar status do pedido
+        async function updateOrderStatus(orderId, status) {
+            if (!supabase) return { success: false, error: 'Supabase não inicializado' };
+
+            try {
+                const { data, error } = await supabase
+                    .from('sb_orders')
+                    .update({ sb_status: status })
+                    .eq('sb_order_id', orderId)
+                    .select();
+
+                if (error) throw error;
+                await loadAdminData();
+                return { success: true };
+            } catch (error) {
+                console.error('Erro ao atualizar status:', error);
+                return { success: false, error: error.message };
+            }
+        }
+
+        // Salvar configurações
+        async function saveSettings(settingsData) {
+            if (!supabase) {
+                shippingConfig = {
+                    price: settingsData.sb_shipping_price,
+                    freeShippingLimit: settingsData.sb_free_shipping_limit
+                };
+                updateShippingDisplay();
+                return { success: true };
+            }
+
+            try {
+                const { data, error } = await supabase
+                    .from('sb_settings')
+                    .upsert([{ sb_settings_id: 1, ...settingsData }])
+                    .select();
+
+                if (error) throw error;
+                
+                shippingConfig = {
+                    price: settingsData.sb_shipping_price,
+                    freeShippingLimit: settingsData.sb_free_shipping_limit
+                };
+                
+                updateShippingDisplay();
+                return { success: true };
+            } catch (error) {
+                console.error('Erro ao salvar configurações:', error);
+                return { success: false, error: error.message };
+            }
+        }
+
+        // Excluir produto
+        async function deleteProduct(id) {
+            if (confirm('Tem certeza que deseja excluir este produto?')) {
+                try {
+                    const { error } = await supabase
+                        .from('sb_products')
+                        .delete()
+                        .eq('sb_product_id', id);
+
+                    if (error) throw error;
+                    await loadAdminData();
+                    showAlert('Produto excluído com sucesso!');
+                } catch (error) {
+                    console.error('Erro ao excluir produto:', error);
+                    showAlert('Erro ao excluir produto!', 'error');
+                }
+            }
+        }
+
+        // Excluir categoria
+        async function deleteCategory(id) {
+            if (confirm('Tem certeza que deseja excluir esta categoria?')) {
+                try {
+                    const { error } = await supabase
+                        .from('sb_categories')
+                        .delete()
+                        .eq('sb_category_id', id);
+
+                    if (error) throw error;
+                    await loadAdminData();
+                    showAlert('Categoria excluída com sucesso!');
+                } catch (error) {
+                    console.error('Erro ao excluir categoria:', error);
+                    showAlert('Erro ao excluir categoria!', 'error');
+                }
+            }
+        }
+
+        // Mostrar/esconder erro no formulário
+        function showFormError(formType, message) {
+            const errorDiv = document.getElementById(`${formType}-form-error`);
+            errorDiv.textContent = message;
+            errorDiv.classList.remove('hidden');
+        }
+
+        function hideFormError(formType) {
+            const errorDiv = document.getElementById(`${formType}-form-error`);
+            errorDiv.classList.add('hidden');
+        }
+
+        // Carregar produtos admin
+        function loadAdminProducts() {
+            const container = document.getElementById('admin-products-grid');
+            if (!container) return;
+
+            let html = '';
+            productsDB.forEach(product => {
+                const categoryName = categoryData[product.category]?.sb_name || product.category;
+                
+                html += `
+                    <div class="admin-product-card">
+                        <div class="h-48 bg-gray-50 dark:bg-gray-700 flex items-center justify-center p-4">
+                            <img src="${product.image}" alt="${product.name}" class="max-h-full max-w-full object-contain">
+                        </div>
+                        <div class="p-4">
+                            <span class="text-xs bg-primary text-white px-2 py-1 rounded">${categoryName}</span>
+                            <h3 class="font-bold mt-2 mb-2">${product.name}</h3>
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="text-primary font-bold text-lg">R$ ${product.price.toFixed(2).replace('.', ',')}</div>
+                                <div class="text-sm text-gray-500">${product.weight || ''}</div>
+                            </div>
+                            <div class="flex gap-2">
+                                <button class="edit-product-btn flex-1 bg-blue-500 text-white py-2 px-3 rounded text-sm hover:bg-blue-600" data-id="${product.sb_product_id}">
+                                    <i class="fas fa-edit mr-1"></i> Editar
+                                </button>
+                                <button class="delete-product-btn flex-1 bg-red-500 text-white py-2 px-3 rounded text-sm hover:bg-red-600" data-id="${product.sb_product_id}">
+                                    <i class="fas fa-trash mr-1"></i> Excluir
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html || '<div class="col-span-full text-center py-12 text-gray-500">Nenhum produto encontrado</div>';
+
+            // Adicionar eventos
+            setupAdminProductEvents();
+        }
+
+        // Carregar categorias admin
+        function loadAdminCategories() {
+            const container = document.getElementById('admin-categories-grid');
+            if (!container) return;
+
+            let html = '';
+            Object.keys(categoryData).forEach(code => {
+                const category = categoryData[code];
+                const productCount = productsDB.filter(p => p.category === code).length;
+                
+                html += `
+                    <div class="admin-category-card">
+                        <div class="bg-primary text-white p-4">
+                            <h3 class="font-bold text-lg">${category.sb_name}</h3>
+                            <span class="text-sm bg-white bg-opacity-20 px-2 py-1 rounded">${code}</span>
+                        </div>
+                        <div class="p-4">
+                            <p class="text-gray-600 dark:text-gray-400 mb-4">${category.sb_description}</p>
+                            <div class="bg-gray-50 dark:bg-gray-700 p-3 rounded mb-4 text-center">
+                                <span class="text-2xl font-bold text-primary">${productCount}</span>
+                                <span class="block text-sm text-gray-500">Produtos</span>
+                            </div>
+                            <div class="flex gap-2">
+                                <button class="edit-category-btn flex-1 bg-blue-500 text-white py-2 px-3 rounded text-sm hover:bg-blue-600" data-id="${category.sb_category_id}">
+                                    <i class="fas fa-edit mr-1"></i> Editar
+                                </button>
+                                <button class="delete-category-btn flex-1 bg-red-500 text-white py-2 px-3 rounded text-sm hover:bg-red-600" data-id="${category.sb_category_id}">
+                                    <i class="fas fa-trash mr-1"></i> Excluir
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html || '<div class="col-span-full text-center py-12 text-gray-500">Nenhuma categoria encontrada</div>';
+
+            setupAdminCategoryEvents();
+        }
+
+        // Carregar pedidos
+        function loadOrders() {
+            const container = document.getElementById('orders-list');
+            if (!container) return;
+
+            const statusFilter = document.getElementById('order-status-filter').value;
+            let filteredOrders = ordersDB;
+            
+            if (statusFilter !== 'all') {
+                filteredOrders = filteredOrders.filter(o => o.status === statusFilter);
+            }
+
+            let html = '';
+            filteredOrders.forEach(order => {
+                const orderDate = new Date(order.created_at).toLocaleDateString('pt-BR');
+                const statusClass = order.status === 'pending' ? 'bg-orange-100 text-orange-800' : 
+                                   order.status === 'delivered' ? 'bg-green-100 text-green-800' : 
+                                   'bg-red-100 text-red-800';
+
+                html += `
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h4 class="font-bold">Pedido #${order.id}</h4>
+                                <p class="text-sm text-gray-500">${orderDate}</p>
+                                <p class="text-sm text-gray-500">${order.customer_name}</p>
+                            </div>
+                            <div class="text-right">
+                                <span class="px-2 py-1 rounded text-xs ${statusClass}">
+                                    ${order.status === 'pending' ? 'Pendente' : order.status === 'delivered' ? 'Entregue' : 'Cancelado'}
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <div class="border-t pt-4">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <p class="font-bold text-lg">R$ ${order.total_amount.toFixed(2).replace('.', ',')}</p>
+                                    <p class="text-sm text-gray-500">${order.items ? JSON.parse(order.items).length : 0} item(s)</p>
+                                </div>
+                                <div class="flex gap-2">
+                                    <button class="view-order-btn bg-blue-500 text-white px-3 py-1 rounded text-sm" data-id="${order.id}">Ver Detalhes</button>
+                                    ${order.status === 'pending' ? `
+                                        <button class="mark-delivered-btn bg-green-500 text-white px-3 py-1 rounded text-sm" data-id="${order.id}">Marcar Entregue</button>
+                                    ` : ''}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html || '<div class="text-center py-12 text-gray-500">Nenhum pedido encontrado</div>';
+
+            setupOrderEvents();
+        }
+
+        // Atualizar dashboard
+        function updateDashboard() {
+            const today = new Date();
+            const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+            const startOfDay = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+
+            const dailySales = ordersDB
+                .filter(o => o.status === 'delivered' && new Date(o.created_at) >= startOfDay)
+                .reduce((sum, o) => sum + o.total_amount, 0);
+
+            const monthlySales = ordersDB
+                .filter(o => o.status === 'delivered' && new Date(o.created_at) >= startOfMonth)
+                .reduce((sum, o) => sum + o.total_amount, 0);
+
+            const pendingOrders = ordersDB.filter(o => o.status === 'pending').length;
+
+            document.getElementById('sales-today').textContent = `R$ ${dailySales.toFixed(2).replace('.', ',')}`;
+            document.getElementById('sales-month').textContent = `R$ ${monthlySales.toFixed(2).replace('.', ',')}`;
+            document.getElementById('pending-orders').textContent = pendingOrders;
+            document.getElementById('total-products').textContent = productsDB.length;
+
+            loadRecentOrders();
+        }
+
+        // Carregar últimos pedidos
+        function loadRecentOrders() {
+            const container = document.getElementById('recent-orders');
+            const recentOrders = ordersDB.slice(0, 5);
+
+            if (recentOrders.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-8 text-gray-500">
+                        <i class="fas fa-shopping-bag text-3xl mb-2"></i>
+                        <p>Nenhum pedido encontrado</p>
+                    </div>
+                `;
+                return;
+            }
+
+            let html = '';
+            recentOrders.forEach(order => {
+                const orderDate = new Date(order.created_at).toLocaleDateString('pt-BR');
+                html += `
+                    <div class="flex justify-between items-center p-3 border-b border-gray-200 dark:border-gray-700 last:border-b-0">
+                        <div>
+                            <p class="font-semibold">Pedido #${order.id}</p>
+                            <p class="text-sm text-gray-500">${order.customer_name} - ${orderDate}</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="font-bold">R$ ${order.total_amount.toFixed(2).replace('.', ',')}</p>
+                            <span class="text-xs px-2 py-1 rounded ${order.status === 'pending' ? 'bg-orange-100 text-orange-800' : 'bg-green-100 text-green-800'}">
+                                ${order.status === 'pending' ? 'Pendente' : 'Entregue'}
+                            </span>
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        // Eventos admin produtos
+        function setupAdminProductEvents() {
+            document.querySelectorAll('.edit-product-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const id = parseInt(btn.getAttribute('data-id'));
+                    editProduct(id);
+                });
+            });
+
+            document.querySelectorAll('.delete-product-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const id = parseInt(btn.getAttribute('data-id'));
+                    deleteProduct(id);
+                });
+            });
+        }
+
+        // Eventos admin categorias
+        function setupAdminCategoryEvents() {
+            document.querySelectorAll('.edit-category-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const id = parseInt(btn.getAttribute('data-id'));
+                    editCategory(id);
+                });
+            });
+
+            document.querySelectorAll('.delete-category-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const id = parseInt(btn.getAttribute('data-id'));
+                    deleteCategory(id);
+                });
+            });
+        }
+
+        // Eventos pedidos
+        function setupOrderEvents() {
+            document.querySelectorAll('.view-order-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const id = parseInt(btn.getAttribute('data-id'));
+                    viewOrderDetails(id);
+                });
+            });
+
+            document.querySelectorAll('.mark-delivered-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const id = parseInt(btn.getAttribute('data-id'));
+                    markOrderAsDelivered(id);
+                });
+            });
+        }
+
+        // Ver detalhes do pedido
+        function viewOrderDetails(orderId) {
+            const order = ordersDB.find(o => o.id === orderId);
+            if (!order) return;
+
+            const modal = document.getElementById('order-details-modal');
+            const content = document.getElementById('order-details-content');
+            
+            const orderDate = new Date(order.created_at).toLocaleDateString('pt-BR', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+
+            const items = order.items ? JSON.parse(order.items) : [];
+            
+            let itemsHtml = '';
+            items.forEach(item => {
+                itemsHtml += `
+                    <div class="flex justify-between items-center py-2 border-b last:border-b-0">
+                        <div>
+                            <p class="font-semibold">${item.name}</p>
+                            <p class="text-sm text-gray-500">Quantidade: ${item.quantity}</p>
+                        </div>
+                        <p class="font-bold">R$ ${(item.price * item.quantity).toFixed(2).replace('.', ',')}</p>
+                    </div>
+                `;
+            });
+
+            content.innerHTML = `
+                <div class="mb-4">
+                    <h4 class="font-bold text-lg mb-2">Pedido #${order.id}</h4>
+                    <p><strong>Data:</strong> ${orderDate}</p>
+                    <p><strong>Cliente:</strong> ${order.customer_name}</p>
+                    <p><strong>Telefone:</strong> ${order.customer_phone}</p>
+                </div>
+                
+                <div class="mb-4">
+                    <h5 class="font-bold mb-2">Itens do Pedido:</h5>
+                    ${itemsHtml}
+                </div>
+                
+                <div class="border-t pt-4">
+                    <div class="flex justify-between mb-2">
+                        <span>Subtotal:</span>
+                        <span>R$ ${order.subtotal_amount.toFixed(2).replace('.', ',')}</span>
+                    </div>
+                    <div class="flex justify-between mb-2">
+                        <span>Frete:</span>
+                        <span>R$ ${order.shipping_amount.toFixed(2).replace('.', ',')}</span>
+                    </div>
+                    <div class="flex justify-between text-lg font-bold">
+                        <span>Total:</span>
+                        <span>R$ ${order.total_amount.toFixed(2).replace('.', ',')}</span>
+                    </div>
+                </div>
+            `;
+
+            modal.classList.remove('hidden');
+        }
+
+        // Marcar pedido como entregue
+        async function markOrderAsDelivered(orderId) {
+            const result = await updateOrderStatus(orderId, 'delivered');
+            if (result.success) {
+                showAlert('Pedido marcado como entregue!');
+            } else {
+                showAlert('Erro ao atualizar pedido!', 'error');
+            }
+        }
+
+        // Editar produto
+        function editProduct(id) {
+            const product = productsDB.find(p => p.sb_product_id === id);
+            if (!product) return;
+
+            currentEditingId = id;
+            
+            document.getElementById('product-name').value = product.sb_name;
+            document.getElementById('product-category').value = product.sb_category;
+            document.getElementById('product-price').value = product.sb_price;
+            document.getElementById('product-old-price').value = product.sb_old_price || '';
+            document.getElementById('product-weight').value = product.sb_weight || '';
+            document.getElementById('product-brand').value = product.sb_brand || '';
+            document.getElementById('product-flavors').value = product.sb_flavors || '';
+            document.getElementById('product-benefits').value = product.sb_benefits || '';
+            document.getElementById('product-ingredients').value = product.sb_ingredients || '';
+            document.getElementById('product-usage').value = product.sb_usage || '';
+            document.getElementById('product-description').value = product.sb_description || '';
+            
+            document.getElementById('product-form-title').textContent = 'Editar Produto';
+            document.getElementById('product-form-container').classList.remove('hidden');
+            hideFormError('product');
+        }
+
+        // Editar categoria
+        function editCategory(id) {
+            const category = Object.values(categoryData).find(cat => cat.sb_category_id === id);
+            if (!category) return;
+
+            currentEditingId = id;
+            
+            document.getElementById('category-name').value = category.sb_name;
+            document.getElementById('category-code').value = category.sb_code;
+            document.getElementById('category-description').value = category.sb_description;
+            
+            document.getElementById('category-form-title').textContent = 'Editar Categoria';
+            document.getElementById('category-form-container').classList.remove('hidden');
+            hideFormError('category');
+        }
+
+        // Atualizar filtros de categoria
+        function updateCategoryFilters() {
+            const productCategorySelect = document.getElementById('product-category');
+            
+            if (productCategorySelect) {
+                while (productCategorySelect.options.length > 1) {
+                    productCategorySelect.remove(1);
+                }
+                
+                Object.keys(categoryData).forEach(code => {
+                    const option = document.createElement('option');
+                    option.value = code;
+                    option.textContent = categoryData[code].sb_name;
+                    productCategorySelect.appendChild(option);
+                });
+            }
+        }
+
+        // Atualizar display do frete
+        function updateShippingDisplay() {
+            const shippingPriceInput = document.getElementById('shipping-price');
+            const freeShippingLimitInput = document.getElementById('free-shipping-limit');
+            
+            if (shippingPriceInput) {
+                shippingPriceInput.value = shippingConfig.price;
+            }
+            if (freeShippingLimitInput) {
+                freeShippingLimitInput.value = shippingConfig.freeShippingLimit;
+            }
+        }
+
+        // Mudar aba admin
+        function changeAdminTab(tab) {
+            document.querySelectorAll('.admin-tab').forEach(t => t.classList.add('hidden'));
+            document.getElementById(`admin-tab-${tab}`).classList.remove('hidden');
+            
+            document.querySelectorAll('.admin-nav-item').forEach(item => item.classList.remove('active'));
+            document.querySelector(`[data-tab="${tab}"]`).classList.add('active');
+
+            currentAdminTab = tab;
+            
+            if (tab === 'products') loadAdminProducts();
+            if (tab === 'categories') loadAdminCategories();
+            if (tab === 'orders') loadOrders();
+            if (tab === 'dashboard') updateDashboard();
+            if (tab === 'settings') updateShippingDisplay();
+        }
+
+        // Configurar upload de imagens
+        function setupImageUpload(inputId, previewId) {
+            const input = document.getElementById(inputId);
+            const preview = document.getElementById(previewId);
+            const uploadContainer = input.parentElement;
+
+            uploadContainer.addEventListener('click', () => input.click());
+
+            input.addEventListener('change', () => {
+                const files = Array.from(input.files);
+                preview.innerHTML = '';
+
+                files.forEach(file => {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        const img = document.createElement('img');
+                        img.src = e.target.result;
+                        img.className = 'image-preview';
+                        preview.appendChild(img);
+                    };
+                    reader.readAsDataURL(file);
+                });
+            });
+        }
+
+        // Mostrar alerta
+        function showAlert(message, type = 'success') {
+            const alert = document.getElementById('alert-message');
+            const text = document.getElementById('alert-text');
+            
+            text.textContent = message;
+            
+            if (type === 'error') {
+                alert.className = alert.className.replace('bg-green-500', 'bg-red-500');
+            } else {
+                alert.className = alert.className.replace('bg-red-500', 'bg-green-500');
+            }
+            
+            alert.classList.remove('opacity-0', 'translate-y-full');
+            
+            setTimeout(() => {
+                alert.classList.add('opacity-0', 'translate-y-full');
+            }, 3000);
+        }
+
+        // Mostrar/esconder área administrativa
+        function showAdminPanel() {
+            document.getElementById('main-site').style.display = 'none';
+            document.getElementById('admin-panel').classList.add('active');
+        }
+
+        function hideAdminPanel() {
+            document.getElementById('main-site').style.display = 'block';
+            document.getElementById('admin-panel').classList.remove('active');
+        }
+
+        // Dados dos produtos com Schema.org markup para SEO (mantido do código original)
         const productsData = [
             // Proteínas e Aminoácidos
             {
@@ -1607,7 +3000,7 @@
             }
         ];
 
-        // Sistema de carrinho
+        // Sistema de carrinho (mantido do código original)
         const cart = {
             items: [],
             
@@ -1768,7 +3161,6 @@
             
             sendToWhatsApp() {
                 if (this.items.length === 0) {
-                    // Notificação removida
                     return;
                 }
                 
@@ -1786,7 +3178,7 @@
             }
         };
 
-        // Carregar produtos
+        // Carregar produtos (mantido do código original)
         function loadProducts(startIndex = 0, count = 8, filters = {}) {
             const container = document.getElementById('products-container');
             
@@ -1949,7 +3341,7 @@
             return productsToShow.length;
         }
         
-        // Atualizar paginação
+        // Atualizar paginação (mantido do código original)
         function updatePagination(startIndex, count, totalCount) {
             const loadMoreBtn = document.getElementById('load-more');
             const paginationContainer = document.getElementById('pagination');
@@ -2008,7 +3400,7 @@
             }
         }
         
-        // Pesquisa de produtos
+        // Pesquisa de produtos (mantido do código original)
         function setupSearch() {
             const searchInput = document.getElementById('search-input');
             const searchResults = document.getElementById('search-results');
@@ -2116,6 +3508,7 @@
         
         // Criar card de produto (usado na busca e outras funções)
         function createProductCard(product) {
+            // Similar ao loadProducts - código mantido
             // Gerar HTML para avaliação
             let starsHTML = '';
             const fullStars = Math.floor(product.rating);
@@ -2196,7 +3589,7 @@
             return productCard;
         }
         
-        // Mostrar modal de quick view
+        // Mostrar modal de quick view (mantido do código original)
         function showQuickView(product) {
             const modal = document.getElementById('quickview-modal');
             const content = document.getElementById('quickview-content');
@@ -2336,7 +3729,7 @@
             });
         }
 
-        // Setup acordeões
+        // Setup acordeões (mantido do código original)
         function setupAccordions() {
             document.querySelectorAll('.accordion-header').forEach(header => {
                 header.addEventListener('click', () => {
@@ -2360,7 +3753,7 @@
             });
         }
 
-        // Setup FAQ
+        // Setup FAQ (mantido do código original)
         function setupFAQ() {
             document.querySelectorAll('.faq-header').forEach(header => {
                 header.addEventListener('click', () => {
@@ -2384,7 +3777,7 @@
             });
         }
 
-        // Setup Hero Slider - versão corrigida
+        // Setup Hero Slider - versão corrigida (mantido do código original)
         function setupHeroSlider() {
             // Função para verificar se estamos no mobile
             function isMobile() {
@@ -2472,7 +3865,7 @@
             heroGallery.addEventListener('mouseleave', startAutoplay);
         }
 
-        // Filtros de categoria
+        // Filtros de categoria (mantido do código original)
         function setupCategoryFilters() {
             const filters = document.querySelectorAll('.filter-btn');
             
@@ -2498,7 +3891,7 @@
             });
         }
         
-        // Resetar filtros
+        // Resetar filtros (mantido do código original)
         function resetFilters() {
             // Reset de categoria
             const categoryFilters = document.querySelectorAll('.filter-btn');
@@ -2515,7 +3908,7 @@
             loadProducts(0, 8);
         }
 
-        // Botão voltar ao topo
+        // Botão voltar ao topo (mantido do código original)
         function setupBackToTop() {
             const backToTop = document.getElementById('back-to-top');
             
@@ -2537,13 +3930,13 @@
             });
         }
 
-        // Sistema de notificações toast - Função alterada para não exibir notificações
+        // Sistema de notificações toast - Função alterada para não exibir notificações (mantido do código original)
         function showToast(type, message) {
             // Função desativada conforme solicitado - não mostra notificações
             console.log(`Notificação (${type}): ${message}`);
         }
 
-        // Toggle para busca, menu mobile e carrinho
+        // Toggle para busca, menu mobile e carrinho (mantido do código original)
         function setupToggles() {
             // Busca
             const searchToggle = document.getElementById('search-toggle');
@@ -2639,16 +4032,28 @@
                 themeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
                 themeToggle.setAttribute('aria-label', isDark ? 'Mudar para tema claro' : 'Mudar para tema escuro');
             });
+
+            // Toggle modo escuro admin
+            const adminThemeToggle = document.getElementById('admin-theme-toggle');
+            if (adminThemeToggle) {
+                adminThemeToggle.addEventListener('click', () => {
+                    document.documentElement.classList.toggle('dark');
+                    
+                    // Trocar ícone
+                    const isDark = document.documentElement.classList.contains('dark');
+                    adminThemeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+                });
+            }
         }
 
-        // Finalizar pedido
+        // Finalizar pedido (mantido do código original)
         function setupCheckout() {
             document.getElementById('finalizar-pedido').addEventListener('click', () => {
                 cart.sendToWhatsApp();
             });
         }
 
-        // Formatador para nomes de categorias
+        // Formatador para nomes de categorias (mantido do código original)
         function getCategoryName(category) {
             const names = {
                 'proteinas-aminoacidos': 'Proteínas',
@@ -2665,6 +4070,11 @@
 
         // Inicialização
         document.addEventListener('DOMContentLoaded', () => {
+            // Inicializar Supabase
+            if (initSupabase()) {
+                loadAdminData();
+            }
+
             // Inicializar o carrinho
             cart.init();
             
@@ -2696,7 +4106,209 @@
             
             // Configurar finalização de pedido
             setupCheckout();
+
+            // Configurar admin
+            setupAdminPanel();
         });
+
+        function setupAdminPanel() {
+            // Login admin
+            document.getElementById('admin-login-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const username = document.getElementById('admin-username').value;
+                const password = document.getElementById('admin-password').value;
+                
+                if (username === 'admin' && password === 'admin123') {
+                    isAdminLoggedIn = true;
+                    document.getElementById('admin-login').classList.add('hidden');
+                    document.getElementById('admin-dashboard').classList.remove('hidden');
+                    loadAdminData();
+                } else {
+                    document.getElementById('admin-login-error').classList.remove('hidden');
+                }
+            });
+
+            // Logout admin
+            document.getElementById('admin-logout').addEventListener('click', () => {
+                isAdminLoggedIn = false;
+                hideAdminPanel();
+                document.getElementById('admin-login').classList.remove('hidden');
+                document.getElementById('admin-dashboard').classList.add('hidden');
+                document.getElementById('admin-login-error').classList.add('hidden');
+                document.getElementById('admin-username').value = '';
+                document.getElementById('admin-password').value = '';
+            });
+
+            // Voltar ao site
+            document.getElementById('back-to-site').addEventListener('click', () => {
+                hideAdminPanel();
+            });
+
+            // Links para admin
+            document.getElementById('admin-link').addEventListener('click', (e) => {
+                e.preventDefault();
+                if (isAdminLoggedIn) {
+                    showAdminPanel();
+                    loadAdminData();
+                } else {
+                    showAdminPanel();
+                }
+            });
+
+            document.getElementById('admin-link-mobile').addEventListener('click', (e) => {
+                e.preventDefault();
+                if (isAdminLoggedIn) {
+                    showAdminPanel();
+                    loadAdminData();
+                } else {
+                    showAdminPanel();
+                }
+            });
+
+            // Navegação admin
+            document.querySelectorAll('.admin-nav-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    const tab = item.getAttribute('data-tab');
+                    changeAdminTab(tab);
+                });
+            });
+
+            // Formulários admin
+            document.getElementById('add-product-btn').addEventListener('click', () => {
+                currentEditingId = null;
+                document.getElementById('product-form').reset();
+                document.getElementById('product-image-preview').innerHTML = '';
+                document.getElementById('product-form-title').textContent = 'Adicionar Produto';
+                document.getElementById('product-form-container').classList.remove('hidden');
+                hideFormError('product');
+            });
+
+            document.getElementById('cancel-product-btn').addEventListener('click', () => {
+                document.getElementById('product-form-container').classList.add('hidden');
+                hideFormError('product');
+            });
+
+            document.getElementById('product-form').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                hideFormError('product');
+                
+                const productData = {
+                    sb_name: document.getElementById('product-name').value,
+                    sb_category: document.getElementById('product-category').value,
+                    sb_price: parseFloat(document.getElementById('product-price').value),
+                    sb_old_price: document.getElementById('product-old-price').value ? parseFloat(document.getElementById('product-old-price').value) : null,
+                    sb_weight: document.getElementById('product-weight').value,
+                    sb_brand: document.getElementById('product-brand').value,
+                    sb_flavors: document.getElementById('product-flavors').value,
+                    sb_benefits: document.getElementById('product-benefits').value,
+                    sb_ingredients: document.getElementById('product-ingredients').value,
+                    sb_usage: document.getElementById('product-usage').value,
+                    sb_description: document.getElementById('product-description').value,
+                    sb_images: [],
+                    sb_image_url: null
+                };
+
+                // Upload de imagem
+                const imageFile = document.getElementById('product-image-input').files[0];
+                if (imageFile) {
+                    try {
+                        productData.sb_image_url = await uploadImage(imageFile, 'products');
+                        productData.sb_images = [productData.sb_image_url];
+                    } catch (error) {
+                        console.error('Erro no upload:', error);
+                        showFormError('product', 'Erro ao fazer upload da imagem');
+                        return;
+                    }
+                }
+
+                const result = await saveProduct(productData);
+                if (result.success) {
+                    document.getElementById('product-form-container').classList.add('hidden');
+                    showAlert('Produto salvo com sucesso!');
+                } else {
+                    showFormError('product', result.error);
+                }
+            });
+
+            document.getElementById('add-category-btn').addEventListener('click', () => {
+                currentEditingId = null;
+                document.getElementById('category-form').reset();
+                document.getElementById('category-image-preview').innerHTML = '';
+                document.getElementById('category-form-title').textContent = 'Adicionar Categoria';
+                document.getElementById('category-form-container').classList.remove('hidden');
+                hideFormError('category');
+            });
+
+            document.getElementById('cancel-category-btn').addEventListener('click', () => {
+                document.getElementById('category-form-container').classList.add('hidden');
+                hideFormError('category');
+            });
+
+            document.getElementById('category-form').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                hideFormError('category');
+                
+                const categoryData = {
+                    sb_code: document.getElementById('category-code').value,
+                    sb_name: document.getElementById('category-name').value,
+                    sb_description: document.getElementById('category-description').value,
+                    sb_image_url: null
+                };
+
+                // Upload de imagem
+                const imageFile = document.getElementById('category-image-input').files[0];
+                if (imageFile) {
+                    try {
+                        categoryData.sb_image_url = await uploadImage(imageFile, 'categories');
+                    } catch (error) {
+                        console.error('Erro no upload:', error);
+                        showFormError('category', 'Erro ao fazer upload da imagem');
+                        return;
+                    }
+                }
+
+                const result = await saveCategory(categoryData);
+                if (result.success) {
+                    document.getElementById('category-form-container').classList.add('hidden');
+                    showAlert('Categoria salva com sucesso!');
+                } else {
+                    showFormError('category', result.error);
+                }
+            });
+
+            // Configurações
+            document.getElementById('settings-form').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                hideFormError('settings');
+                
+                const settingsData = {
+                    sb_shipping_price: parseFloat(document.getElementById('shipping-price').value),
+                    sb_free_shipping_limit: parseFloat(document.getElementById('free-shipping-limit').value) || 0
+                };
+
+                const result = await saveSettings(settingsData);
+                if (result.success) {
+                    showAlert('Configurações salvas com sucesso!');
+                } else {
+                    showFormError('settings', result.error);
+                }
+            });
+
+            // Filtros
+            document.getElementById('order-status-filter').addEventListener('change', loadOrders);
+
+            // Modal pedido
+            document.getElementById('close-order-modal').addEventListener('click', () => {
+                document.getElementById('order-details-modal').classList.add('hidden');
+            });
+
+            // Configurar uploads
+            setupImageUpload('product-image-input', 'product-image-preview');
+            setupImageUpload('category-image-input', 'category-image-preview');
+
+            // Atualizar display inicial
+            updateShippingDisplay();
+        }
     </script>
 </body>
 </html>
