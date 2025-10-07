@@ -1301,22 +1301,62 @@
                             
                             <div class="md:col-span-2">
                                 <label class="block text-sm font-medium mb-2">Sabores (separados por vírgula)</label>
-                                <input type="text" id="product-flavors" class="admin-form-input">
+                                <input type="text" id="product-flavors" class="admin-form-input" placeholder="Ex: Chocolate, Baunilha, Morango">
                             </div>
                             
                             <div class="md:col-span-2">
                                 <label class="block text-sm font-medium mb-2">Benefícios</label>
-                                <textarea id="product-benefits" class="admin-form-textarea" rows="3"></textarea>
+                                <textarea id="product-benefits" class="admin-form-textarea" rows="3" placeholder="Liste os principais benefícios do produto"></textarea>
                             </div>
                             
                             <div class="md:col-span-2">
                                 <label class="block text-sm font-medium mb-2">Ingredientes</label>
-                                <input type="text" id="product-ingredients" class="admin-form-input">
+                                <input type="text" id="product-ingredients" class="admin-form-input" placeholder="Liste os principais ingredientes">
                             </div>
                             
                             <div class="md:col-span-2">
                                 <label class="block text-sm font-medium mb-2">Modo de Uso</label>
-                                <textarea id="product-usage" class="admin-form-textarea" rows="2"></textarea>
+                                <textarea id="product-usage" class="admin-form-textarea" rows="2" placeholder="Como usar o produto"></textarea>
+                            </div>
+
+                            <!-- Informações Nutricionais -->
+                            <div class="md:col-span-2">
+                                <h4 class="text-lg font-semibold mb-4 text-gray-800 dark:text-gray-200">Informações Nutricionais</h4>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Calorias (por porção)</label>
+                                <input type="number" id="product-calories" class="admin-form-input" placeholder="Ex: 120">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Proteínas (g)</label>
+                                <input type="number" id="product-proteins" class="admin-form-input" step="0.1" placeholder="Ex: 25.5">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Carboidratos (g)</label>
+                                <input type="number" id="product-carbs" class="admin-form-input" step="0.1" placeholder="Ex: 5.2">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Gorduras (g)</label>
+                                <input type="number" id="product-fats" class="admin-form-input" step="0.1" placeholder="Ex: 2.1">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Fibras (g)</label>
+                                <input type="number" id="product-fiber" class="admin-form-input" step="0.1" placeholder="Ex: 1.5">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Sódio (mg)</label>
+                                <input type="number" id="product-sodium" class="admin-form-input" placeholder="Ex: 150">
+                            </div>
+                            
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-medium mb-2">Outras Informações Nutricionais</label>
+                                <textarea id="product-nutrition-extra" class="admin-form-textarea" rows="2" placeholder="Ex: Vitamina C: 50mg, Creatina: 3g"></textarea>
                             </div>
                             
                             <div class="md:col-span-2">
@@ -1528,7 +1568,7 @@
 
     <!-- Quick View Modal -->
     <div id="quickview-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden quick-view-modal">
-        <div class="bg-white dark:bg-dark-200 rounded-xl shadow-xl max-w-4xl w-full mx-4 max-h-[90vh] overflow-auto">
+        <div class="bg-white dark:bg-dark-200 rounded-xl shadow-xl max-w-6xl w-full mx-4 max-h-[90vh] overflow-auto">
             <div class="flex justify-between items-center p-5 border-b border-gray-200 dark:border-gray-700">
                 <h3 class="text-lg font-medium" id="quickview-title">Detalhes do Produto</h3>
                 <button id="close-quickview" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300" aria-label="Fechar detalhes">
@@ -1536,7 +1576,7 @@
                 </button>
             </div>
             
-            <div class="p-5" id="quickview-content">
+            <div class="p-6" id="quickview-content">
                 <div class="animate-pulse">
                     <div class="h-64 bg-gray-200 dark:bg-gray-700 rounded-lg mb-4"></div>
                     <div class="h-6 bg-gray-200 dark:bg-gray-700 rounded-lg w-3/4 mb-2"></div>
@@ -1737,7 +1777,15 @@
                         description: product.sb_description,
                         images: product.sb_images,
                         image: product.sb_image_url || (product.sb_images && product.sb_images[0]) || 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400',
-                        rating: 4.5 // Rating padrão
+                        rating: 4.5, // Rating padrão
+                        // Informações nutricionais
+                        calories: product.sb_calories,
+                        proteins: product.sb_proteins,
+                        carbs: product.sb_carbs,
+                        fats: product.sb_fats,
+                        fiber: product.sb_fiber,
+                        sodium: product.sb_sodium,
+                        nutrition_extra: product.sb_nutrition_extra
                     }));
                     
                     if (currentAdminTab === 'products') loadAdminProducts();
@@ -2342,6 +2390,15 @@
             document.getElementById('product-usage').value = product.sb_usage || '';
             document.getElementById('product-description').value = product.sb_description || '';
             
+            // Informações nutricionais
+            document.getElementById('product-calories').value = product.sb_calories || '';
+            document.getElementById('product-proteins').value = product.sb_proteins || '';
+            document.getElementById('product-carbs').value = product.sb_carbs || '';
+            document.getElementById('product-fats').value = product.sb_fats || '';
+            document.getElementById('product-fiber').value = product.sb_fiber || '';
+            document.getElementById('product-sodium').value = product.sb_sodium || '';
+            document.getElementById('product-nutrition-extra').value = product.sb_nutrition_extra || '';
+            
             document.getElementById('product-form-title').textContent = 'Editar Produto';
             document.getElementById('product-form-container').classList.remove('hidden');
             hideFormError('product');
@@ -2567,7 +2624,7 @@
             },
             
             addItem(product, quantity = 1) {
-                const existingItem = this.items.find(item => item.id === product.id);
+                const existingItem = this.items.find(item => item.id === product.id && item.selectedFlavor === product.selectedFlavor);
                 
                 if (existingItem) {
                     existingItem.quantity += quantity;
@@ -2577,7 +2634,8 @@
                         name: product.name,
                         price: product.price,
                         image: product.image,
-                        quantity: quantity
+                        quantity: quantity,
+                        selectedFlavor: product.selectedFlavor || ''
                     });
                 }
                 
@@ -2969,7 +3027,7 @@
             return text.replace(regex, '<span class="bg-yellow-100 dark:bg-yellow-800 text-gray-800 dark:text-yellow-100">$1</span>');
         }
         
-        // Mostrar modal de quick view
+        // Mostrar modal de quick view MELHORADO
         function showQuickView(product) {
             const modal = document.getElementById('quickview-modal');
             const content = document.getElementById('quickview-content');
@@ -2991,44 +3049,146 @@
                     starsHTML += '<i class="far fa-star text-yellow-400"></i>';
                 }
             }
+
+            // Gerar opções de sabores
+            let flavorsHTML = '';
+            if (product.flavors && product.flavors.trim()) {
+                const flavorsArray = product.flavors.split(',').map(f => f.trim()).filter(f => f);
+                if (flavorsArray.length > 0) {
+                    flavorsHTML = `
+                        <div class="mb-4">
+                            <label for="product-flavor" class="block text-sm font-medium mb-2">Sabor</label>
+                            <select id="product-flavor" class="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-dark-300 focus:outline-none focus:ring-2 focus:ring-primary text-base">
+                                ${flavorsArray.map(flavor => `<option value="${flavor}">${flavor}</option>`).join('')}
+                            </select>
+                        </div>
+                    `;
+                }
+            }
+
+            // Gerar informações nutricionais
+            let nutritionHTML = '';
+            if (product.calories || product.proteins || product.carbs || product.fats) {
+                nutritionHTML = `
+                    <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 mb-4">
+                        <h4 class="font-semibold mb-3 text-gray-800 dark:text-gray-200">
+                            <i class="fas fa-chart-pie mr-2 text-primary"></i>Informações Nutricionais
+                        </h4>
+                        <div class="grid grid-cols-2 gap-3 text-sm">
+                            ${product.calories ? `<div><strong>Calorias:</strong> ${product.calories} kcal</div>` : ''}
+                            ${product.proteins ? `<div><strong>Proteínas:</strong> ${product.proteins}g</div>` : ''}
+                            ${product.carbs ? `<div><strong>Carboidratos:</strong> ${product.carbs}g</div>` : ''}
+                            ${product.fats ? `<div><strong>Gorduras:</strong> ${product.fats}g</div>` : ''}
+                            ${product.fiber ? `<div><strong>Fibras:</strong> ${product.fiber}g</div>` : ''}
+                            ${product.sodium ? `<div><strong>Sódio:</strong> ${product.sodium}mg</div>` : ''}
+                        </div>
+                        ${product.nutrition_extra ? `<div class="mt-3 text-sm text-gray-600 dark:text-gray-400">${product.nutrition_extra}</div>` : ''}
+                    </div>
+                `;
+            }
+
+            // Gerar informações adicionais
+            let additionalInfoHTML = '';
+            if (product.benefits || product.ingredients || product.usage) {
+                additionalInfoHTML = `
+                    <div class="space-y-4 mb-6">
+                        ${product.benefits ? `
+                            <div>
+                                <h4 class="font-semibold text-gray-800 dark:text-gray-200 mb-2">
+                                    <i class="fas fa-star mr-2 text-primary"></i>Benefícios
+                                </h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">${product.benefits}</p>
+                            </div>
+                        ` : ''}
+                        
+                        ${product.ingredients ? `
+                            <div>
+                                <h4 class="font-semibold text-gray-800 dark:text-gray-200 mb-2">
+                                    <i class="fas fa-list-ul mr-2 text-primary"></i>Ingredientes
+                                </h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">${product.ingredients}</p>
+                            </div>
+                        ` : ''}
+                        
+                        ${product.usage ? `
+                            <div>
+                                <h4 class="font-semibold text-gray-800 dark:text-gray-200 mb-2">
+                                    <i class="fas fa-info-circle mr-2 text-primary"></i>Modo de Uso
+                                </h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">${product.usage}</p>
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+            }
             
             content.innerHTML = `
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="bg-white dark:bg-dark-100 rounded-xl p-5 flex items-center justify-center">
-                        <img src="${product.image}" alt="${product.name}" class="max-h-64 max-w-full object-contain">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Imagem do Produto -->
+                    <div class="bg-white dark:bg-dark-100 rounded-xl p-6 flex items-center justify-center">
+                        <img src="${product.image}" alt="${product.name}" class="max-h-80 max-w-full object-contain">
                     </div>
-                    <div>
-                        <div class="flex justify-between items-start mb-1">
-                            <span class="text-sm text-gray-500 dark:text-gray-400">${getCategoryName(product.category)}</span>
-                            <div class="flex text-sm">${starsHTML} <span class="ml-1 text-gray-500">(${Math.floor(Math.random() * 100)})</span></div>
-                        </div>
-                        
-                        <h3 class="text-xl font-medium mb-2">${product.name}</h3>
-                        
-                        <div class="flex items-center mb-4">
-                            ${product.oldPrice ? `<span class="text-gray-500 dark:text-gray-400 line-through mr-2">R$${product.oldPrice.toFixed(2).replace('.', ',')}</span>` : ''}
-                            <span class="text-primary font-bold text-2xl">R$${product.price.toFixed(2).replace('.', ',')}</span>
-                        </div>
-                        
-                        <p class="text-gray-700 dark:text-gray-300 mb-6">${product.description || 'Produto de alta qualidade para suas necessidades.'}</p>
-                        
-                        <div class="flex space-x-3">
-                            <div class="w-24">
-                                <label for="product-quantity" class="block text-sm font-medium mb-1">Quantidade</label>
-                                <select id="product-quantity" class="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-full bg-white dark:bg-dark-300 focus:outline-none focus:ring-2 focus:ring-primary">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                </select>
+                    
+                    <!-- Informações do Produto -->
+                    <div class="flex flex-col">
+                        <!-- Cabeçalho -->
+                        <div class="mb-4">
+                            <div class="flex justify-between items-start mb-2">
+                                <span class="text-sm text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full">${getCategoryName(product.category)}</span>
+                                <div class="flex text-sm items-center">${starsHTML} <span class="ml-2 text-gray-500">(${Math.floor(Math.random() * 100)})</span></div>
                             </div>
-                            <div class="flex-grow">
-                                <button class="quickview-add-to-cart w-full bg-primary hover:bg-opacity-90 text-white py-2.5 rounded-full transition-all hover:shadow-lg transform hover:-translate-y-1 flex items-center justify-center mt-6" data-id="${product.id}">
-                                    <i class="fas fa-shopping-cart mr-2"></i>
-                                    Adicionar ao Carrinho
-                                </button>
+                            
+                            <h3 class="text-2xl font-bold mb-3 text-gray-800 dark:text-gray-200">${product.name}</h3>
+                            
+                            ${product.brand ? `<p class="text-sm text-gray-600 dark:text-gray-400 mb-3"><strong>Marca:</strong> ${product.brand}</p>` : ''}
+                            ${product.weight ? `<p class="text-sm text-gray-600 dark:text-gray-400 mb-3"><strong>Peso:</strong> ${product.weight}</p>` : ''}
+                            
+                            <div class="flex items-center mb-4">
+                                ${product.oldPrice ? `<span class="text-gray-500 dark:text-gray-400 line-through mr-3 text-lg">R$${product.oldPrice.toFixed(2).replace('.', ',')}</span>` : ''}
+                                <span class="text-primary font-bold text-3xl">R$${product.price.toFixed(2).replace('.', ',')}</span>
                             </div>
+                        </div>
+
+                        <!-- Descrição -->
+                        ${product.description ? `
+                            <div class="mb-4">
+                                <p class="text-gray-700 dark:text-gray-300">${product.description}</p>
+                            </div>
+                        ` : ''}
+
+                        <!-- Informações Nutricionais -->
+                        ${nutritionHTML}
+
+                        <!-- Informações Adicionais -->
+                        ${additionalInfoHTML}
+
+                        <!-- Seleção de Sabor e Quantidade -->
+                        <div class="mt-auto">
+                            ${flavorsHTML}
+                            
+                            <div class="flex gap-4 mb-4">
+                                <div class="w-32">
+                                    <label for="product-quantity" class="block text-sm font-medium mb-2">Quantidade</label>
+                                    <select id="product-quantity" class="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-dark-300 focus:outline-none focus:ring-2 focus:ring-primary text-base">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <!-- Botão Adicionar ao Carrinho -->
+                            <button class="quickview-add-to-cart w-full bg-primary hover:bg-opacity-90 text-white py-3 rounded-lg transition-all hover:shadow-lg transform hover:-translate-y-1 flex items-center justify-center text-lg font-semibold" data-id="${product.id}">
+                                <i class="fas fa-shopping-cart mr-3"></i>
+                                Adicionar ao Carrinho
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -3041,10 +3201,19 @@
             const addToCartBtn = content.querySelector('.quickview-add-to-cart');
             addToCartBtn.addEventListener('click', () => {
                 const quantity = parseInt(document.getElementById('product-quantity').value);
-                cart.addItem(product, quantity);
+                const selectedFlavor = document.getElementById('product-flavor') ? document.getElementById('product-flavor').value : '';
+                
+                // Criar objeto do produto com sabor selecionado
+                const productToAdd = {
+                    ...product,
+                    name: selectedFlavor ? `${product.name} - ${selectedFlavor}` : product.name,
+                    selectedFlavor: selectedFlavor
+                };
+                
+                cart.addItem(productToAdd, quantity);
                 
                 // Animação de adição ao carrinho
-                addToCartBtn.innerHTML = '<i class="fas fa-check mr-2"></i>Adicionado com sucesso!';
+                addToCartBtn.innerHTML = '<i class="fas fa-check mr-3"></i>Adicionado com sucesso!';
                 addToCartBtn.classList.add('bg-green-500');
                 
                 setTimeout(() => {
@@ -3528,7 +3697,15 @@
                     sb_usage: document.getElementById('product-usage').value,
                     sb_description: document.getElementById('product-description').value,
                     sb_images: [],
-                    sb_image_url: null
+                    sb_image_url: null,
+                    // Informações nutricionais
+                    sb_calories: document.getElementById('product-calories').value ? parseInt(document.getElementById('product-calories').value) : null,
+                    sb_proteins: document.getElementById('product-proteins').value ? parseFloat(document.getElementById('product-proteins').value) : null,
+                    sb_carbs: document.getElementById('product-carbs').value ? parseFloat(document.getElementById('product-carbs').value) : null,
+                    sb_fats: document.getElementById('product-fats').value ? parseFloat(document.getElementById('product-fats').value) : null,
+                    sb_fiber: document.getElementById('product-fiber').value ? parseFloat(document.getElementById('product-fiber').value) : null,
+                    sb_sodium: document.getElementById('product-sodium').value ? parseInt(document.getElementById('product-sodium').value) : null,
+                    sb_nutrition_extra: document.getElementById('product-nutrition-extra').value
                 };
 
                 // Upload de imagem
