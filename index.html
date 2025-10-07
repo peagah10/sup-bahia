@@ -486,13 +486,31 @@
             }
         }
 
-        /* Estilos da área administrativa */
+        /* Estilos da área administrativa - CORRIGIDO */
         .admin-panel {
             display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 10000;
+            background: #f3f4f6;
+            overflow-y: auto;
         }
         
         .admin-panel.active {
-            display: block;
+            display: block !important;
+        }
+        
+        .dark .admin-panel {
+            background: #111827;
+        }
+
+        /* Garante que quando admin estiver ativo, nada mais apareça */
+        body.admin-active #main-site,
+        body.admin-active > header:not(.admin-header) {
+            display: none !important;
         }
         
         .admin-nav {
@@ -669,104 +687,104 @@
 </head>
 
 <body class="font-sans bg-light-200 dark:bg-dark-400 text-gray-800 dark:text-gray-200">
-    <!-- Header -->
-    <header class="bg-white dark:bg-dark-300 shadow-md py-4">
-        <div class="container mx-auto px-4">
-            <div class="flex items-center justify-between">
-                <a href="#" class="flex items-center space-x-3 group no-underline">
-                    <!-- Container da logo -->
-                    <div class="flex items-center space-x-3">
-                        <div class="w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] md:w-[70px] md:h-[70px] overflow-hidden rounded-full transition-all duration-300 group-hover:scale-105 shadow-lg">
-                            <img src="https://pfst.cf2.poecdn.net/base/image/d1f85532876f53ac1e8b5772d3928c91b46d0255ed1d3a5dfa568c3ee0207bdc?w=1024&h=1024" 
-                                 alt="Logo Suplementos BAHIA"
-                                 class="w-full h-full object-cover"
-                                 width="70"
-                                 height="70">
-                        </div>
-                        <div class="block">
-                            <h1 class="text-sm sm:text-lg md:text-xl font-bold text-black dark:text-white tracking-wide">SUPLEMENTOS</h1>
-                            <h2 class="text-base sm:text-xl md:text-2xl font-black text-black dark:text-white tracking-wider -mt-1">BAHIA</h2>
-                        </div>
-                    </div>
-                </a>
-                
-                <!-- Breadcrumbs (visível apenas em páginas internas) -->
-                <nav aria-label="Breadcrumb" class="hidden breadcrumb-nav max-w-xs overflow-hidden">
-                    <ol class="flex flex-nowrap text-sm text-gray-600 dark:text-gray-400">
-                        <li class="breadcrumb-item flex items-center truncate">
-                            <a href="#" class="hover:text-primary truncate">Home</a>
-                        </li>
-                        <li class="breadcrumb-item flex items-center truncate current-breadcrumb">
-                            <span class="truncate">Produtos</span>
-                        </li>
-                    </ol>
-                </nav>
-                
-                <!-- Menu de navegação (desktop) -->
-                <nav class="hidden md:flex space-x-8">
-                    <a href="#" class="font-medium hover:text-primary transition-colors">Home</a>
-                    <a href="#produtos" class="font-medium hover:text-primary transition-colors">Produtos</a>
-                    <a href="#guia" class="font-medium hover:text-primary transition-colors">Guia Nutricional</a>
-                    <a href="#faq" class="font-medium hover:text-primary transition-colors">FAQ</a>
-                    <a href="#local" class="font-medium hover:text-primary transition-colors">Nossa Loja</a>
-                    <a href="#" id="admin-link" class="font-medium hover:text-primary transition-colors">Admin</a>
-                </nav>
-                
-                <!-- Ações do header -->
-                <div class="flex items-center space-x-4">
-                    <!-- Busca -->
-                    <button id="search-toggle" class="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors" aria-label="Abrir busca">
-                        <i class="fas fa-search"></i>
-                    </button>
-                    
-                    <!-- Toggle dark mode -->
-                    <button id="theme-toggle" class="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors" aria-label="Alternar tema claro/escuro">
-                        <i class="fas fa-moon dark:fas fa-sun"></i>
-                    </button>
-                    
-                    <!-- Carrinho -->
-                    <button id="cart-toggle" class="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors relative" aria-label="Abrir carrinho">
-                        <i class="fas fa-shopping-cart"></i>
-                        <span id="cart-count" class="absolute -top-2 -right-2 bg-primary text-white text-xs rounded-full w-5 h-5 flex items-center justify-center transition-all">0</span>
-                    </button>
-                    
-                    <!-- Menu mobile toggle -->
-                    <button id="mobile-toggle" class="md:hidden text-gray-600 dark:text-gray-300 hover:text-primary" aria-label="Abrir menu">
-                        <i class="fas fa-bars"></i>
-                    </button>
-                </div>
-            </div>
-            
-            <!-- Menu mobile (colapsado por padrão) -->
-            <nav id="mobile-menu" class="md:hidden hidden pt-4 pb-2">
-                <div class="flex flex-col space-y-3">
-                    <a href="#" class="font-medium hover:text-primary py-1">Home</a>
-                    <a href="#produtos" class="font-medium hover:text-primary py-1">Produtos</a>
-                    <a href="#guia" class="font-medium hover:text-primary py-1">Guia Nutricional</a>
-                    <a href="#faq" class="font-medium hover:text-primary py-1">FAQ</a>
-                    <a href="#local" class="font-medium hover:text-primary py-1">Nossa Loja</a>
-                    <a href="#" id="admin-link-mobile" class="font-medium hover:text-primary py-1">Admin</a>
-                </div>
-            </nav>
-        </div>
-    </header>
-    
-    <!-- Busca -->
-    <div id="search-container" class="hidden bg-white dark:bg-dark-300 shadow-md py-4 absolute w-full z-40">
-        <div class="container mx-auto px-4">
-            <div class="relative max-w-2xl mx-auto">
-                <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
-                <input id="search-input" type="text" placeholder="Buscar produtos..." class="w-full pl-10 pr-10 py-3 text-base border border-gray-300 dark:border-gray-600 rounded-full focus:outline-none focus:ring-2 focus:ring-primary bg-white dark:bg-dark-200" aria-label="Buscar produtos">
-                <button id="search-close" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200" aria-label="Fechar busca">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div id="search-results" class="mt-4 max-w-2xl mx-auto"></div>
-        </div>
-    </div>
-
     <!-- Área Principal do Site -->
     <div id="main-site">
+        <!-- Header -->
+        <header class="bg-white dark:bg-dark-300 shadow-md py-4">
+            <div class="container mx-auto px-4">
+                <div class="flex items-center justify-between">
+                    <a href="#" class="flex items-center space-x-3 group no-underline">
+                        <!-- Container da logo -->
+                        <div class="flex items-center space-x-3">
+                            <div class="w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] md:w-[70px] md:h-[70px] overflow-hidden rounded-full transition-all duration-300 group-hover:scale-105 shadow-lg">
+                                <img src="https://pfst.cf2.poecdn.net/base/image/d1f85532876f53ac1e8b5772d3928c91b46d0255ed1d3a5dfa568c3ee0207bdc?w=1024&h=1024" 
+                                     alt="Logo Suplementos BAHIA"
+                                     class="w-full h-full object-cover"
+                                     width="70"
+                                     height="70">
+                            </div>
+                            <div class="block">
+                                <h1 class="text-sm sm:text-lg md:text-xl font-bold text-black dark:text-white tracking-wide">SUPLEMENTOS</h1>
+                                <h2 class="text-base sm:text-xl md:text-2xl font-black text-black dark:text-white tracking-wider -mt-1">BAHIA</h2>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <!-- Breadcrumbs (visível apenas em páginas internas) -->
+                    <nav aria-label="Breadcrumb" class="hidden breadcrumb-nav max-w-xs overflow-hidden">
+                        <ol class="flex flex-nowrap text-sm text-gray-600 dark:text-gray-400">
+                            <li class="breadcrumb-item flex items-center truncate">
+                                <a href="#" class="hover:text-primary truncate">Home</a>
+                            </li>
+                            <li class="breadcrumb-item flex items-center truncate current-breadcrumb">
+                                <span class="truncate">Produtos</span>
+                            </li>
+                        </ol>
+                    </nav>
+                    
+                    <!-- Menu de navegação (desktop) -->
+                    <nav class="hidden md:flex space-x-8">
+                        <a href="#" class="font-medium hover:text-primary transition-colors">Home</a>
+                        <a href="#produtos" class="font-medium hover:text-primary transition-colors">Produtos</a>
+                        <a href="#guia" class="font-medium hover:text-primary transition-colors">Guia Nutricional</a>
+                        <a href="#faq" class="font-medium hover:text-primary transition-colors">FAQ</a>
+                        <a href="#local" class="font-medium hover:text-primary transition-colors">Nossa Loja</a>
+                        <a href="#" id="admin-link" class="font-medium hover:text-primary transition-colors">Admin</a>
+                    </nav>
+                    
+                    <!-- Ações do header -->
+                    <div class="flex items-center space-x-4">
+                        <!-- Busca -->
+                        <button id="search-toggle" class="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors" aria-label="Abrir busca">
+                            <i class="fas fa-search"></i>
+                        </button>
+                        
+                        <!-- Toggle dark mode -->
+                        <button id="theme-toggle" class="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors" aria-label="Alternar tema claro/escuro">
+                            <i class="fas fa-moon dark:fas fa-sun"></i>
+                        </button>
+                        
+                        <!-- Carrinho -->
+                        <button id="cart-toggle" class="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors relative" aria-label="Abrir carrinho">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span id="cart-count" class="absolute -top-2 -right-2 bg-primary text-white text-xs rounded-full w-5 h-5 flex items-center justify-center transition-all">0</span>
+                        </button>
+                        
+                        <!-- Menu mobile toggle -->
+                        <button id="mobile-toggle" class="md:hidden text-gray-600 dark:text-gray-300 hover:text-primary" aria-label="Abrir menu">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Menu mobile (colapsado por padrão) -->
+                <nav id="mobile-menu" class="md:hidden hidden pt-4 pb-2">
+                    <div class="flex flex-col space-y-3">
+                        <a href="#" class="font-medium hover:text-primary py-1">Home</a>
+                        <a href="#produtos" class="font-medium hover:text-primary py-1">Produtos</a>
+                        <a href="#guia" class="font-medium hover:text-primary py-1">Guia Nutricional</a>
+                        <a href="#faq" class="font-medium hover:text-primary py-1">FAQ</a>
+                        <a href="#local" class="font-medium hover:text-primary py-1">Nossa Loja</a>
+                        <a href="#" id="admin-link-mobile" class="font-medium hover:text-primary py-1">Admin</a>
+                    </div>
+                </nav>
+            </div>
+        </header>
+        
+        <!-- Busca -->
+        <div id="search-container" class="hidden bg-white dark:bg-dark-300 shadow-md py-4 absolute w-full z-40">
+            <div class="container mx-auto px-4">
+                <div class="relative max-w-2xl mx-auto">
+                    <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                    <input id="search-input" type="text" placeholder="Buscar produtos..." class="w-full pl-10 pr-10 py-3 text-base border border-gray-300 dark:border-gray-600 rounded-full focus:outline-none focus:ring-2 focus:ring-primary bg-white dark:bg-dark-200" aria-label="Buscar produtos">
+                    <button id="search-close" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200" aria-label="Fechar busca">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div id="search-results" class="mt-4 max-w-2xl mx-auto"></div>
+            </div>
+        </div>
+
         <!-- Hero Banner - Altura reduzida para mobile -->
         <section class="relative h-[250px] md:h-[400px] overflow-hidden">
             <div id="hero-gallery">
@@ -1073,7 +1091,7 @@
     <div id="admin-panel" class="admin-panel">
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
             <!-- Header Admin -->
-            <header class="bg-white dark:bg-gray-800 shadow-md">
+            <header class="bg-white dark:bg-gray-800 shadow-md admin-header">
                 <div class="container mx-auto px-4 py-4">
                     <div class="flex items-center justify-between">
                         <div class="flex items-center space-x-3">
@@ -2487,15 +2505,37 @@
             }, 3000);
         }
 
-        // Mostrar/esconder área administrativa
+        // Mostrar/esconder área administrativa - CORRIGIDO
         function showAdminPanel() {
+            // Esconder completamente o site principal
             document.getElementById('main-site').style.display = 'none';
-            document.getElementById('admin-panel').classList.add('active');
+            
+            // Mostrar apenas o painel admin ocupando toda a tela
+            const adminPanel = document.getElementById('admin-panel');
+            adminPanel.style.display = 'block';
+            adminPanel.classList.add('active');
+            
+            // Adicionar classe ao body para garantir que nada do site apareça
+            document.body.classList.add('admin-active');
+            
+            // Desabilitar scroll do body principal
+            document.body.style.overflow = 'hidden';
         }
 
         function hideAdminPanel() {
+            // Mostrar o site principal
             document.getElementById('main-site').style.display = 'block';
-            document.getElementById('admin-panel').classList.remove('active');
+            
+            // Esconder o painel admin
+            const adminPanel = document.getElementById('admin-panel');
+            adminPanel.style.display = 'none';
+            adminPanel.classList.remove('active');
+            
+            // Remover classe do body
+            document.body.classList.remove('admin-active');
+            
+            // Restaurar scroll normal
+            document.body.style.overflow = 'auto';
         }
 
         // Sistema de carrinho
@@ -3427,22 +3467,25 @@
             // Links para admin
             document.getElementById('admin-link').addEventListener('click', (e) => {
                 e.preventDefault();
+                showAdminPanel();
                 if (isAdminLoggedIn) {
-                    showAdminPanel();
                     loadAdminData();
-                } else {
-                    showAdminPanel();
                 }
             });
 
             document.getElementById('admin-link-mobile').addEventListener('click', (e) => {
                 e.preventDefault();
+                showAdminPanel();
                 if (isAdminLoggedIn) {
-                    showAdminPanel();
                     loadAdminData();
-                } else {
-                    showAdminPanel();
                 }
+                // Fechar menu mobile
+                document.getElementById('mobile-menu').classList.add('hidden');
+                const mobileToggle = document.getElementById('mobile-toggle');
+                const icon = mobileToggle.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+                mobileToggle.setAttribute('aria-expanded', 'false');
             });
 
             // Navegação admin
@@ -3630,4 +3673,3 @@
     </script>
 </body>
 </html>
-
